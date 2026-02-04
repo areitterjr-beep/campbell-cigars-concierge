@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { Send, Loader2, User, Bot, Sparkles, Camera, X } from 'lucide-react'
+import { Send, Loader2, Sparkles, Camera, X } from 'lucide-react'
 import CigarInfoCard, { CigarData } from './CigarInfoCard'
 
 interface Message {
@@ -13,28 +13,25 @@ interface Message {
   timestamp: Date
 }
 
+interface ChatInterfaceProps {
+  isExpanded?: boolean
+  onEngaged?: () => void
+}
+
 const SUGGESTED_QUESTIONS = [
   "I'm new to cigars. Where should I start?",
   "What cigar pairs well with bourbon?",
   "Show me something full-bodied",
   "What's good for a celebration?",
-  "I like smooth, creamy flavors",
+  "Understand cigar strength, body and flavor",
 ]
 
-export default function ChatInterface() {
+export default function ChatInterface({ isExpanded = false, onEngaged }: ChatInterfaceProps) {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
       role: 'assistant',
-      content: `Welcome to Campbell Cigars Concierge! I'm your personal cigar expert.
-
-I can help you with:
-• **Personalized recommendations** based on your taste
-• **Photo identification** - snap a pic of any cigar
-• **Pairing suggestions** for drinks & occasions
-• **Education** about flavors, origins & more
-
-What are you looking for today?`,
+      content: `Welcome! I'm your personal cigar expert. Ask me for recommendations, snap a photo to identify a cigar, or get pairing suggestions. How can I help?`,
       timestamp: new Date(),
     },
   ])
@@ -110,6 +107,11 @@ What are you looking for today?`,
     const text = messageText || input
     if ((!text.trim() && !attachedImage) || isLoading) return
 
+    // Notify parent that user has engaged with chat
+    if (onEngaged) {
+      onEngaged()
+    }
+
     const userMessage: Message = {
       id: Date.now().toString(),
       role: 'user',
@@ -176,7 +178,11 @@ What are you looking for today?`,
   }
 
   return (
-    <div className="flex flex-col h-[calc(100vh-280px)] bg-white rounded-2xl shadow-lg overflow-hidden relative">
+    <div className={`flex flex-col bg-white shadow-lg overflow-hidden relative transition-all duration-300 ${
+      isExpanded 
+        ? 'h-[calc(100vh-100px)] rounded-none' 
+        : 'h-[calc(100vh-280px)] rounded-2xl'
+    }`}>
 
       {/* Camera View - Shows inside chat area */}
       {showCamera && (
@@ -215,24 +221,11 @@ What are you looking for today?`,
         {messages.map((message) => (
           <div
             key={message.id}
-            className={`flex gap-3 message-slide-in ${
-              message.role === 'user' ? 'flex-row-reverse' : ''
+            className={`message-slide-in ${
+              message.role === 'user' ? 'flex justify-end' : ''
             }`}
           >
-            <div
-              className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
-                message.role === 'user'
-                  ? 'bg-cigar-gold text-cigar-dark'
-                  : 'bg-cigar-dark text-cigar-gold'
-              }`}
-            >
-              {message.role === 'user' ? (
-                <User className="w-4 h-4" />
-              ) : (
-                <Bot className="w-4 h-4" />
-              )}
-            </div>
-            <div className={`max-w-[85%] ${message.role === 'user' ? 'text-right' : ''}`}>
+            <div className={`max-w-full ${message.role === 'user' ? 'text-right' : ''}`}>
               {/* User image */}
               {message.image && (
                 <div className={`mb-2 ${message.role === 'user' ? 'flex justify-end' : ''}`}>
@@ -270,15 +263,15 @@ What are you looking for today?`,
                 </div>
               )}
 
-              {/* Cigar Cards */}
+              {/* Cigar Cards - limited to 2 */}
               {message.cigars && message.cigars.length > 0 && (
                 <div className="mt-3">
                   <div className={`grid gap-3 ${
-                    message.cigars.length === 1 
+                    message.cigars.slice(0, 2).length === 1 
                       ? 'grid-cols-1 max-w-sm' 
                       : 'grid-cols-1 sm:grid-cols-2'
                   }`}>
-                    {message.cigars.map((cigar, i) => (
+                    {message.cigars.slice(0, 2).map((cigar, i) => (
                       <CigarInfoCard key={i} cigar={cigar} fullWidth />
                     ))}
                   </div>
@@ -302,11 +295,8 @@ What are you looking for today?`,
         ))}
 
         {isLoading && (
-          <div className="flex gap-3 message-slide-in">
-            <div className="w-8 h-8 rounded-full bg-cigar-dark text-cigar-gold flex items-center justify-center">
-              <Bot className="w-4 h-4" />
-            </div>
-            <div className="bg-cigar-cream rounded-2xl px-4 py-3">
+          <div className="message-slide-in">
+            <div className="bg-cigar-cream rounded-2xl px-4 py-3 inline-block">
               <Loader2 className="w-5 h-5 animate-spin text-cigar-gold" />
             </div>
           </div>

@@ -1,8 +1,8 @@
 'use client'
 
-import { MessageCircle, Camera, Compass } from 'lucide-react'
+import { MessageCircle, Compass } from 'lucide-react'
 
-type Tab = 'chat' | 'scan' | 'discover'
+type Tab = 'chat' | 'discover'
 
 interface NavigationProps {
   activeTab: Tab
@@ -12,7 +12,6 @@ interface NavigationProps {
 export default function Navigation({ activeTab, onTabChange }: NavigationProps) {
   const tabs = [
     { id: 'chat' as Tab, label: 'Ask Expert', icon: MessageCircle },
-    { id: 'scan' as Tab, label: 'Scan Cigar', icon: Camera },
     { id: 'discover' as Tab, label: 'Discover', icon: Compass },
   ]
 

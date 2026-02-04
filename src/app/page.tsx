@@ -1,14 +1,12 @@
 'use client'
 
 import { useState } from 'react'
-import { X } from 'lucide-react'
+import { X, ChevronDown, ChevronUp } from 'lucide-react'
 import Navigation from '@/components/Navigation'
 import ChatInterface from '@/components/ChatInterface'
-import BarcodeScanner from '@/components/BarcodeScanner'
-import CigarCard from '@/components/CigarCard'
 import PreferenceQuiz from '@/components/PreferenceQuiz'
 
-type Tab = 'chat' | 'scan' | 'discover'
+type Tab = 'chat' | 'discover'
 
 export interface CigarInfo {
   id: string
@@ -32,11 +30,11 @@ export interface CigarInfo {
 export default function Home() {
   const [showLanding, setShowLanding] = useState(true)
   const [activeTab, setActiveTab] = useState<Tab>('chat')
-  const [scannedCigar, setScannedCigar] = useState<CigarInfo | null>(null)
   const [showQuiz, setShowQuiz] = useState(false)
+  const [chatEngaged, setChatEngaged] = useState(false)
 
-  const handleScanResult = (cigar: CigarInfo) => {
-    setScannedCigar(cigar)
+  const handleChatEngaged = () => {
+    setChatEngaged(true)
   }
 
   const handleQuizComplete = (preferences: string) => {
@@ -95,58 +93,74 @@ export default function Home() {
     )
   }
 
+  const isExpandedChat = chatEngaged && activeTab === 'chat'
+
   return (
     <main className="min-h-screen flex flex-col">
-      {/* Header with Close Button */}
-      <header className="bg-cigar-dark text-cigar-cream py-6 px-4 shadow-lg relative">
+      {/* Header with Close Button - compact when chat is engaged */}
+      <header className={`bg-cigar-dark text-cigar-cream px-4 shadow-lg relative transition-all duration-300 ${
+        isExpandedChat ? 'py-3' : 'py-6'
+      }`}>
         <button
-          onClick={() => setShowLanding(true)}
+          onClick={() => {
+            setShowLanding(true)
+            setChatEngaged(false)
+          }}
           className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full
                    hover:bg-white/10 transition-colors"
           title="Back to welcome"
         >
           <X className="w-6 h-6 text-cigar-cream/80 hover:text-cigar-cream" />
         </button>
+
+        {/* Expand/Collapse toggle - always visible in chat tab */}
+        {activeTab === 'chat' && (
+          <button
+            onClick={() => setChatEngaged(!chatEngaged)}
+            className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full
+                     hover:bg-white/10 transition-colors"
+            title={isExpandedChat ? "Show navigation" : "Expand chat"}
+          >
+            {isExpandedChat ? (
+              <ChevronDown className="w-6 h-6 text-cigar-cream/80 hover:text-cigar-cream" />
+            ) : (
+              <ChevronUp className="w-6 h-6 text-cigar-cream/80 hover:text-cigar-cream" />
+            )}
+          </button>
+        )}
         
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-3xl md:text-4xl font-bold tracking-wide">
+          <h1 className={`font-bold tracking-wide transition-all duration-300 ${
+            isExpandedChat ? 'text-xl md:text-2xl' : 'text-3xl md:text-4xl'
+          }`}>
             <span className="text-cigar-gold">Campbell Cigars</span> Concierge
           </h1>
-          <p className="text-sm md:text-base mt-2 text-cigar-cream/80">
-            Your Personal Expert Guide to the World of Fine Cigars
-          </p>
+          {!isExpandedChat && (
+            <p className="text-sm md:text-base mt-2 text-cigar-cream/80">
+              Your Personal Expert Guide to the World of Fine Cigars
+            </p>
+          )}
         </div>
       </header>
 
-      {/* Navigation */}
-      <Navigation activeTab={activeTab} onTabChange={setActiveTab} />
+      {/* Navigation - hidden when chat is engaged */}
+      {!isExpandedChat && (
+        <Navigation activeTab={activeTab} onTabChange={(tab) => {
+          setActiveTab(tab)
+          if (tab !== 'chat') setChatEngaged(false)
+        }} />
+      )}
 
       {/* Main Content */}
-      <div className="flex-1 max-w-4xl mx-auto w-full p-4">
+      <div className={`flex-1 max-w-4xl mx-auto w-full transition-all duration-300 ${
+        isExpandedChat ? 'p-0' : 'p-4'
+      }`}>
         {activeTab === 'chat' && !showQuiz && (
           <div className="h-full">
-            <ChatInterface />
-          </div>
-        )}
-
-        {activeTab === 'scan' && (
-          <div className="space-y-6">
-            <div className="bg-white rounded-2xl shadow-lg p-6">
-              <h2 className="text-xl font-semibold text-cigar-dark mb-4">
-                Scan a Cigar
-              </h2>
-              <p className="text-gray-600 mb-6">
-                Point your camera at a cigar barcode or take a photo to get instant details, 
-                tasting notes, and perfect pairings.
-              </p>
-              <BarcodeScanner onScanResult={handleScanResult} />
-            </div>
-
-            {scannedCigar && (
-              <div className="message-slide-in">
-                <CigarCard cigar={scannedCigar} />
-              </div>
-            )}
+            <ChatInterface 
+              isExpanded={isExpandedChat} 
+              onEngaged={handleChatEngaged} 
+            />
           </div>
         )}
 
@@ -202,10 +216,12 @@ export default function Home() {
         )}
       </div>
 
-      {/* Footer */}
-      <footer className="bg-cigar-dark text-cigar-cream/60 py-4 px-4 text-center text-sm">
-        <p>Ask our concierge anything about cigars. We&apos;re here to help!</p>
-      </footer>
+      {/* Footer - hidden when chat is engaged */}
+      {!isExpandedChat && (
+        <footer className="bg-cigar-dark text-cigar-cream/60 py-4 px-4 text-center text-sm">
+          <p>Ask our concierge anything about cigars. We&apos;re here to help!</p>
+        </footer>
+      )}
     </main>
   )
 }
