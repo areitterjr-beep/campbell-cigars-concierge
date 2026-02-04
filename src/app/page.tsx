@@ -48,26 +48,17 @@ export default function Home() {
     return (
       <main className="min-h-screen bg-cigar-dark flex flex-col items-center justify-center p-6">
         <div className="text-center max-w-md">
-          {/* Logo/Icon */}
-          <div className="mb-8">
-            <div className="w-24 h-24 mx-auto bg-cigar-gold/20 rounded-full flex items-center justify-center mb-6">
-              <svg 
-                className="w-12 h-12 text-cigar-gold" 
-                fill="currentColor" 
-                viewBox="0 0 24 24"
-              >
-                <path d="M4 4h16v2H4V4zm0 4h16v2H4V8zm0 4h10v2H4v-2zm0 4h10v2H4v-2zm14-4l4 4-4 4v-8z"/>
-              </svg>
-            </div>
+          {/* Logo */}
+          <div className="mb-1">
+            <img 
+              src="/logo.png" 
+              alt="Campbell Cigar Club" 
+              className="w-48 h-auto mx-auto"
+            />
           </div>
           
-          {/* Welcome Text */}
-          <h1 className="text-4xl md:text-5xl font-bold text-cigar-cream mb-4">
-            Welcome to
-          </h1>
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            <span className="text-cigar-gold">Campbell Cigars</span>{' '}
-            <span className="text-cigar-cream">Concierge</span>
+          <h2 className="text-xl md:text-2xl font-normal text-cigar-cream mb-6">
+            Concierge
           </h2>
           
           <p className="text-cigar-cream/70 text-lg mb-10">
