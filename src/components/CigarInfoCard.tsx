@@ -33,6 +33,11 @@ export default function CigarInfoCard({ cigar, fullWidth = false }: CigarInfoCar
   
   const hasValidImage = cigar.imageUrl && !imageError
   
+  // Remove brand name from cigar name if it appears at the start
+  const displayName = cigar.name.toLowerCase().startsWith(cigar.brand.toLowerCase())
+    ? cigar.name.substring(cigar.brand.length).trim().replace(/^[-–—]/, '').trim()
+    : cigar.name
+  
   const getBodyStyle = (body: string) => {
     const b = body.toLowerCase()
     if (b.includes('light') && !b.includes('medium')) return { bg: 'bg-amber-100', border: 'border-amber-400', text: 'text-amber-800', label: 'Light' }
@@ -93,7 +98,7 @@ export default function CigarInfoCard({ cigar, fullWidth = false }: CigarInfoCar
               {cigar.brand}
             </p>
             <h3 className="text-white font-bold text-base leading-tight mt-1 truncate" title={cigar.name}>
-              {cigar.name}
+              {displayName || cigar.name}
             </h3>
           </div>
           {!hasValidImage && cigar.inStock !== false && (
