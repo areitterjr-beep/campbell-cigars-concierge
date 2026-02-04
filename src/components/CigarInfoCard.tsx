@@ -162,15 +162,18 @@ export default function CigarInfoCard({ cigar, fullWidth = false }: CigarInfoCar
       </div>
 
       {/* Pairings */}
-      <div className="px-4 py-3 space-y-2">
-        <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Pairs With</p>
-        <div className="flex items-center gap-2">
-          <Wine className="w-4 h-4 text-purple-500 flex-shrink-0" />
-          <p className="text-sm text-gray-700">{cigar.pairings.alcoholic.slice(0, 2).join(' · ')}</p>
-        </div>
-        <div className="flex items-center gap-2">
-          <Coffee className="w-4 h-4 text-amber-600 flex-shrink-0" />
-          <p className="text-sm text-gray-700">{cigar.pairings.nonAlcoholic.slice(0, 2).join(' · ')}</p>
+      <div className="px-4 py-3">
+        <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Pairs With</p>
+        <div className="flex items-center gap-3 flex-wrap">
+          <div className="flex items-center gap-1.5">
+            <Wine className="w-4 h-4 text-purple-500 flex-shrink-0" />
+            <span className="text-sm text-gray-700">{cigar.pairings.alcoholic.slice(0, 2).join(', ')}</span>
+          </div>
+          <span className="text-gray-300">|</span>
+          <div className="flex items-center gap-1.5">
+            <Coffee className="w-4 h-4 text-amber-600 flex-shrink-0" />
+            <span className="text-sm text-gray-700">{cigar.pairings.nonAlcoholic.slice(0, 2).join(', ')}</span>
+          </div>
         </div>
       </div>
     </div>
