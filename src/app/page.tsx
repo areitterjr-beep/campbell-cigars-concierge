@@ -148,6 +148,7 @@ export default function Home() {
         <Navigation activeTab={activeTab} onTabChange={(tab) => {
           setActiveTab(tab)
           if (tab !== 'chat') setChatEngaged(false)
+          if (tab === 'chat') setShowQuiz(false)
         }} />
       )}
 
