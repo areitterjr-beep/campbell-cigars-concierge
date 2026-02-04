@@ -94,10 +94,10 @@ export default function CigarInfoCard({ cigar, fullWidth = false }: CigarInfoCar
       <div className={`bg-gradient-to-r from-cigar-dark to-cigar-brown p-4 ${!hasValidImage ? 'pt-5' : ''}`}>
         <div className="flex justify-between items-start gap-2">
           <div className="flex-1 min-w-0">
-            <p className="text-cigar-gold text-xs font-semibold uppercase tracking-wider truncate">
+            <p className="text-cigar-gold text-sm font-bold uppercase tracking-widest truncate drop-shadow-sm">
               {cigar.brand}
             </p>
-            <h3 className="text-white font-bold text-base leading-tight mt-1 truncate" title={cigar.name}>
+            <h3 className="text-white/90 font-medium text-base leading-tight mt-1 truncate" title={cigar.name}>
               {displayName || cigar.name}
             </h3>
           </div>
