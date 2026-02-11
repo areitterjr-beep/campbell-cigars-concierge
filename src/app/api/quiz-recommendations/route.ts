@@ -14,6 +14,7 @@ interface CigarRecommendation {
   description: string
   tastingNotes: string[]
   pairings: { alcoholic: string[], nonAlcoholic: string[] }
+  imageUrl?: string
 }
 
 // Check if a cigar is in our inventory and get its data
@@ -125,18 +126,17 @@ export async function POST(request: NextRequest) {
       }
       
       // Filter to only cigars in inventory, add inventory data, limit to 2 (like chat)
-      const enrichedCigars = cigars
-        .map(cigar => {
-          const data = getInventoryData(cigar.name, cigar.brand)
-          if (!data.inInventory) return null
-          return {
-            ...cigar,
-            imageUrl: data.imageUrl,
-            price: data.priceRange || cigar.price
-          }
-        })
-        .filter((c): c is CigarRecommendation => c !== null)
-        .slice(0, 2)
+      const mapped = cigars.map(cigar => {
+        const data = getInventoryData(cigar.name, cigar.brand)
+        if (!data.inInventory) return null
+        return {
+          ...cigar,
+          imageUrl: data.imageUrl,
+          price: data.priceRange || cigar.price
+        }
+      })
+      const filtered = mapped.filter((c): c is NonNullable<typeof c> => c !== null)
+      const enrichedCigars = filtered.slice(0, 2)
 
       return NextResponse.json({
         message,

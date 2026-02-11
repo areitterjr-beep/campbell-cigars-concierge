@@ -98,6 +98,7 @@ The app uses `sharp` for image compression. Vercel supports this natively.
 ### Build Fails
 - Check that all dependencies are in `package.json`
 - Ensure TypeScript has no errors: `npm run build`
+- **Sharp error**: If build fails with sharp (e.g. "Could not load sharp", "free(): invalid size"), try downgrading: `npm install sharp@0.32.6` and commit the updated `package-lock.json`
 
 ### API Not Working
 - Verify `GROQ_API_KEY` or `GEMINI_API_KEY` is set correctly in Vercel (at least one required)

@@ -1,8 +1,14 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
-import { Send, Loader2, Sparkles, Camera, X } from 'lucide-react'
+import { useState, useRef, useEffect, useCallback } from 'react'
+import { Send, Loader2, Sparkles, Camera, X, Mic, MicOff, Volume2, VolumeX } from 'lucide-react'
 import CigarInfoCard, { CigarData } from './CigarInfoCard'
+
+// Web Speech API - check support at runtime
+const getSpeechRecognition = () => {
+  if (typeof window === 'undefined') return null
+  return (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition
+}
 
 interface Message {
   id: string
@@ -40,9 +46,12 @@ export default function ChatInterface({ isExpanded = false, onEngaged }: ChatInt
   const [isLoading, setIsLoading] = useState(false)
   const [attachedImage, setAttachedImage] = useState<string | null>(null)
   const [showCamera, setShowCamera] = useState(false)
+  const [voiceMode, setVoiceMode] = useState(false)
+  const [isListening, setIsListening] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
   const streamRef = useRef<MediaStream | null>(null)
+  const recognitionRef = useRef<any>(null)
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -104,6 +113,81 @@ export default function ChatInterface({ isExpanded = false, onEngaged }: ChatInt
     setAttachedImage(null)
   }
 
+  // Text-to-speech: read response aloud
+  const speakResponse = useCallback((text: string) => {
+    if (!voiceMode || !text.trim()) return
+    if (typeof window === 'undefined' || !window.speechSynthesis) return
+    window.speechSynthesis.cancel()
+    const utterance = new SpeechSynthesisUtterance(text)
+    utterance.rate = 0.95
+    utterance.pitch = 1
+    const voices = window.speechSynthesis.getVoices()
+    const preferred = voices.find(v => v.name.includes('Samantha') || v.name.includes('Google') || v.lang.startsWith('en'))
+    if (preferred) utterance.voice = preferred
+    window.speechSynthesis.speak(utterance)
+  }, [voiceMode])
+
+  const stopSpeaking = useCallback(() => {
+    window.speechSynthesis.cancel()
+  }, [])
+
+  // Speech-to-text: listen and transcribe
+  const startListening = useCallback(() => {
+    const SpeechRecognition = getSpeechRecognition()
+    if (!SpeechRecognition) {
+      alert('Voice input is not supported in this browser. Try Chrome or Edge.')
+      return
+    }
+    if (isListening) return
+    const recognition = new SpeechRecognition()
+    recognition.continuous = false
+    recognition.interimResults = true
+    recognition.lang = 'en-US'
+    recognitionRef.current = recognition
+    const transcriptRef = { current: '' }
+    recognition.onresult = (e: any) => {
+      const results = Array.from(e.results)
+      const transcript = results.map((r: any) => r[0].transcript).join('').trim()
+      if (transcript) {
+        transcriptRef.current = transcript
+        setInput(transcript)
+      }
+    }
+    recognition.onend = () => {
+      setIsListening(false)
+      recognitionRef.current = null
+      const text = transcriptRef.current.trim()
+      if (text) {
+        setInput('')
+        handleSendRef.current(text)
+      }
+    }
+    recognition.onerror = () => setIsListening(false)
+    recognition.start()
+    setIsListening(true)
+  }, [isListening])
+
+  const stopListening = useCallback(() => {
+    if (recognitionRef.current) {
+      recognitionRef.current.stop()
+      recognitionRef.current = null
+    }
+    setIsListening(false)
+  }, [])
+
+  const handleSendRef = useRef<(msg?: string) => void>(() => {})
+
+  useEffect(() => {
+    if (!voiceMode) stopSpeaking()
+  }, [voiceMode, stopSpeaking])
+
+  useEffect(() => {
+    return () => {
+      stopListening()
+      stopSpeaking()
+    }
+  }, [stopListening, stopSpeaking])
+
   const handleSend = async (messageText?: string) => {
     const text = messageText || input
     if ((!text.trim() && !attachedImage) || isLoading) return
@@ -157,19 +241,26 @@ export default function ChatInterface({ isExpanded = false, onEngaged }: ChatInt
       }
 
       setMessages((prev) => [...prev, assistantMessage])
+      if (voiceMode && data.message) {
+        const textForSpeech = data.message.replace(/\*\*(.*?)\*\*/g, '$1')
+        speakResponse(textForSpeech)
+      }
     } catch (error) {
       console.error('Chat error:', error)
+      const errorContent = "I'm sorry, I encountered an error. Please try again in a moment."
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: "I'm sorry, I encountered an error. Please try again in a moment.",
+        content: errorContent,
         timestamp: new Date(),
       }
       setMessages((prev) => [...prev, errorMessage])
+      if (voiceMode) speakResponse(errorContent)
     } finally {
       setIsLoading(false)
     }
   }
+  handleSendRef.current = handleSend
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -355,12 +446,21 @@ export default function ChatInterface({ isExpanded = false, onEngaged }: ChatInt
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyPress={handleKeyPress}
-            placeholder={attachedImage ? "Ask about this cigar..." : "Ask me anything..."}
+            placeholder={attachedImage ? "Ask about this cigar..." : isListening ? "Listening..." : "Ask me anything..."}
             className="flex-1 resize-none border border-gray-300 rounded-xl px-3 py-2 text-sm
                      focus:outline-none focus:ring-2 focus:ring-cigar-gold focus:border-transparent
                      placeholder-gray-400 text-cigar-dark"
             rows={1}
           />
+          <button
+            onClick={() => setVoiceMode(!voiceMode)}
+            className={`p-2.5 rounded-xl transition-colors ${
+              voiceMode ? 'bg-cigar-gold text-cigar-dark' : 'bg-cigar-cream hover:bg-cigar-gold/30 text-cigar-dark'
+            }`}
+            title={voiceMode ? "Voice mode on - responses will be read aloud" : "Voice mode off - tap to enable"}
+          >
+            {voiceMode ? <Volume2 className="w-5 h-5" /> : <VolumeX className="w-5 h-5" />}
+          </button>
           <button
             onClick={() => startCamera()}
             className="bg-cigar-cream hover:bg-cigar-gold/30 text-cigar-dark p-2.5 rounded-xl transition-colors"
@@ -368,6 +468,17 @@ export default function ChatInterface({ isExpanded = false, onEngaged }: ChatInt
           >
             <Camera className="w-5 h-5" />
           </button>
+          {getSpeechRecognition() ? (
+            <button
+              onClick={isListening ? stopListening : startListening}
+              className={`p-2.5 rounded-xl transition-colors ${
+                isListening ? 'bg-red-500 text-white animate-pulse' : 'bg-cigar-cream hover:bg-cigar-gold/30 text-cigar-dark'
+              }`}
+              title={isListening ? "Stop listening" : "Voice input"}
+            >
+              {isListening ? <MicOff className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
+            </button>
+          ) : null}
           <button
             onClick={() => handleSend()}
             disabled={(!input.trim() && !attachedImage) || isLoading}
