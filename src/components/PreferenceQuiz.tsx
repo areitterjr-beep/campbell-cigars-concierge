@@ -26,7 +26,6 @@ interface CigarCardData {
   description: string
   tastingNotes: string[]
   pairings: { alcoholic: string[]; nonAlcoholic: string[] }
-  inStock: boolean
   imageUrl?: string
 }
 

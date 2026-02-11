@@ -17,15 +17,15 @@ interface CigarData {
 }
 
 // Check if a cigar is in our inventory
-function getInventoryStatus(cigarName: string): { inStock: boolean, imageUrl?: string } {
+function getInventoryData(cigarName: string): { imageUrl?: string, priceRange?: string } {
   const found = cigarsData.cigars.find(c => 
     c.name.toLowerCase() === cigarName.toLowerCase() ||
     cigarName.toLowerCase().includes(c.name.toLowerCase()) ||
     c.name.toLowerCase().includes(cigarName.toLowerCase())
   )
   return {
-    inStock: found ? found.inventory > 0 : false,
-    imageUrl: found?.imageUrl || undefined
+    imageUrl: found?.imageUrl || undefined,
+    priceRange: (found as any)?.priceRange || undefined
   }
 }
 
@@ -105,7 +105,9 @@ IF CONFIDENCE < 60:
   "message": "I can see [specific observations]. Can you [ONE specific question]?"
 }
 
-Remember: Even cigars being held, partially visible, or in challenging lighting can often be identified by wrapper color, band design, and shape!`
+Remember: Even cigars being held, partially visible, or in challenging lighting can often be identified by wrapper color, band design, and shape!
+
+REFERENCE IMAGES (when provided): You will receive reference images from our store inventory. Compare the customer's photo to these—match band design, colors, text, and appearance. Use them as visual training. Prefer matching to a reference when the photo clearly matches one.`
 
 export async function POST(request: NextRequest) {
   try {
@@ -113,7 +115,7 @@ export async function POST(request: NextRequest) {
 
     // If a barcode was provided directly, look it up in inventory
     if (barcode) {
-      const cigar = cigarsData.cigars.find((c) => c.barcode === barcode)
+      const cigar = cigarsData.cigars.find((c) => (c as any).barcode === barcode)
       
       if (cigar) {
         return NextResponse.json({ cigar })
@@ -121,7 +123,7 @@ export async function POST(request: NextRequest) {
       
       // Try partial match or name search
       const partialMatch = cigarsData.cigars.find((c) => 
-        c.barcode.includes(barcode) || 
+        (c as any).barcode?.includes(barcode) || 
         c.name.toLowerCase().includes(barcode.toLowerCase()) ||
         c.brand.toLowerCase().includes(barcode.toLowerCase())
       )
@@ -164,22 +166,37 @@ export async function POST(request: NextRequest) {
         const base64Data = processedImage.split(',')[1]
         const mimeType = processedImage.split(';')[0].split(':')[1] || 'image/jpeg'
 
+        // Fetch reference images from inventory for better recognition
+        const { getReferenceImagesFromInventory } = await import('@/lib/imageUtils')
+        const referenceImages = await getReferenceImagesFromInventory(
+          cigarsData.cigars as any[],
+          6
+        )
+        const refPrompt = referenceImages.length > 0
+          ? `\n\nREFERENCE IMAGES: Below are ${referenceImages.length} product photos from our inventory. Compare the CUSTOMER'S PHOTO (the last image) to these:\n${referenceImages
+              .map((r, i) => `${i + 1}. ${r.brand} - ${r.name}`)
+              .join('\n')}\n\nThe LAST image is the customer's cigar photo to identify.`
+          : ''
+
         // Use Scout as primary model (best accuracy based on testing)
         const VISION_MODEL = 'meta-llama/llama-4-scout-17b-16e-instruct'
         
         let response = ''
         let succeeded = false
         
+        const visionPrompt = SCAN_PROMPT + refPrompt
+        const contentParts: Array<{ type: 'text'; text: string } | { type: 'image_url'; image_url: { url: string } }> = [
+          { type: 'text', text: visionPrompt },
+        ]
+        for (const ref of referenceImages) {
+          contentParts.push({ type: 'image_url', image_url: { url: `data:image/jpeg;base64,${ref.base64}` } })
+        }
+        contentParts.push({ type: 'image_url', image_url: { url: `data:${mimeType};base64,${base64Data}` } })
+        
         try {
-          console.log(`[Scan] Using vision model: ${VISION_MODEL}`)
+          console.log(`[Scan] Using vision model: ${VISION_MODEL} (${referenceImages.length} references)`)
           const completion = await groq.chat.completions.create({
-            messages: [{
-              role: 'user',
-              content: [
-                { type: 'text', text: SCAN_PROMPT },
-                { type: 'image_url', image_url: { url: `data:${mimeType};base64,${base64Data}` } },
-              ],
-            }],
+            messages: [{ role: 'user', content: contentParts }],
             model: VISION_MODEL,
             temperature: 0.3,
             max_tokens: 800,
@@ -219,16 +236,15 @@ export async function POST(request: NextRequest) {
             
             // Apply confidence guardrail - only return cigar if confidence >= 60
             if (confidence >= 60 && parsed.identified && parsed.cigar) {
-              const status = getInventoryStatus(parsed.cigar.name)
+              const data = getInventoryData(parsed.cigar.name)
               return NextResponse.json({ 
                 cigar: {
                   ...parsed.cigar,
                   id: `ai-${Date.now()}`,
-                  inventory: status.inStock ? 1 : 0,
                   barcode: '',
                   bestFor: [],
-                  inStock: status.inStock,
-                  imageUrl: status.imageUrl
+                  imageUrl: data.imageUrl,
+                  price: data.priceRange || parsed.cigar.price
                 },
                 confidence
               })

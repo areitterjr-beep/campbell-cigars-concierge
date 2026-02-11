@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Groq from 'groq-sdk'
+import { GoogleGenerativeAI } from '@google/generative-ai'
 import cigarsData from '@/data/cigars.json'
 
 interface CigarRecommendation {
@@ -16,16 +17,201 @@ interface CigarRecommendation {
   pairings: { alcoholic: string[], nonAlcoholic: string[] }
 }
 
-// Check if a cigar is in our inventory and get stock status
-function getInventoryStatus(cigarName: string): { inStock: boolean, imageUrl?: string } {
-  const found = cigarsData.cigars.find(c => 
-    c.name.toLowerCase() === cigarName.toLowerCase() ||
-    cigarName.toLowerCase().includes(c.name.toLowerCase()) ||
-    c.name.toLowerCase().includes(cigarName.toLowerCase())
-  )
+// Tokenize a string into meaningful words for matching
+function tokenize(s: string): string[] {
+  return s.toLowerCase()
+    .replace(/['']/g, '')
+    .split(/[\s\-–—\/.,;:()]+/)
+    .filter(w => w.length > 0)
+}
+
+// Words too generic to be useful for matching on their own
+const NOISE_WORDS = new Set([
+  'the', 'de', 'del', 'la', 'las', 'los', 'and', 'by', 'of', 'no', 'a', 'el',
+  'cigar', 'cigars', 'toro', 'robusto', 'churchill', 'corona', 'gordo', 'lancero',
+  'belicoso', 'torpedo', 'perfecto', 'petit', 'double', 'gran', 'grande'
+])
+
+// Check if a cigar is in our inventory and get its data
+function getInventoryStatus(cigarName: string, brandName?: string): { productUrl?: string, imageUrl?: string, priceRange?: string } {
+  const queryName = cigarName.toLowerCase().trim()
+  const queryBrand = brandName?.toLowerCase().trim() || ''
+
+  // Build query tokens from what the AI returned
+  const nameTokens = tokenize(queryName)
+  const brandTokens = tokenize(queryBrand)
+
+  // Remove brand tokens that appear in name (AI often puts brand in the name too)
+  const deduped = nameTokens.filter(t => !brandTokens.includes(t))
+  const allQueryTokens = [...brandTokens, ...deduped]
+
+  let bestMatch: any = null
+  let bestScore = 0
+
+  for (const c of cigarsData.cigars as any[]) {
+    const cName = c.name.toLowerCase()
+    const cBrand = c.brand.toLowerCase()
+
+    // === Exact / near-exact matches (highest priority) ===
+    const cFull = `${cBrand} ${cName}`
+    const qFull = queryBrand ? `${queryBrand} ${queryName}` : queryName
+
+    if (cFull === qFull || cName === queryName) {
+      // Perfect match
+      if (100 > bestScore) { bestScore = 100; bestMatch = c }
+      continue
+    }
+    if (cFull === queryName || qFull === cFull) {
+      if (98 > bestScore) { bestScore = 98; bestMatch = c }
+      continue
+    }
+
+    // === Token-based fuzzy matching ===
+    const cBrandTokens = tokenize(cBrand)
+    const cNameTokens = tokenize(cName)
+    const cAllTokens = [...cBrandTokens, ...cNameTokens]
+
+    // Check brand compatibility
+    const brandMatch = queryBrand && (
+      cBrand === queryBrand ||
+      cBrand.includes(queryBrand) || queryBrand.includes(cBrand) ||
+      cBrandTokens.some(bt => brandTokens.includes(bt))
+    )
+
+    // Count meaningful token overlaps between query and inventory
+    let matchCount = 0
+    let matchWeight = 0
+    const matched: string[] = []
+
+    for (const qt of allQueryTokens) {
+      if (NOISE_WORDS.has(qt)) continue
+      for (const ct of cAllTokens) {
+        if (qt === ct) {
+          matchCount++
+          // Numbers (1964, 1926, 45, 9) are highly distinctive
+          const isNumber = /^\d+$/.test(qt)
+          // Long distinctive words (hemingway, melanio, undercrown) are valuable
+          const isDistinctive = qt.length >= 6
+          matchWeight += isNumber ? 30 : isDistinctive ? 20 : 10
+          matched.push(qt)
+          break
+        }
+      }
+    }
+
+    // Require: brand must match + at least one meaningful token overlap,
+    // OR at least 2 meaningful non-brand token overlaps
+    const nonBrandMatches = matched.filter(m => !brandTokens.includes(m))
+
+    let score = 0
+    if (brandMatch && nonBrandMatches.length >= 1) {
+      score = 20 + matchWeight
+    } else if (nonBrandMatches.length >= 2) {
+      score = 10 + matchWeight
+    }
+
+    // Bonus for substring containment (one direction)
+    if (score > 0 && (queryName.includes(cName) || cName.includes(queryName))) {
+      score += 15
+    }
+    if (score > 0 && (qFull.includes(cFull) || cFull.includes(qFull))) {
+      score += 10
+    }
+
+    if (score > bestScore) {
+      bestScore = score
+      bestMatch = c
+    }
+  }
+
+  // Require a minimum confidence threshold
+  if (bestScore < 25) {
+    bestMatch = null
+  }
+
   return {
-    inStock: found ? found.inventory > 0 : false,
-    imageUrl: found?.imageUrl || undefined
+    productUrl: bestMatch?.productUrl || undefined,
+    imageUrl: bestMatch?.imageUrl || undefined,
+    priceRange: bestMatch?.priceRange || undefined
+  }
+}
+
+// Find a cigar in inventory when user asks for a specific cigar by name
+function findCigarFromUserMessage(userMessage: string): CigarRecommendation | null {
+  const msg = userMessage.toLowerCase().trim()
+  const msgTokens = tokenize(msg)
+  if (msgTokens.length < 2) return null // Need at least something like "padron 1964"
+
+  // Phrases that indicate user is asking for a specific cigar
+  const askPatterns = [
+    /tell\s+me\s+(?:about|more\s+about)\s+(?:the\s+)?(.+)/i,
+    /what(?:'s|\s+is)\s+(?:the\s+)?(.+?)\s+like\?/i,
+    /what\s+about\s+(?:the\s+)?(.+?)(?:\?|$)/i,
+    /(?:want\s+to\s+know|know\s+more)\s+about\s+(?:the\s+)?(.+)/i,
+    /do\s+you\s+have\s+(?:the\s+)?(.+?)(?:\?|$)/i,
+    /(?:show\s+me|get\s+me)\s+(?:the\s+)?(.+)/i,
+    /tell\s+me\s+about\s+(.+)/i,
+  ]
+
+  let query = msg
+  for (const p of askPatterns) {
+    const m = msg.match(p)
+    if (m && m[1]) {
+      query = m[1].trim()
+      break
+    }
+  }
+
+  const queryTokens = tokenize(query).filter((t) => !NOISE_WORDS.has(t))
+  if (queryTokens.length < 1) return null
+
+  let bestMatch: any = null
+  let bestScore = 0
+
+  for (const c of cigarsData.cigars as any[]) {
+    const cName = c.name.toLowerCase()
+    const cBrand = c.brand.toLowerCase()
+    const cFull = `${cBrand} ${cName}`
+    const cTokens = tokenize(cFull)
+    const cBrandTokens = tokenize(cBrand)
+
+    let matchCount = 0
+    let matchWeight = 0
+    for (const qt of queryTokens) {
+      if (NOISE_WORDS.has(qt)) continue
+      for (const ct of cTokens) {
+        if (qt === ct) {
+          matchCount++
+          const isNumber = /^\d+$/.test(qt)
+          const isDistinctive = qt.length >= 5
+          matchWeight += isNumber ? 30 : isDistinctive ? 20 : 10
+          break
+        }
+      }
+    }
+
+    const brandInQuery = cBrandTokens.some((bt: string) => queryTokens.includes(bt))
+    const score = brandInQuery ? 15 + matchWeight : matchWeight
+    if (matchCount >= 1 && score > bestScore && score >= 25) {
+      bestScore = score
+      bestMatch = c
+    }
+  }
+
+  if (!bestMatch) return null
+
+  return {
+    name: bestMatch.name,
+    brand: bestMatch.brand,
+    origin: bestMatch.origin || '',
+    wrapper: bestMatch.wrapper || '',
+    body: bestMatch.body || 'Medium',
+    strength: bestMatch.strength || 'Medium',
+    price: bestMatch.priceRange || '$0',
+    time: bestMatch.smokingTime || '45-60min',
+    description: bestMatch.description || '',
+    tastingNotes: Array.isArray(bestMatch.tastingNotes) ? bestMatch.tastingNotes : [],
+    pairings: bestMatch.pairings || { alcoholic: [], nonAlcoholic: [] },
   }
 }
 
@@ -37,7 +223,7 @@ IMPORTANT CONTEXT: You are assisting customers who are ALREADY INSIDE Campbell C
 - Instead, say things like "we have...", "I can show you...", "let me recommend...", "ask our staff to show you..."
 - Treat recommendations as items they can see and purchase right now in the shop
 
-You have extensive knowledge of ALL cigars worldwide - recommend the best cigars based on the customer's needs, not limited to any specific inventory.
+CRITICAL - INVENTORY ONLY: You may ONLY recommend cigars that appear in the store's inventory list provided below. Never suggest cigars that are not in this list—unless the customer specifically requests a cigar by name (e.g., "Tell me about My Father No. 4" or "I want the Padron 1964"). In that case only, you may discuss the requested cigar even if it's not in inventory. For any other request, recommend the closest match from the list.
 
 RESPONSE FORMAT:
 Always respond with valid JSON in this exact format:
@@ -46,12 +232,28 @@ Always respond with valid JSON in this exact format:
   "cigars": [] // Array of cigar objects when recommending, empty array otherwise
 }
 
-When recommending cigars, include detailed cigar objects:
+When recommending cigars, include EXACTLY 2 cigar objects (no more, no less):
 {
-  "message": "Your response here",
+  "message": "Your response mentioning only CigarA and CigarB",
   "cigars": [
     {
-      "name": "Full cigar name",
+      "name": "CigarA full name",
+      "brand": "Brand name",
+      "origin": "Country",
+      "wrapper": "Wrapper type",
+      "body": "Light/Medium/Full",
+      "strength": "Mild/Medium/Full",
+      "price": "$X-$XX",
+      "time": "XX-XXmin",
+      "description": "2-3 sentence description",
+      "tastingNotes": ["note1", "note2", "note3"],
+      "pairings": {
+        "alcoholic": ["drink1", "drink2"],
+        "nonAlcoholic": ["drink1", "drink2"]
+      }
+    },
+    {
+      "name": "CigarB full name",
       "brand": "Brand name",
       "origin": "Country",
       "wrapper": "Wrapper type",
@@ -71,7 +273,7 @@ When recommending cigars, include detailed cigar objects:
 
 GUIDELINES:
 1. Use good judgment on response length - be concise for simple questions, thorough when needed
-2. Recommend 1-4 cigars based on context - use your expertise to pick the right number
+2. CRITICAL: When recommending cigars, ALWAYS recommend EXACTLY 2 cigars. The "cigars" array must contain exactly 2 objects. Your "message" text must ONLY mention these same 2 cigars by name - never reference any other cigars that are not in the array. EXCEPTION: When the customer asks for a SPECIFIC cigar by name (e.g. "Tell me about the Padron 1964", "What's the Opus X like?"), include that cigar in the cigars array (1 cigar) so we can display its card.
 3. Offer diverse recommendations across different brands, origins, and flavor profiles
 4. Only recommend cigars when the customer is asking for recommendations - for educational/explanation questions, provide helpful information WITHOUT recommending cigars (empty cigars array)
 5. Share your expertise freely about cigar culture, storage, terminology, etc.
@@ -99,6 +301,17 @@ For "understand cigar strength, body and flavor":
 **Quick guide**: New smokers - start mild STRENGTH, but enjoy any body/flavor you like.
 
 End with a brief follow-up question.
+
+QUICK QUESTIONS - Owner's preferred answers (use these when customers ask):
+1. "What are cigars all about?" → Cigars are about enjoying a handcrafted tobacco product for flavor, aroma, and relaxation—slowly and intentionally—often as a way to unwind, celebrate, or socialize.
+2. "What does strength mean?" → Strength refers to how powerful a cigar's flavor is, mainly based on its content and overall intensity.
+3. "What affects cigar price and quality?" → Tobacco quality, aging time, craftsmanship, construction, brand, and rarity.
+4. "What are celebration cigars?" → Special aged, well-branded cigars enjoyed to mark important moments like milestones, achievements, or special occasions.
+5. "Light/medium/full-bodied suggestions?" → Recommend 2 cigars from our inventory spanning light, medium, and full body. Use the cigars array.
+6. "Tell me about this cigar" → If they have a photo: use image ID. If they name a cigar: describe it from inventory AND include that cigar in the cigars array (1 cigar) so we can display its card. If unclear: ask which cigar they mean.
+7. "How are cigars evaluated?" → Appearance, construction, draw, burn, flavor, aroma, and balance.
+8. "Mold vs plume (bloom)?" → Mold is harmful and fuzzy; plume (bloom) is harmless white dust from natural oils aging on the cigar.
+9. "Ideal storage temp and humidity?" → About 65–70% humidity and 65–70°F (18–21°C).
 
 IMPORTANT: Keep responses CONCISE - no more than 150 words for educational answers. Always output valid JSON. The "cigars" array MUST be empty [] for educational questions.`
 
@@ -230,7 +443,9 @@ IF CONFIDENCE < 60: Ask ONE specific question:
   "cigars": []
 }
 
-Remember: Even partial views of cigars being held, smoked, or in cases can often be identified by an expert. Use your knowledge!`
+Remember: Even partial views of cigars being held, smoked, or in cases can often be identified by an expert. Use your knowledge!
+
+REFERENCE IMAGES (when provided): You will receive reference images from our store inventory showing actual product photos. Compare the customer's photo to these reference images—match band design, colors, text, and overall appearance. Use them as visual training to identify the cigar. Prefer matching to one of the reference cigars when the customer's photo clearly matches.`
 
 // Helper to parse JSON from model response
 function parseModelResponse(response: string): { message: string, cigars: CigarRecommendation[], confidence?: number } {
@@ -276,14 +491,16 @@ function parseImageResponse(response: string): { message: string, cigars: CigarR
   }
 }
 
-// Add inventory status to cigar recommendations
-function enrichWithInventoryStatus(cigars: CigarRecommendation[]) {
+// Add inventory data (image, product URL, real price) to cigar recommendations
+function enrichWithInventoryData(cigars: CigarRecommendation[]) {
   return cigars.map(cigar => {
-    const status = getInventoryStatus(cigar.name)
+    const status = getInventoryStatus(cigar.name, cigar.brand)
     return {
       ...cigar,
-      inStock: status.inStock,
-      imageUrl: status.imageUrl
+      productUrl: status.productUrl,
+      imageUrl: status.imageUrl,
+      // Override AI-generated price with the real store price from spreadsheet
+      price: status.priceRange || cigar.price
     }
   })
 }
@@ -291,17 +508,20 @@ function enrichWithInventoryStatus(cigars: CigarRecommendation[]) {
 export async function POST(request: NextRequest) {
   try {
     const { messages, image, shownCigars = [] } = await request.json()
-    const apiKey = process.env.GROQ_API_KEY
+    const groqKey = process.env.GROQ_API_KEY
+    const geminiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_GENERATIVE_AI_API_KEY
+    const hasGroq = groqKey && groqKey !== 'your_groq_api_key_here'
+    const hasGemini = geminiKey && geminiKey !== 'your_gemini_api_key_here'
     const lastMessage = messages[messages.length - 1]?.content || ''
     
-    if (!apiKey || apiKey === 'your_groq_api_key_here') {
+    if (!hasGroq && !hasGemini) {
       return NextResponse.json({
         message: "I'd be happy to help! What would you like to know about cigars?",
         cigars: []
       })
     }
 
-    const groq = new Groq({ apiKey })
+    const groq = hasGroq ? new Groq({ apiKey: groqKey! }) : null
 
     // Handle image requests
     if (image) {
@@ -322,42 +542,80 @@ export async function POST(request: NextRequest) {
         const base64Data = processedImage.split(',')[1]
         const mimeType = processedImage.split(';')[0].split(':')[1] || 'image/jpeg'
         
+        // Fetch reference images from inventory for better recognition
+        const { getReferenceImagesFromInventory } = await import('@/lib/imageUtils')
+        const referenceImages = await getReferenceImagesFromInventory(
+          cigarsData.cigars as any[],
+          6
+        )
+        const refPrompt = referenceImages.length > 0
+          ? `\n\nREFERENCE IMAGES: Below are ${referenceImages.length} product photos from our inventory. Compare the CUSTOMER'S PHOTO (the last image) to these. Use them to match band design, colors, and branding:\n${referenceImages
+              .map((r, i) => `${i + 1}. ${r.brand} - ${r.name}`)
+              .join('\n')}\n\nThe LAST image is the customer's cigar photo to identify.`
+          : ''
+        
         // Use Scout as primary model (best accuracy based on testing)
         const VISION_MODEL = 'meta-llama/llama-4-scout-17b-16e-instruct'
         
         let response = ''
         let succeeded = false
         
-        try {
-          console.log(`[Chat] Using vision model: ${VISION_MODEL}`)
-          const completion = await groq.chat.completions.create({
-            messages: [{
-              role: 'user',
-              content: [
-                { type: 'text', text: IMAGE_PROMPT + (lastMessage ? `\n\nCustomer says: ${lastMessage}` : '') },
-                { type: 'image_url', image_url: { url: `data:${mimeType};base64,${base64Data}` } },
-              ],
-            }],
+        const visionPrompt = IMAGE_PROMPT + refPrompt + (lastMessage ? `\n\nCustomer says: ${lastMessage}` : '')
+        
+        if (groq) {
+          try {
+            console.log(`[Chat] Using vision model: ${VISION_MODEL} (${referenceImages.length} references)`)
+            const contentParts: Array<{ type: 'text'; text: string } | { type: 'image_url'; image_url: { url: string } }> = [
+              { type: 'text', text: visionPrompt },
+            ]
+            for (const ref of referenceImages) {
+              contentParts.push({ type: 'image_url', image_url: { url: `data:image/jpeg;base64,${ref.base64}` } })
+            }
+            contentParts.push({ type: 'image_url', image_url: { url: `data:${mimeType};base64,${base64Data}` } })
+            const completion = await groq.chat.completions.create({
+            messages: [{ role: 'user', content: contentParts }],
             model: VISION_MODEL,
             temperature: 0.7,
             max_tokens: 800,
           })
           
-          response = completion.choices[0]?.message?.content || ''
-          if (response) {
-            console.log(`[Chat] Vision succeeded`)
-            succeeded = true
+            response = completion.choices[0]?.message?.content || ''
+            if (response) {
+              console.log(`[Chat] Vision succeeded`)
+              succeeded = true
+            }
+          } catch (modelError: any) {
+            console.error(`[Chat] Vision model failed:`, modelError?.message || modelError)
+            
+            // If image is still too large, provide helpful error
+            if (modelError?.message?.includes('413') || modelError?.message?.includes('too large')) {
+              return NextResponse.json({
+                message: "That image is too large for me to process. Could you try taking a closer photo of just the cigar band, or describe what you see on it?",
+                cigars: [],
+                confidence: 0
+              })
+            }
           }
-        } catch (modelError: any) {
-          console.error(`[Chat] Vision model failed:`, modelError?.message || modelError)
-          
-          // If image is still too large, provide helpful error
-          if (modelError?.message?.includes('413') || modelError?.message?.includes('too large')) {
-            return NextResponse.json({
-              message: "That image is too large for me to process. Could you try taking a closer photo of just the cigar band, or describe what you see on it?",
-              cigars: [],
-              confidence: 0
-            })
+        }
+        
+        // Fallback to Gemini vision if Groq failed or wasn't configured
+        if (!succeeded && hasGemini && geminiKey) {
+          try {
+            console.log('[Chat] Trying Gemini vision...')
+            const genAI = new GoogleGenerativeAI(geminiKey)
+            const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' })
+            const geminiParts: Array<{ text: string } | { inlineData: { data: string; mimeType: string } }> = [
+              { text: visionPrompt },
+            ]
+            for (const ref of referenceImages) {
+              geminiParts.push({ inlineData: { data: ref.base64, mimeType: 'image/jpeg' } })
+            }
+            geminiParts.push({ inlineData: { data: base64Data, mimeType: mimeType || 'image/jpeg' } })
+            const result = await model.generateContent(geminiParts)
+            response = result.response.text() || ''
+            if (response) succeeded = true
+          } catch (geminiVisionError) {
+            console.error(`[Chat] Gemini vision fallback failed:`, geminiVisionError)
           }
         }
         
@@ -373,7 +631,7 @@ export async function POST(request: NextRequest) {
         const parsed = parseImageResponse(response)
         return NextResponse.json({
           message: parsed.message,
-          cigars: enrichWithInventoryStatus(parsed.cigars),
+          cigars: enrichWithInventoryData(parsed.cigars).slice(0, 2),
           confidence: parsed.confidence
         })
       } catch (visionError) {
@@ -385,31 +643,142 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Build system prompt with context about previously shown cigars
-    let systemPrompt = SYSTEM_PROMPT
+    // Build system prompt with inventory list and context about previously shown cigars
+    const inventoryList = (cigarsData.cigars as any[])
+      .map((c) => `${c.brand} - ${c.name}`)
+      .join('\n')
+    let systemPrompt = SYSTEM_PROMPT + `\n\nSTORE INVENTORY (you may ONLY recommend from this list):\n${inventoryList}`
     if (shownCigars.length > 0) {
       systemPrompt += `\n\n[Internal - do not mention to customer] Previously recommended cigars to avoid repeating: ${shownCigars.join(', ')}. Suggest different cigars for variety.`
     }
 
-    const completion = await groq.chat.completions.create({
-      messages: [
-        { role: 'system', content: systemPrompt },
-        ...messages.map((m: { role: string; content: string }) => ({
-          role: m.role as 'user' | 'assistant',
-          content: m.content,
-        })),
-      ],
-      model: 'llama-3.3-70b-versatile',
-      temperature: 0.7,
-      max_tokens: 800,
-    })
+    let response = ''
+    let succeeded = false
+    let lastError = ''
 
-    const response = completion.choices[0]?.message?.content || ''
-    const parsed = parseModelResponse(response)
-    
+    // Try Groq first (often higher rate limits), then Gemini as fallback
+    if (groq) {
+      try {
+        console.log('[Chat] Trying Groq...')
+        const completion = await groq.chat.completions.create({
+          messages: [
+            { role: 'system', content: systemPrompt },
+            ...messages.map((m: { role: string; content: string }) => ({
+              role: m.role as 'user' | 'assistant',
+              content: m.content,
+            })),
+          ],
+          model: 'llama-3.3-70b-versatile',
+          temperature: 0.7,
+          max_tokens: 800,
+        })
+        response = completion.choices[0]?.message?.content || ''
+        if (response) {
+          succeeded = true
+          console.log('[Chat] Groq succeeded')
+        } else {
+          lastError = 'Groq returned empty response'
+        }
+      } catch (groqError: any) {
+        lastError = `Groq: ${groqError?.message || String(groqError)}`
+        console.error('[Chat] Groq failed:', lastError)
+      }
+    }
+
+    // Fallback to Gemini if Groq failed or wasn't configured
+    if (!succeeded && hasGemini && geminiKey) {
+      const GEMINI_MODEL = 'gemini-2.5-flash' // stable; gemini-2.0-flash deprecated Mar 2026
+      const tryGemini = async (retryAfter429 = false): Promise<boolean> => {
+        try {
+          if (retryAfter429) {
+            console.log('[Chat] Retrying Gemini after rate limit (429)...')
+            await new Promise((r) => setTimeout(r, 3000))
+          } else {
+            console.log(`[Chat] Trying Gemini (${GEMINI_MODEL})...`)
+          }
+          const genAI = new GoogleGenerativeAI(geminiKey)
+          const model = genAI.getGenerativeModel({ model: GEMINI_MODEL })
+          const chatPrompt = [
+            systemPrompt,
+            ...messages.map((m: { role: string; content: string }) =>
+              `${m.role === 'user' ? 'User' : 'Assistant'}: ${m.content}`
+            ),
+            'Assistant:',
+          ].join('\n\n')
+          const result = await model.generateContent(chatPrompt)
+          const resp = result?.response
+          if (!resp) {
+            console.error('[Chat] Gemini returned falsy response')
+            lastError = lastError || 'Gemini: Empty response'
+            return false
+          }
+          const blockReason = resp.promptFeedback?.blockReason
+          if (blockReason) {
+            console.error('[Chat] Gemini blocked prompt:', blockReason)
+            lastError = lastError || `Gemini: Prompt blocked (${blockReason})`
+            return false
+          }
+          const text = resp.text?.()
+          const r = (typeof text === 'string' ? text : '').trim()
+          if (r) {
+            response = r
+            return true
+          }
+          console.error('[Chat] Gemini returned empty text')
+          lastError = lastError || 'Gemini: Empty output'
+          return false
+        } catch (e: any) {
+          const msg = e?.message || String(e)
+          console.error('[Chat] Gemini error:', msg)
+          if (msg.includes('429') && !retryAfter429) {
+            return tryGemini(true)
+          }
+          lastError = lastError || `Gemini: ${msg}`
+          return false
+        }
+      }
+      succeeded = await tryGemini(false)
+      if (succeeded) console.log('[Chat] Gemini succeeded')
+    } else if (!succeeded && !hasGemini) {
+      console.error('[Chat] No Gemini key configured - add GEMINI_API_KEY to .env.local for fallback')
+    }
+
+    if (succeeded && response) {
+      try {
+        const parsed = parseModelResponse(response)
+        let cigars = enrichWithInventoryData(parsed.cigars)
+
+        // If user asked for a specific cigar, ensure we show its card
+        const requestedCigar = findCigarFromUserMessage(lastMessage)
+        if (requestedCigar) {
+          const reqName = requestedCigar.name.toLowerCase()
+          const reqBrand = requestedCigar.brand.toLowerCase()
+          const alreadyIncluded = cigars.some(
+            (c) => c.name.toLowerCase() === reqName && c.brand.toLowerCase() === reqBrand
+          )
+          if (!alreadyIncluded) {
+            const enriched = enrichWithInventoryData([requestedCigar])[0]
+            cigars = [enriched, ...cigars].slice(0, 2)
+          }
+        }
+
+        return NextResponse.json({
+          message: parsed.message,
+          cigars: cigars.slice(0, 2)
+        })
+      } catch (parseError) {
+        console.error('[Chat] Parse error, using raw response:', parseError)
+        return NextResponse.json({
+          message: response,
+          cigars: []
+        })
+      }
+    }
+    // Never expose raw API errors to users - log for debugging only
+    if (lastError) console.error('[Chat] Fallback failed:', lastError)
     return NextResponse.json({
-      message: parsed.message,
-      cigars: enrichWithInventoryStatus(parsed.cigars)
+      message: "Having trouble connecting. Please try again in a moment.",
+      cigars: []
     })
     
   } catch (error) {

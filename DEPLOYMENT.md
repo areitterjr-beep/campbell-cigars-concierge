@@ -11,7 +11,8 @@
 
 | Variable | Description | Required |
 |----------|-------------|----------|
-| `GROQ_API_KEY` | Your Groq API key for AI vision/chat | ✅ Yes |
+| `GROQ_API_KEY` | Your Groq API key for AI vision/chat | ✅ Yes (or Gemini) |
+| `GEMINI_API_KEY` | Google Gemini API key (free fallback when Groq fails) | Optional |
 | `ADMIN_PASSWORD` | Password for admin panel access | ✅ Yes |
 
 ---
@@ -41,8 +42,11 @@ git push origin main
 5. Add Environment Variables:
    ```
    GROQ_API_KEY=your_groq_api_key_here
+   GEMINI_API_KEY=your_gemini_api_key_here   # Optional: free fallback when Groq fails
    ADMIN_PASSWORD=your_secure_admin_password
    ```
+
+   Get a free Gemini key at [aistudio.google.com](https://aistudio.google.com/apikey)
 
 6. Click **"Deploy"**
 
@@ -96,7 +100,7 @@ The app uses `sharp` for image compression. Vercel supports this natively.
 - Ensure TypeScript has no errors: `npm run build`
 
 ### API Not Working
-- Verify `GROQ_API_KEY` is set correctly in Vercel
+- Verify `GROQ_API_KEY` or `GEMINI_API_KEY` is set correctly in Vercel (at least one required)
 - Check Vercel function logs for errors
 
 ### Admin Panel Access

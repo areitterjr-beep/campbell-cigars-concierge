@@ -16,24 +16,35 @@ interface CigarRecommendation {
   pairings: { alcoholic: string[], nonAlcoholic: string[] }
 }
 
-// Check if a cigar is in our inventory
-function getInventoryStatus(cigarName: string): { inStock: boolean, imageUrl?: string } {
-  const found = cigarsData.cigars.find(c => 
-    c.name.toLowerCase() === cigarName.toLowerCase() ||
-    cigarName.toLowerCase().includes(c.name.toLowerCase()) ||
-    c.name.toLowerCase().includes(cigarName.toLowerCase())
-  )
+// Check if a cigar is in our inventory and get its data
+function getInventoryData(cigarName: string, brandName?: string): { inInventory: boolean; imageUrl?: string; priceRange?: string } {
+  const queryName = cigarName.toLowerCase().trim()
+  const queryBrand = (brandName || '').toLowerCase().trim()
+  const cFull = queryBrand ? `${queryBrand} ${queryName}` : queryName
+  const found = (cigarsData.cigars as any[]).find(c => {
+    const cName = c.name.toLowerCase()
+    const cBrand = c.brand.toLowerCase()
+    const invFull = `${cBrand} ${cName}`
+    // Exact match
+    if (cName === queryName && (!queryBrand || cBrand === queryBrand)) return true
+    if (invFull === cFull || invFull === queryName) return true
+    // Substring match (AI may include brand in name or use shorthand)
+    if (invFull.includes(queryName) || queryName.includes(cName)) return true
+    if (queryBrand && cBrand.includes(queryBrand) && (cName.includes(queryName) || queryName.includes(cName))) return true
+    return false
+  })
   return {
-    inStock: found ? found.inventory > 0 : false,
-    imageUrl: found?.imageUrl || undefined
+    inInventory: !!found,
+    imageUrl: found?.imageUrl || undefined,
+    priceRange: found?.priceRange || undefined
   }
 }
 
 const SYSTEM_PROMPT = `You are an expert cigar concierge at Campbell Cigars. A customer just completed a preference quiz.
 
-Based on their preferences, recommend the best cigars from your extensive knowledge of ALL cigars worldwide.
+CRITICAL - INVENTORY ONLY: You may ONLY recommend cigars that appear in the store's inventory list provided below. Never suggest cigars that are not in this list. Recommend the closest match from the list based on the customer's preferences.
 
-RESPONSE FORMAT - Always respond with valid JSON:
+RESPONSE FORMAT - Always respond with valid JSON. Include EXACTLY 2 cigars in the array:
 {
   "message": "Brief, warm 1-2 sentence intro referencing their preferences",
   "cigars": [
@@ -57,12 +68,11 @@ RESPONSE FORMAT - Always respond with valid JSON:
 }
 
 GUIDELINES:
-- Recommend 2-4 cigars based on their experience level and preferences
-- Beginners: 2-3 approachable options
-- Experienced: 3-4 diverse options to compare
+- Recommend EXACTLY 2 cigars based on their experience level and preferences
 - Choose cigars that genuinely match their stated preferences
 - Vary your recommendations across different brands and origins
-- Be conversational in your intro message`
+- Be conversational in your intro message
+- You MUST use the EXACT "brand" and "name" from the inventory list for each cigar you recommend`
 
 export async function POST(request: NextRequest) {
   try {
@@ -76,12 +86,17 @@ export async function POST(request: NextRequest) {
       })
     }
 
+    const inventoryList = (cigarsData.cigars as any[])
+      .map((c) => `${c.brand} - ${c.name}`)
+      .join('\n')
+    const systemPrompt = SYSTEM_PROMPT + `\n\nSTORE INVENTORY (you may ONLY recommend from this list):\n${inventoryList}`
+
     const groq = new Groq({ apiKey })
 
     try {
       const completion = await groq.chat.completions.create({
         messages: [
-          { role: 'system', content: SYSTEM_PROMPT },
+          { role: 'system', content: systemPrompt },
           { 
             role: 'user', 
             content: `Customer quiz preferences:\n${preferences}` 
@@ -109,15 +124,19 @@ export async function POST(request: NextRequest) {
         console.log('Could not parse quiz recommendations JSON')
       }
       
-      // Add inventory status to each cigar
-      const enrichedCigars = cigars.map(cigar => {
-        const status = getInventoryStatus(cigar.name)
-        return {
-          ...cigar,
-          inStock: status.inStock,
-          imageUrl: status.imageUrl
-        }
-      })
+      // Filter to only cigars in inventory, add inventory data, limit to 2 (like chat)
+      const enrichedCigars = cigars
+        .map(cigar => {
+          const data = getInventoryData(cigar.name, cigar.brand)
+          if (!data.inInventory) return null
+          return {
+            ...cigar,
+            imageUrl: data.imageUrl,
+            price: data.priceRange || cigar.price
+          }
+        })
+        .filter((c): c is CigarRecommendation => c !== null)
+        .slice(0, 2)
 
       return NextResponse.json({
         message,

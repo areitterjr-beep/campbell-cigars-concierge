@@ -2,6 +2,59 @@
  * Image utilities for compression and processing
  */
 
+// Cache for reference images (avoids refetching on every request)
+let referenceImagesCache: { images: Array<{ brand: string; name: string; base64: string }>; fetchedAt: number } | null = null
+const CACHE_TTL_MS = 10 * 60 * 1000 // 10 minutes
+
+/**
+ * Fetch image from URL and return as base64. Resizes to thumbnail for reference use.
+ */
+export async function fetchImageAsBase64(url: string, maxSize = 256): Promise<string | null> {
+  try {
+    const fullUrl = url.startsWith('//') ? `https:${url}` : url
+    const res = await fetch(fullUrl, { headers: { 'User-Agent': 'CampbellCigars/1.0' } })
+    if (!res.ok) return null
+    const buffer = Buffer.from(await res.arrayBuffer())
+    const sharp = require('sharp')
+    const resized = await sharp(buffer)
+      .resize(maxSize, maxSize, { fit: 'inside', withoutEnlargement: true })
+      .jpeg({ quality: 70 })
+      .toBuffer()
+    return resized.toString('base64')
+  } catch {
+    return null
+  }
+}
+
+/**
+ * Get reference images from inventory for vision model training/context.
+ * Returns a curated set of cigars (diverse brands) with their product images as base64.
+ */
+export async function getReferenceImagesFromInventory(
+  cigars: Array<{ brand: string; name: string; imageUrl?: string }>,
+  count = 8
+): Promise<Array<{ brand: string; name: string; base64: string }>> {
+  if (referenceImagesCache && Date.now() - referenceImagesCache.fetchedAt < CACHE_TTL_MS) {
+    return referenceImagesCache.images
+  }
+  const withImages = cigars.filter((c) => c.imageUrl && c.imageUrl.startsWith('http'))
+  const seenBrands = new Set<string>()
+  const selected: typeof withImages = []
+  for (const c of withImages) {
+    if (selected.length >= count) break
+    if (seenBrands.has(c.brand)) continue
+    seenBrands.add(c.brand)
+    selected.push(c)
+  }
+  const results: Array<{ brand: string; name: string; base64: string }> = []
+  for (const c of selected) {
+    const base64 = await fetchImageAsBase64(c.imageUrl!)
+    if (base64) results.push({ brand: c.brand, name: c.name, base64 })
+  }
+  referenceImagesCache = { images: results, fetchedAt: Date.now() }
+  return results
+}
+
 /**
  * Compress a base64 image to reduce size for API calls
  * Groq has a limit on request size, so we need to compress large images

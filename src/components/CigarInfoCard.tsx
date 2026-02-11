@@ -18,8 +18,8 @@ export interface CigarData {
     alcoholic: string[]
     nonAlcoholic: string[]
   }
-  inStock?: boolean
   imageUrl?: string
+  productUrl?: string
 }
 
 interface CigarInfoCardProps {
@@ -65,47 +65,37 @@ export default function CigarInfoCard({ cigar, fullWidth = false }: CigarInfoCar
     <div className={`bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden ${
       fullWidth ? 'w-full' : 'w-80 flex-shrink-0'
     }`}>
-      {/* Image Section */}
-      {hasValidImage && (
-        <div className="relative h-44 bg-gradient-to-br from-gray-100 to-gray-50 flex items-center justify-center">
-          {!imageLoaded && (
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-10 h-10 border-3 border-cigar-gold border-t-transparent rounded-full animate-spin" />
-            </div>
-          )}
-          <img 
-            src={cigar.imageUrl}
-            alt={cigar.name}
-            className={`max-h-40 max-w-[90%] object-contain transition-opacity duration-300 ${
-              imageLoaded ? 'opacity-100' : 'opacity-0'
-            }`}
-            onLoad={() => setImageLoaded(true)}
-            onError={() => setImageError(true)}
-          />
-          {cigar.inStock !== false && (
-            <span className="absolute top-3 right-3 bg-green-500 text-white text-xs px-2 py-1 rounded-full font-medium">
-              In Stock
-            </span>
-          )}
-        </div>
-      )}
+      {/* Image Section - fixed height so cards align whether they have an image or not */}
+      <div className="relative h-44 bg-white flex items-center justify-center flex-shrink-0">
+        {hasValidImage ? (
+          <>
+            {!imageLoaded && (
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-10 h-10 border-3 border-cigar-gold border-t-transparent rounded-full animate-spin" />
+              </div>
+            )}
+            <img 
+              src={cigar.imageUrl}
+              alt={cigar.name}
+              className={`max-h-40 max-w-[90%] object-contain transition-opacity duration-300 ${
+                imageLoaded ? 'opacity-100' : 'opacity-0'
+              }`}
+              onLoad={() => setImageLoaded(true)}
+              onError={() => setImageError(true)}
+            />
+          </>
+        ) : null}
+      </div>
 
       {/* Header - Brand & Name */}
-      <div className={`bg-gradient-to-r from-cigar-dark to-cigar-brown p-4 ${!hasValidImage ? 'pt-5' : ''}`}>
-        <div className="flex justify-between items-start gap-2">
-          <div className="flex-1 min-w-0">
-            <p className="text-cigar-gold text-sm font-bold uppercase tracking-widest truncate drop-shadow-sm">
-              {cigar.brand}
-            </p>
-            <h3 className="text-white/90 font-medium text-base leading-tight mt-1 truncate" title={cigar.name}>
-              {displayName || cigar.name}
-            </h3>
-          </div>
-          {!hasValidImage && cigar.inStock !== false && (
-            <span className="bg-green-500 text-white text-xs px-2 py-1 rounded-full font-medium flex-shrink-0">
-              In Stock
-            </span>
-          )}
+      <div className="bg-gradient-to-r from-cigar-dark to-cigar-brown p-4">
+        <div className="flex-1 min-w-0">
+          <p className="text-cigar-gold text-sm font-bold uppercase tracking-widest truncate drop-shadow-sm">
+            {cigar.brand}
+          </p>
+          <h3 className="text-white/90 font-medium text-base leading-tight mt-1 truncate" title={cigar.name}>
+            {displayName || cigar.name}
+          </h3>
         </div>
       </div>
 

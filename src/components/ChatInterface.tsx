@@ -19,11 +19,12 @@ interface ChatInterfaceProps {
 }
 
 const SUGGESTED_QUESTIONS = [
-  "I'm new to cigars. Where should I start?",
-  "What cigar pairs well with bourbon?",
-  "Show me something full-bodied",
+  "What are cigars all about?",
+  "What does strength mean in cigars?",
+  "Suggest a medium bodied cigar",
   "What's good for a celebration?",
-  "Understand cigar strength, body and flavor",
+  "Mold vs plume (bloom)—what's the difference?",
+  "Ideal storage temp and humidity?",
 ]
 
 export default function ChatInterface({ isExpanded = false, onEngaged }: ChatInterfaceProps) {

@@ -188,12 +188,12 @@ export default function Home() {
                     <QuickGuideCard
                       title="New to Cigars?"
                       description="Start with mild, Connecticut-wrapped cigars. They're smooth, approachable, and won't overwhelm your palate."
-                      recommendation="Try: Ashton Classic or Montecristo White"
+                      recommendation="Try: Ashton Crystal Belicoso or Montecristo White Series"
                     />
                     <QuickGuideCard
                       title="Looking for Bold Flavors?"
                       description="Full-bodied Nicaraguan cigars with Maduro wrappers deliver rich, complex flavors with notes of chocolate and espresso."
-                      recommendation="Try: Liga Privada No. 9 or Padron 1964"
+                      recommendation="Try: Liga Privada No. 9 or Padron 1964 Anniversary Maduro"
                     />
                     <QuickGuideCard
                       title="Short on Time?"
