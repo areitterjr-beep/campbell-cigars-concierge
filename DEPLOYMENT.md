@@ -100,9 +100,12 @@ The app uses `sharp` for image compression. Vercel supports this natively.
 - Ensure TypeScript has no errors: `npm run build`
 - **Sharp error**: If build fails with sharp (e.g. "Could not load sharp", "free(): invalid size"), try downgrading: `npm install sharp@0.32.6` and commit the updated `package-lock.json`
 
-### API Not Working
-- Verify `GROQ_API_KEY` or `GEMINI_API_KEY` is set correctly in Vercel (at least one required)
-- Check Vercel function logs for errors
+### API Not Working / "Having trouble connecting"
+1. **Check environment variables**: Visit `https://your-project.vercel.app/api/health` – it will show if `GROQ_API_KEY` and `GEMINI_API_KEY` are configured (without exposing values).
+2. **Vercel Dashboard**: Project → Settings → Environment Variables. Ensure variables are set for **Production** (not just Preview). Redeploy after adding or changing env vars.
+3. **Both keys recommended**: Set both `GROQ_API_KEY` and `GEMINI_API_KEY`. When Groq rate-limits (429), the app automatically falls back to Gemini.
+4. **Get a free Gemini key**: [aistudio.google.com](https://aistudio.google.com/apikey) – use as fallback when Groq fails.
+5. **Check Vercel logs**: Project → Deployments → select deployment → Functions → view logs for the `/api/chat` route to see actual errors.
 
 ### Admin Panel Access
 - Use the `ADMIN_PASSWORD` you set in environment variables

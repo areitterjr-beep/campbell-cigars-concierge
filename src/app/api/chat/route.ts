@@ -505,6 +505,9 @@ function enrichWithInventoryData(cigars: CigarRecommendation[]) {
   })
 }
 
+// Allow up to 30s for AI API calls (Groq/Gemini can be slow)
+export const maxDuration = 30
+
 export async function POST(request: NextRequest) {
   try {
     const { messages, image, shownCigars = [] } = await request.json()
