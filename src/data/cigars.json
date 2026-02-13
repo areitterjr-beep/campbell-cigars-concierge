@@ -298,7 +298,7 @@
         ]
       },
       "inventory": 5,
-      "productUrl": "https://www.bestcigarprices.com/cigar-directory/cigars/its-a-boy-its-a-girl/",
+      "productUrl": "https://www.bestcigarprices.com/cigar-directory/cigars/its-a-boy-its-a-girl/?srsltid=AfmBOoo6J9qFXuJpzX-YquvgWRnWSF8hR1Ziv2iCCIahLkWYCKOcErCC",
       "imageUrl": "https://www.holts.com/media//categoryimage//thumb/270x270/5/3/53918655alec-bradley-its-a-boy.png"
     },
     {
@@ -327,7 +327,7 @@
         ]
       },
       "inventory": 3,
-      "productUrl": "https://www.bestcigarprices.com/cigar-directory/cigars/its-a-boy-its-a-girl/",
+      "productUrl": "https://www.bestcigarprices.com/cigar-directory/cigars/its-a-boy-its-a-girl/?srsltid=AfmBOoo6J9qFXuJpzX-YquvgWRnWSF8hR1Ziv2iCCIahLkWYCKOcErCC",
       "imageUrl": "http://www.cigarsdirect.com/cdn/shop/products/alec-bradley-its-a-boy-Dec-2017.jpg?v=1646319168"
     },
     {
@@ -1292,7 +1292,7 @@
         ]
       },
       "inventory": 25,
-      "productUrl": "https://www.coronacigar.com/brands/cao/cao-pilon/",
+      "productUrl": "https://www.coronacigar.com/brands/cao/cao-pilon/?srsltid=AfmBOopshMHpY1I-HRh9-qgA0c5BJUVhaL5vkXJtjeDJRFet3euxdBdp",
       "imageUrl": "http://www.cigarsdirect.com/cdn/shop/files/cao-pilon-corona-box-pressed-closed-box.jpg?v=1687898823"
     },
     {
@@ -1594,7 +1594,7 @@
         ]
       },
       "inventory": 6,
-      "productUrl": "https://lmcigars.com/product/cohiba-toro-tubo/",
+      "productUrl": "https://lmcigars.com/product/cohiba-toro-tubo/?srsltid=AfmBOorKRkH6rbgA4zGuuK_AuwekK6rBR_aH0Db3S0DMbWWZjDk8ZAs-",
       "imageUrl": "http://www.cigarsdirect.com/cdn/shop/products/cohiba-red-dot-toro-tubo-closed-box.jpg?v=1646350864"
     },
     {
@@ -2142,37 +2142,6 @@
       "imageUrl": "https://www.holts.com/media//categoryimage//thumb/270x270/e/l/el-rey-del-mundoel-rey-del-mundo-5x54_1.png"
     },
     {
-      "id": "72",
-      "name": "By AJ Fernandez",
-      "brand": "El Rey del Mundo",
-      "origin": "Nicaragua",
-      "wrapper": "Nicaraguan",
-      "body": "Full",
-      "strength": "Medium-Full",
-      "priceRange": "$30",
-      "description": "AJ Fernandez's take on the classic brand with Nicaraguan tobaccos.",
-      "tastingNotes": [
-        "Dark Chocolate",
-        "Pepper",
-        "Earth",
-        "Leather",
-        "Cedar"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Rum",
-          "Bourbon"
-        ],
-        "nonAlcoholic": [
-          "Strong Coffee",
-          "Hot Chocolate"
-        ]
-      },
-      "inventory": 15,
-      "productUrl": "https://www.leafenthusiast.com/cigar-review-el-rey-del-mundo-by-aj-fernandez/",
-      "imageUrl": "https://i0.wp.com/www.leafenthusiast.com/leaf/wp-content/uploads/2022/07/ElReyAJ_angle.jpg"
-    },
-    {
       "id": "73",
       "name": "Knuckle Sandwich Maduro",
       "brand": "Espinosa",
@@ -2446,2128 +2415,6 @@
       "imageUrl": "https://images.squarespace-cdn.com/content/v1/5d3daa4a17aa5f0001719b33/50348ecd-a5b6-4dce-ae19-f4ef622be8fe/god-of-fire-kkp-special-reserve-cigars-1f.jpg"
     },
     {
-      "id": "82",
-      "name": "KKP 54",
-      "brand": "God of Fire",
-      "origin": "Dominican Republic",
-      "wrapper": "Natural",
-      "body": "Full",
-      "strength": "Medium-Full",
-      "priceRange": "$50",
-      "description": "Carlito Fuente's collaboration with Prometheus in 54 ring gauge.",
-      "tastingNotes": [
-        "Cedar",
-        "Leather",
-        "Coffee",
-        "Spice"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Cognac",
-          "Single Malt"
-        ],
-        "nonAlcoholic": [
-          "Espresso",
-          "Dark Coffee"
-        ]
-      },
-      "inventory": 3,
-      "productUrl": "",
-      "imageUrl": "http://www.cigarsdirect.com/cdn/shop/files/god-of-fire-kkp-never-back-down-toro-extra-54-cigars-on-humidor-2.jpg?v=1753829782"
-    },
-    {
-      "id": "83",
-      "name": "Don Carlos",
-      "brand": "God of Fire",
-      "origin": "Dominican Republic",
-      "wrapper": "Cameroon",
-      "body": "Medium-Full",
-      "strength": "Medium",
-      "priceRange": "$50",
-      "description": "Don Carlos blend in the prestigious God of Fire line.",
-      "tastingNotes": [
-        "Cedar",
-        "Sweet Spice",
-        "Leather",
-        "Cocoa"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Cognac",
-          "Port"
-        ],
-        "nonAlcoholic": [
-          "Espresso",
-          "Black Tea"
-        ]
-      },
-      "inventory": 4,
-      "productUrl": "https://foxcigar.com/shop/cigars/arturo-fuente/fuente-friday/god-of-fire-robusto-tubos/",
-      "imageUrl": "http://www.cigarsdirect.com/cdn/shop/products/god-of-fire-by-don-carlos-churchill-closed-box.jpg?v=1646351224"
-    },
-    {
-      "id": "84",
-      "name": "Carlito Tubo",
-      "brand": "God of Fire",
-      "origin": "Dominican Republic",
-      "wrapper": "Natural",
-      "body": "Medium-Full",
-      "strength": "Medium",
-      "priceRange": "$50",
-      "description": "Carlito Fuente's vision in an elegant tube presentation.",
-      "tastingNotes": [
-        "Cedar",
-        "Leather",
-        "Coffee",
-        "Cream"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "XO Cognac",
-          "Scotch"
-        ],
-        "nonAlcoholic": [
-          "Premium Espresso",
-          "Earl Grey"
-        ]
-      },
-      "inventory": 3,
-      "productUrl": "https://www.godoffire.com/by-carlito",
-      "imageUrl": "http://www.cigarsdirect.com/cdn/shop/products/god-of-fire-by-carlito-double-robusto-tubo-box-closed.jpg?v=1646351230"
-    },
-    {
-      "id": "85",
-      "name": "Cellar Reserve",
-      "brand": "Gurkha",
-      "origin": "Nicaragua",
-      "wrapper": "Connecticut Broadleaf",
-      "body": "Full",
-      "strength": "Medium-Full",
-      "priceRange": "$30",
-      "description": "Aged 15 years, this is one of Gurkha's most acclaimed offerings.",
-      "tastingNotes": [
-        "Dark Chocolate",
-        "Coffee",
-        "Leather",
-        "Pepper",
-        "Cedar"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Aged Rum",
-          "Bourbon"
-        ],
-        "nonAlcoholic": [
-          "Strong Espresso",
-          "Hot Chocolate"
-        ]
-      },
-      "inventory": 10,
-      "productUrl": "https://www.cigarsinternational.com/p/gurkha-cellar-reserve-cigars/2022000/",
-      "imageUrl": "https://www.cigarsdirect.com/cdn/shop/products/gurkha-cellar-reserve-12-year-platinum-toro-closed-box_400x.jpg?v=1658077044"
-    },
-    {
-      "id": "86",
-      "name": "Cameroon Major",
-      "brand": "H. Upmann",
-      "origin": "Dominican Republic",
-      "wrapper": "Cameroon",
-      "body": "Medium",
-      "strength": "Medium",
-      "priceRange": "$20",
-      "description": "Classic H. Upmann with African Cameroon wrapper.",
-      "tastingNotes": [
-        "Sweet Spice",
-        "Cedar",
-        "Cream",
-        "Nuts"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Cognac",
-          "Port"
-        ],
-        "nonAlcoholic": [
-          "Café au Lait",
-          "Earl Grey"
-        ]
-      },
-      "inventory": 20,
-      "productUrl": "",
-      "imageUrl": "https://mikescigars.com/media/catalog/product/cache/e5410cdb9d5ae58911546adee63f83c5/image/31472e5af/december-to-remember-cigar-sampler.jpg"
-    },
-    {
-      "id": "87",
-      "name": "Esteli Toro Tubo",
-      "brand": "Herrera Esteli",
-      "origin": "Nicaragua",
-      "wrapper": "Ecuadorian Habano",
-      "body": "Medium",
-      "strength": "Medium",
-      "priceRange": "$30",
-      "description": "Drew Estate and Willy Herrera's acclaimed collaboration.",
-      "tastingNotes": [
-        "Cedar",
-        "Coffee",
-        "Pepper",
-        "Cream"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Bourbon",
-          "Rum"
-        ],
-        "nonAlcoholic": [
-          "Espresso",
-          "Black Tea"
-        ]
-      },
-      "inventory": 12,
-      "productUrl": "",
-      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/h/e/herrera-esteli-habano.png"
-    },
-    {
-      "id": "88",
-      "name": "Connecticut Toro",
-      "brand": "JFR",
-      "origin": "Nicaragua",
-      "wrapper": "Connecticut",
-      "body": "Medium",
-      "strength": "Medium",
-      "priceRange": "$20",
-      "description": "A smooth Connecticut wrapped cigar from Casa Fernandez.",
-      "tastingNotes": [
-        "Cream",
-        "Cedar",
-        "Nuts",
-        "Light Pepper"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Light Rum",
-          "White Wine"
-        ],
-        "nonAlcoholic": [
-          "Latte",
-          "Green Tea"
-        ]
-      },
-      "inventory": 20,
-      "productUrl": "https://www.jrcigars.com/item/jfr-connecticut/super-toro/JFRCST.html",
-      "imageUrl": "https://mikescigars.com/media/catalog/product/cache/e5410cdb9d5ae58911546adee63f83c5/image/jfr-connecticut.jpg"
-    },
-    {
-      "id": "89",
-      "name": "Cabinetta No. 60",
-      "brand": "Joya de Nicaragua",
-      "origin": "Nicaragua",
-      "wrapper": "Connecticut/Habano",
-      "body": "Medium",
-      "strength": "Mild-Medium",
-      "priceRange": "$20",
-      "description": "Features a unique barber pole wrapper for visual appeal and complex flavor.",
-      "tastingNotes": [
-        "Cedar",
-        "Cream",
-        "Pepper",
-        "Coffee"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Rum",
-          "Amber Ale"
-        ],
-        "nonAlcoholic": [
-          "Cappuccino",
-          "Oolong Tea"
-        ]
-      },
-      "inventory": 18,
-      "productUrl": "",
-      "imageUrl": "https://joyacigars.com/wp-content/uploads/2017/07/Joya-Cabinetta_Thumbnail_2019.png"
-    },
-    {
-      "id": "90",
-      "name": "Antano Gran Reserva",
-      "brand": "Joya de Nicaragua",
-      "origin": "Nicaragua",
-      "wrapper": "Nicaraguan Criollo",
-      "body": "Full",
-      "strength": "Full",
-      "priceRange": "$20",
-      "description": "A powerful, full-bodied cigar paying homage to Nicaragua's cigar heritage.",
-      "tastingNotes": [
-        "Earth",
-        "Pepper",
-        "Leather",
-        "Coffee",
-        "Dark Chocolate"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Aged Rum",
-          "Bourbon"
-        ],
-        "nonAlcoholic": [
-          "Strong Espresso",
-          "Black Coffee"
-        ]
-      },
-      "inventory": 15,
-      "productUrl": "https://www.cigarsinternational.com/p/joya-de-nicaragua-antano-cigars/1413348/",
-      "imageUrl": "https://mikescigars.com/media/catalog/product/cache/e5410cdb9d5ae58911546adee63f83c5/image/joya-de-nicaragua-antano-gran-reserva.jpg"
-    },
-    {
-      "id": "91",
-      "name": "Cuatro Cinco Reserva",
-      "brand": "Joya de Nicaragua",
-      "origin": "Nicaragua",
-      "wrapper": "Habano",
-      "body": "Medium-Full",
-      "strength": "Medium",
-      "priceRange": "$20",
-      "description": "Celebrates 45 years of Joya de Nicaragua with refined complexity.",
-      "tastingNotes": [
-        "Cedar",
-        "Coffee",
-        "Leather",
-        "Sweet Spice"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Single Malt",
-          "Port"
-        ],
-        "nonAlcoholic": [
-          "Espresso",
-          "Dark Tea"
-        ]
-      },
-      "inventory": 10,
-      "productUrl": "https://www.cigarsinternational.com/p/joya-de-nicaragua-cuatro-cinco-cigars/2005766/",
-      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/270x270/j/o/joya-de-nicaragua-cuatro-cinco_1.png"
-    },
-    {
-      "id": "92",
-      "name": "Double Ligero",
-      "brand": "La Flor Dominicana",
-      "origin": "Dominican Republic",
-      "wrapper": "Ecuadorian Habano",
-      "body": "Full",
-      "strength": "Full",
-      "priceRange": "$20",
-      "description": "Bold, powerful cigar featuring double ligero tobacco for intense flavor.",
-      "tastingNotes": [
-        "Pepper",
-        "Earth",
-        "Leather",
-        "Dark Chocolate",
-        "Coffee"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Bourbon",
-          "Aged Rum"
-        ],
-        "nonAlcoholic": [
-          "Strong Espresso",
-          "Black Coffee"
-        ]
-      },
-      "inventory": 12,
-      "productUrl": "https://www.cigarsinternational.com/p/la-flor-dominicana-double-ligero-cigars/1413386/",
-      "imageUrl": "http://www.cigarsdirect.com/cdn/shop/products/la-flor-dominicana-double-ligero-chiselito-closed-box.jpg?v=1646376839"
-    },
-    {
-      "id": "93",
-      "name": "La Nox",
-      "brand": "La Flor Dominicana",
-      "origin": "Dominican Republic",
-      "wrapper": "Maduro",
-      "body": "Full",
-      "strength": "Medium-Full",
-      "priceRange": "$20",
-      "description": "A dark, mysterious cigar with rich, complex flavors.",
-      "tastingNotes": [
-        "Dark Chocolate",
-        "Coffee",
-        "Leather",
-        "Earth"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Dark Rum",
-          "Porter"
-        ],
-        "nonAlcoholic": [
-          "Cold Brew",
-          "Hot Chocolate"
-        ]
-      },
-      "inventory": 10,
-      "productUrl": "https://www.cigarsinternational.com/p/la-flor-dominicana-la-nox-cigars/2018010/",
-      "imageUrl": "http://www.cigarsdirect.com/cdn/shop/products/la-flor-dominicana-la-nox-petite-closed-box.jpg?v=1646371381"
-    },
-    {
-      "id": "94",
-      "name": "Ligero Cabinet Oscuro",
-      "brand": "La Flor Dominicana",
-      "origin": "Dominican Republic",
-      "wrapper": "Oscuro",
-      "body": "Full",
-      "strength": "Full",
-      "priceRange": "$20",
-      "description": "A box-pressed powerhouse with dark, intense character.",
-      "tastingNotes": [
-        "Espresso",
-        "Dark Chocolate",
-        "Pepper",
-        "Leather"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Bourbon",
-          "Stout"
-        ],
-        "nonAlcoholic": [
-          "Turkish Coffee",
-          "Espresso"
-        ]
-      },
-      "inventory": 8,
-      "productUrl": "https://www.cigarsinternational.com/p/la-flor-dominicana-ligero-cabinet-oscuro/2015405/",
-      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/l/a/la-flor-dominicana-double-ligero_2.png"
-    },
-    {
-      "id": "95",
-      "name": "No. 9",
-      "brand": "Liga Privada",
-      "origin": "Nicaragua",
-      "wrapper": "Connecticut Broadleaf",
-      "body": "Full",
-      "strength": "Medium-Full",
-      "priceRange": "$30",
-      "description": "Drew Estate's flagship ultra-premium cigar with exceptional complexity.",
-      "tastingNotes": [
-        "Dark Chocolate",
-        "Espresso",
-        "Earth",
-        "Pepper",
-        "Cream"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Single Malt",
-          "Bourbon"
-        ],
-        "nonAlcoholic": [
-          "Turkish Coffee",
-          "Dark Hot Chocolate"
-        ]
-      },
-      "inventory": 8,
-      "productUrl": "https://www.cigarsinternational.com/p/liga-privada-no-9-cigars/1476215/",
-      "imageUrl": "http://www.cigarsdirect.com/cdn/shop/products/drew-estate-liga-privada-no-9-toro-box-closed.jpg?v=1755200802"
-    },
-    {
-      "id": "96",
-      "name": "T52",
-      "brand": "Liga Privada",
-      "origin": "Nicaragua",
-      "wrapper": "Stalk Cut Habano",
-      "body": "Full",
-      "strength": "Medium-Full",
-      "priceRange": "$30",
-      "description": "Features rare stalk-cut Connecticut shade tobacco for unique complexity.",
-      "tastingNotes": [
-        "Cedar",
-        "Leather",
-        "Coffee",
-        "Pepper",
-        "Sweet Wood"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Aged Rum",
-          "Cognac"
-        ],
-        "nonAlcoholic": [
-          "Espresso",
-          "Strong Coffee"
-        ]
-      },
-      "inventory": 6,
-      "productUrl": "https://www.cigarsinternational.com/p/liga-privada-t52-cigars/1476241/",
-      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/l/i/liga-privada-t52.png"
-    },
-    {
-      "id": "97",
-      "name": "Undercrown Shade",
-      "brand": "Liga Privada",
-      "origin": "Nicaragua",
-      "wrapper": "Ecuadorian Connecticut",
-      "body": "Medium",
-      "strength": "Mild-Medium",
-      "priceRange": "$20",
-      "description": "A smooth, approachable cigar in the Liga Privada family.",
-      "tastingNotes": [
-        "Cream",
-        "Cedar",
-        "Pepper",
-        "Nuts"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "White Wine",
-          "Light Rum"
-        ],
-        "nonAlcoholic": [
-          "Latte",
-          "Green Tea"
-        ]
-      },
-      "inventory": 25,
-      "productUrl": "https://www.cigarsinternational.com/p/liga-undercrown-shade-cigars/2015779/",
-      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/l/i/liga-privada-undercrown-shade_1.png"
-    },
-    {
-      "id": "98",
-      "name": "Undercrown Maduro",
-      "brand": "Liga Privada",
-      "origin": "Nicaragua",
-      "wrapper": "San Andres Maduro",
-      "body": "Medium-Full",
-      "strength": "Medium",
-      "priceRange": "$20",
-      "description": "A more accessible expression of Liga Privada quality.",
-      "tastingNotes": [
-        "Dark Chocolate",
-        "Coffee",
-        "Cedar",
-        "Pepper"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Bourbon",
-          "Porter"
-        ],
-        "nonAlcoholic": [
-          "Cold Brew",
-          "Hot Chocolate"
-        ]
-      },
-      "inventory": 30,
-      "productUrl": "https://www.cigarsinternational.com/p/liga-undercrown-cigars/1478653/",
-      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/l/i/liga-privada-undercrown-10.png"
-    },
-    {
-      "id": "99",
-      "name": "Platinum Toro Tubo",
-      "brand": "Montecristo",
-      "origin": "Dominican Republic",
-      "wrapper": "Connecticut",
-      "body": "Light",
-      "strength": "Mild",
-      "priceRange": "$30",
-      "description": "A smooth, refined cigar from the legendary Montecristo brand.",
-      "tastingNotes": [
-        "Cream",
-        "Cedar",
-        "Nuts",
-        "Light Spice"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Champagne",
-          "Light Rum"
-        ],
-        "nonAlcoholic": [
-          "Latte",
-          "Green Tea"
-        ]
-      },
-      "inventory": 12,
-      "productUrl": "https://www.cigarsinternational.com/p/montecristo-platinum-cigars/1414246/",
-      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/m/o/montecristo-platinum_1.png"
-    },
-    {
-      "id": "100",
-      "name": "White Series",
-      "brand": "Montecristo",
-      "origin": "Dominican Republic",
-      "wrapper": "Ecuadorian Connecticut",
-      "body": "Light-Medium",
-      "strength": "Mild",
-      "priceRange": "$20",
-      "description": "A creamy, approachable Montecristo for everyday enjoyment.",
-      "tastingNotes": [
-        "Cream",
-        "Cedar",
-        "Vanilla",
-        "Hay"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "White Wine",
-          "Prosecco"
-        ],
-        "nonAlcoholic": [
-          "Café au Lait",
-          "White Tea"
-        ]
-      },
-      "inventory": 35,
-      "productUrl": "https://www.cigarsinternational.com/p/montecristo-white-series-cigars/1414271/",
-      "imageUrl": "http://www.cigarsdirect.com/cdn/shop/products/montecristo-white-label-toro-open-box.jpg?v=1661566126"
-    },
-    {
-      "id": "101",
-      "name": "Epic",
-      "brand": "Montecristo",
-      "origin": "Nicaragua",
-      "wrapper": "Nicaraguan Habano",
-      "body": "Medium-Full",
-      "strength": "Medium",
-      "priceRange": "$20",
-      "description": "A bolder expression from Montecristo with Nicaraguan character.",
-      "tastingNotes": [
-        "Pepper",
-        "Leather",
-        "Coffee",
-        "Cedar"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Bourbon",
-          "Red Wine"
-        ],
-        "nonAlcoholic": [
-          "Espresso",
-          "Black Tea"
-        ]
-      },
-      "inventory": 18,
-      "productUrl": "https://www.cigarsinternational.com/p/montecristo-epic-cigars/1484279/",
-      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/m/o/montecristo-epic.png"
-    },
-    {
-      "id": "102",
-      "name": "Le Bijou 1922",
-      "brand": "My Father",
-      "origin": "Nicaragua",
-      "wrapper": "Ecuadorian Habano Oscuro",
-      "body": "Full",
-      "strength": "Medium-Full",
-      "priceRange": "$30",
-      "description": "Honors the birth year of the Garcia family patriarch with bold complexity.",
-      "tastingNotes": [
-        "Dark Chocolate",
-        "Coffee",
-        "Pepper",
-        "Leather",
-        "Cedar"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Aged Rum",
-          "Bourbon"
-        ],
-        "nonAlcoholic": [
-          "Turkish Coffee",
-          "Strong Espresso"
-        ]
-      },
-      "inventory": 15,
-      "productUrl": "https://www.cigarsinternational.com/p/my-father-le-bijou-1922-cigars/1414504/",
-      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/m/y/my-father-le-bijou-1922-toro_1.png"
-    },
-    {
-      "id": "103",
-      "name": "Flor de las Antillas",
-      "brand": "My Father",
-      "origin": "Nicaragua",
-      "wrapper": "Nicaraguan Sun Grown",
-      "body": "Medium",
-      "strength": "Medium",
-      "priceRange": "$20",
-      "description": "Cigar Aficionado's 2012 Cigar of the Year with classic Cuban-inspired flavors.",
-      "tastingNotes": [
-        "Cedar",
-        "Coffee",
-        "Cream",
-        "Pepper",
-        "Sweet Spice"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Rum",
-          "Red Wine"
-        ],
-        "nonAlcoholic": [
-          "Espresso",
-          "Black Tea"
-        ]
-      },
-      "inventory": 25,
-      "productUrl": "https://www.cigarsinternational.com/p/my-father-flor-de-las-antillas-cigars/1414509/",
-      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/m/y/my-father-flor-de-las-antillas.png"
-    },
-    {
-      "id": "104",
-      "name": "The Judge",
-      "brand": "My Father",
-      "origin": "Nicaragua",
-      "wrapper": "Ecuadorian Habano",
-      "body": "Full",
-      "strength": "Full",
-      "priceRange": "$30",
-      "description": "A powerful, complex cigar named for Judge Edwin Torres.",
-      "tastingNotes": [
-        "Espresso",
-        "Dark Chocolate",
-        "Pepper",
-        "Earth",
-        "Leather"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Single Malt",
-          "Cognac"
-        ],
-        "nonAlcoholic": [
-          "Turkish Coffee",
-          "Dark Espresso"
-        ]
-      },
-      "inventory": 10,
-      "productUrl": "https://www.cigarsinternational.com/p/my-father-the-judge-cigars/2011411/",
-      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/m/y/my-father-the-judge_1.png"
-    },
-    {
-      "id": "105",
-      "name": "Connecticut Deluxe",
-      "brand": "My Father",
-      "origin": "Nicaragua",
-      "wrapper": "Ecuadorian Connecticut",
-      "body": "Medium",
-      "strength": "Mild-Medium",
-      "priceRange": "$20",
-      "description": "A smoother, more approachable My Father with Connecticut elegance.",
-      "tastingNotes": [
-        "Cream",
-        "Cedar",
-        "Nuts",
-        "Light Pepper"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "White Wine",
-          "Light Rum"
-        ],
-        "nonAlcoholic": [
-          "Latte",
-          "Green Tea"
-        ]
-      },
-      "inventory": 20,
-      "productUrl": "https://www.cigarsinternational.com/p/my-father-connecticut-cigars/2019315/",
-      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/270x270/m/y/my-father-connecticut-.png"
-    },
-    {
-      "id": "160",
-      "name": "Blue",
-      "brand": "My Father",
-      "origin": "Honduras",
-      "wrapper": "Connecticut Broadleaf Rosado",
-      "body": "Medium-Full",
-      "strength": "Medium-Full",
-      "priceRange": "$9-$13",
-      "smokingTime": "45-60min",
-      "description": "The inaugural blend from the Garcias' new Honduran factory. Connecticut Broadleaf Rosado wrapper over Honduran Corojo and Criollo tobaccos from Finca La Opulencia. Blue-and-white band pays homage to the Honduran flag.",
-      "tastingNotes": [
-        "Leather",
-        "Cayenne",
-        "Wood",
-        "Sweetness",
-        "Dried Fruit"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Aged Rum",
-          "Bourbon"
-        ],
-        "nonAlcoholic": [
-          "Espresso",
-          "Turkish Coffee"
-        ]
-      },
-      "inventory": 12,
-      "productUrl": "https://www.cigarsinternational.com/p/my-father-blue-honduras/2062764/",
-      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/m/y/my-father-blue.png"
-    },
-    {
-      "id": "106",
-      "name": "Serie V Melanio",
-      "brand": "Oliva",
-      "origin": "Nicaragua",
-      "wrapper": "Ecuadorian Sumatra",
-      "body": "Full",
-      "strength": "Medium-Full",
-      "priceRange": "$20",
-      "description": "Named after patriarch Melanio Oliva, this is the pinnacle of the Oliva line.",
-      "tastingNotes": [
-        "Espresso",
-        "Leather",
-        "Dark Chocolate",
-        "Cedar",
-        "Pepper"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Single Malt",
-          "Cognac"
-        ],
-        "nonAlcoholic": [
-          "Turkish Coffee",
-          "Strong Espresso"
-        ]
-      },
-      "inventory": 15,
-      "productUrl": "https://www.cigarsinternational.com/p/oliva-serie-v-melanio-cigars/1478920/",
-      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/o/l/oliva-serie-v-melanio_8.png"
-    },
-    {
-      "id": "107",
-      "name": "Serie V",
-      "brand": "Oliva",
-      "origin": "Nicaragua",
-      "wrapper": "Nicaraguan Sun Grown",
-      "body": "Full",
-      "strength": "Medium-Full",
-      "priceRange": "$20",
-      "description": "A bold, complex cigar with rich Nicaraguan character.",
-      "tastingNotes": [
-        "Cedar",
-        "Pepper",
-        "Leather",
-        "Coffee",
-        "Earth"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Bourbon",
-          "Aged Rum"
-        ],
-        "nonAlcoholic": [
-          "Espresso",
-          "Black Coffee"
-        ]
-      },
-      "inventory": 25,
-      "productUrl": "https://www.cigarsinternational.com/p/oliva-serie-v-cigars/1414844/",
-      "imageUrl": "http://www.cigarsdirect.com/cdn/shop/products/oliva-serie-v-double-toro-box-closed.jpg?v=1654113916"
-    },
-    {
-      "id": "108",
-      "name": "Serie O",
-      "brand": "Oliva",
-      "origin": "Nicaragua",
-      "wrapper": "Nicaraguan Sun Grown",
-      "body": "Medium-Full",
-      "strength": "Medium",
-      "priceRange": "$20",
-      "description": "A well-balanced cigar offering excellent value and flavor.",
-      "tastingNotes": [
-        "Cedar",
-        "Pepper",
-        "Earth",
-        "Coffee"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Rum",
-          "Red Wine"
-        ],
-        "nonAlcoholic": [
-          "Black Coffee",
-          "Black Tea"
-        ]
-      },
-      "inventory": 35,
-      "productUrl": "https://www.cigarsinternational.com/p/oliva-serie-o-cigars/1414829/",
-      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/o/l/oliva-serie-o.png"
-    },
-    {
-      "id": "109",
-      "name": "Connecticut Reserve",
-      "brand": "Oliva",
-      "origin": "Nicaragua",
-      "wrapper": "Ecuadorian Connecticut",
-      "body": "Light-Medium",
-      "strength": "Mild-Medium",
-      "priceRange": "$20",
-      "description": "A smooth, creamy cigar perfect for those who prefer milder smokes.",
-      "tastingNotes": [
-        "Cream",
-        "Cedar",
-        "Nuts",
-        "Light Pepper"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "White Wine",
-          "Light Lager"
-        ],
-        "nonAlcoholic": [
-          "Latte",
-          "Green Tea"
-        ]
-      },
-      "inventory": 30,
-      "productUrl": "https://www.cigarsinternational.com/p/oliva-connecticut-reserve-cigars/1414807/",
-      "imageUrl": "http://www.cigarsdirect.com/cdn/shop/products/oliva-connecticut-reserve-robusto-box-closed.jpg?v=1646373039"
-    },
-    {
-      "id": "110",
-      "name": "Serie G",
-      "brand": "Oliva",
-      "origin": "Nicaragua",
-      "wrapper": "Cameroon",
-      "body": "Medium",
-      "strength": "Mild-Medium",
-      "priceRange": "$20",
-      "description": "Features African Cameroon wrapper for added sweetness and complexity.",
-      "tastingNotes": [
-        "Sweet Spice",
-        "Cedar",
-        "Cream",
-        "Coffee"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Cognac",
-          "Port"
-        ],
-        "nonAlcoholic": [
-          "Café au Lait",
-          "Earl Grey"
-        ]
-      },
-      "inventory": 25,
-      "productUrl": "https://www.cigarsinternational.com/p/oliva-serie-g-cigars/1414815/",
-      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/o/l/oliva-serie-g-figurado_1.png"
-    },
-    {
-      "id": "111",
-      "name": "Opus X",
-      "brand": "Arturo Fuente",
-      "origin": "Dominican Republic",
-      "wrapper": "Dominican Rosado",
-      "body": "Full",
-      "strength": "Medium-Full",
-      "priceRange": "$50",
-      "description": "The legendary, sought-after cigar that revolutionized Dominican cigar making.",
-      "tastingNotes": [
-        "Cedar",
-        "Leather",
-        "Sweet Spice",
-        "Coffee",
-        "Cocoa"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "XO Cognac",
-          "Vintage Port"
-        ],
-        "nonAlcoholic": [
-          "Premium Espresso",
-          "Dark Hot Chocolate"
-        ]
-      },
-      "inventory": 5,
-      "productUrl": "https://www.cigarsinternational.com/p/arturo-fuente-fuente-opusx-cigars/2044889/",
-      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/270x270/f/u/fuente-opus-x-lost-city.png"
-    },
-    {
-      "id": "112",
-      "name": "Opus X Perfecxion No. 2",
-      "brand": "Arturo Fuente",
-      "origin": "Dominican Republic",
-      "wrapper": "Dominican Rosado",
-      "body": "Full",
-      "strength": "Medium-Full",
-      "priceRange": "$50",
-      "description": "A belicoso format of the legendary Opus X with complex, refined character.",
-      "tastingNotes": [
-        "Cedar",
-        "Leather",
-        "Pepper",
-        "Sweet Spice",
-        "Cocoa"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Cognac",
-          "Single Malt"
-        ],
-        "nonAlcoholic": [
-          "Turkish Coffee",
-          "Premium Espresso"
-        ]
-      },
-      "inventory": 4,
-      "productUrl": "https://www.cigarsinternational.com/p/arturo-fuente-fuente-opusx-cigars/2044889/",
-      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/270x270/f/u/fuente-opus-x-lost-city.png"
-    },
-    {
-      "id": "113",
-      "name": "1926 Serie No. 2",
-      "brand": "Padron",
-      "origin": "Nicaragua",
-      "wrapper": "Nicaraguan Habano",
-      "body": "Full",
-      "strength": "Medium-Full",
-      "priceRange": "$40",
-      "description": "Ultra-premium cigar honoring Jose O. Padron's birth year with exceptional quality.",
-      "tastingNotes": [
-        "Espresso",
-        "Dark Chocolate",
-        "Leather",
-        "Cedar",
-        "Earth"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "XO Cognac",
-          "Single Malt"
-        ],
-        "nonAlcoholic": [
-          "Turkish Coffee",
-          "Premium Espresso"
-        ]
-      },
-      "inventory": 6,
-      "productUrl": "https://www.cigarsinternational.com/p/padron-serie-1926-cigars/1414937/",
-      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/p/a/padron-1926-series_1.png"
-    },
-    {
-      "id": "114",
-      "name": "1926 Serie No. 6",
-      "brand": "Padron",
-      "origin": "Nicaragua",
-      "wrapper": "Nicaraguan Habano",
-      "body": "Full",
-      "strength": "Medium-Full",
-      "priceRange": "$30",
-      "description": "A smaller format of the legendary 1926 Serie with concentrated flavors.",
-      "tastingNotes": [
-        "Dark Chocolate",
-        "Coffee",
-        "Leather",
-        "Cedar"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Cognac",
-          "Aged Rum"
-        ],
-        "nonAlcoholic": [
-          "Espresso",
-          "Strong Coffee"
-        ]
-      },
-      "inventory": 8,
-      "productUrl": "https://www.cigarsinternational.com/p/padron-serie-1926-cigars/1414937/",
-      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/p/a/padron-1926-series_1.png"
-    },
-    {
-      "id": "115",
-      "name": "1964 Anniversary Maduro",
-      "brand": "Padron",
-      "origin": "Nicaragua",
-      "wrapper": "Nicaraguan Maduro",
-      "body": "Medium-Full",
-      "strength": "Medium",
-      "priceRange": "$30",
-      "description": "Celebrates 30 years of Padron with rich, refined complexity.",
-      "tastingNotes": [
-        "Dark Chocolate",
-        "Coffee",
-        "Cedar",
-        "Sweet Wood",
-        "Leather"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Bourbon",
-          "Port"
-        ],
-        "nonAlcoholic": [
-          "Hot Chocolate",
-          "Espresso"
-        ]
-      },
-      "inventory": 10,
-      "productUrl": "https://www.cigarsinternational.com/p/padron-1964-anniversary-series-maduro-cigars/1414918/",
-      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/p/a/padron-1964-anniversary_2.png"
-    },
-    {
-      "id": "116",
-      "name": "1964 Anniversary Natural",
-      "brand": "Padron",
-      "origin": "Nicaragua",
-      "wrapper": "Nicaraguan Natural",
-      "body": "Medium",
-      "strength": "Medium",
-      "priceRange": "$30",
-      "description": "The natural wrapper version with slightly lighter, nuanced flavors.",
-      "tastingNotes": [
-        "Cedar",
-        "Coffee",
-        "Cream",
-        "Leather",
-        "Nuts"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Cognac",
-          "Red Wine"
-        ],
-        "nonAlcoholic": [
-          "Espresso",
-          "Black Tea"
-        ]
-      },
-      "inventory": 12,
-      "productUrl": "https://www.cigarsinternational.com/p/padron-1964-anniversary-series-natural-cigars/1414926/",
-      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/p/a/padron-1964-anniversary_1.png"
-    },
-    {
-      "id": "117",
-      "name": "Family Reserve No. 45",
-      "brand": "Padron",
-      "origin": "Nicaragua",
-      "wrapper": "Nicaraguan",
-      "body": "Full",
-      "strength": "Medium-Full",
-      "priceRange": "$50",
-      "description": "Celebrates 45 years of Padron excellence with rare, aged tobaccos.",
-      "tastingNotes": [
-        "Espresso",
-        "Chocolate",
-        "Leather",
-        "Cedar",
-        "Pepper"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "XO Cognac",
-          "Aged Scotch"
-        ],
-        "nonAlcoholic": [
-          "Premium Espresso",
-          "Turkish Coffee"
-        ]
-      },
-      "inventory": 4,
-      "productUrl": "https://www.cigarsinternational.com/p/padron-family-reserve-cigars/1414960/",
-      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/p/a/padron-family-reserve_3.png"
-    },
-    {
-      "id": "118",
-      "name": "2000 Maduro",
-      "brand": "Padron",
-      "origin": "Nicaragua",
-      "wrapper": "Nicaraguan Maduro",
-      "body": "Medium",
-      "strength": "Medium",
-      "priceRange": "$20",
-      "description": "An accessible entry to the Padron line with excellent quality.",
-      "tastingNotes": [
-        "Coffee",
-        "Chocolate",
-        "Cedar",
-        "Earth"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Rum",
-          "Bourbon"
-        ],
-        "nonAlcoholic": [
-          "Coffee",
-          "Black Tea"
-        ]
-      },
-      "inventory": 35,
-      "productUrl": "https://www.cigarsinternational.com/p/padron-cigars/1414906/",
-      "imageUrl": "http://www.cigarsdirect.com/cdn/shop/products/padron-thousand-series-2000-maduro-box-closed.jpg?v=1660187210"
-    },
-    {
-      "id": "119",
-      "name": "3000 Maduro",
-      "brand": "Padron",
-      "origin": "Nicaragua",
-      "wrapper": "Nicaraguan Maduro",
-      "body": "Medium-Full",
-      "strength": "Medium",
-      "priceRange": "$20",
-      "description": "A larger format with richer, more developed maduro flavors.",
-      "tastingNotes": [
-        "Dark Chocolate",
-        "Coffee",
-        "Cedar",
-        "Leather"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Bourbon",
-          "Porter"
-        ],
-        "nonAlcoholic": [
-          "Espresso",
-          "Hot Chocolate"
-        ]
-      },
-      "inventory": 30,
-      "productUrl": "https://www.cigarsinternational.com/p/padron-cigars/1414906/",
-      "imageUrl": "http://www.cigarsdirect.com/cdn/shop/products/padron-thousand-series-3000-maduro-box-closed.jpg?v=1726756371"
-    },
-    {
-      "id": "120",
-      "name": "Lot 23",
-      "brand": "Perdomo",
-      "origin": "Nicaragua",
-      "wrapper": "Nicaraguan Sun Grown",
-      "body": "Medium",
-      "strength": "Medium",
-      "priceRange": "$20",
-      "description": "Named after the original Perdomo tobacco farm with authentic Nicaraguan character.",
-      "tastingNotes": [
-        "Cedar",
-        "Coffee",
-        "Earth",
-        "Pepper"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Rum",
-          "Red Wine"
-        ],
-        "nonAlcoholic": [
-          "Black Coffee",
-          "Black Tea"
-        ]
-      },
-      "inventory": 30,
-      "productUrl": "https://www.cigarsinternational.com/p/perdomo-lot-23-cigars/1415006/",
-      "imageUrl": "http://www.cigarsdirect.com/cdn/shop/products/perdomo-lot-23-connecticut-toro-open-box.jpg?v=1646377312"
-    },
-    {
-      "id": "121",
-      "name": "20th Anniversary Maduro",
-      "brand": "Perdomo",
-      "origin": "Nicaragua",
-      "wrapper": "Nicaraguan Maduro",
-      "body": "Medium-Full",
-      "strength": "Medium",
-      "priceRange": "$20",
-      "description": "Celebrates 20 years of excellence with rich, aged tobaccos.",
-      "tastingNotes": [
-        "Dark Chocolate",
-        "Coffee",
-        "Cedar",
-        "Cream"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Bourbon",
-          "Port"
-        ],
-        "nonAlcoholic": [
-          "Espresso",
-          "Hot Chocolate"
-        ]
-      },
-      "inventory": 20,
-      "productUrl": "https://www.cigarsinternational.com/p/perdomo-20th-anniversary-maduro-cigars/2015055/",
-      "imageUrl": "http://www.cigarsdirect.com/cdn/shop/products/perdomo-20th-anniversary-maduro-gordo-open-box.jpg?v=1646360530"
-    },
-    {
-      "id": "122",
-      "name": "20th Anniversary Connecticut",
-      "brand": "Perdomo",
-      "origin": "Nicaragua",
-      "wrapper": "Ecuadorian Connecticut",
-      "body": "Light-Medium",
-      "strength": "Mild-Medium",
-      "priceRange": "$20",
-      "description": "A smooth, refined anniversary cigar with creamy character.",
-      "tastingNotes": [
-        "Cream",
-        "Cedar",
-        "Nuts",
-        "Light Pepper"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "White Wine",
-          "Champagne"
-        ],
-        "nonAlcoholic": [
-          "Latte",
-          "Green Tea"
-        ]
-      },
-      "inventory": 18,
-      "productUrl": "https://www.cigarsinternational.com/p/perdomo-20th-anniversary-connecticut/2015060/",
-      "imageUrl": "http://www.cigarsdirect.com/cdn/shop/products/perdomo-20th-anniversary-connecticut-epicure-open-box.jpg?v=1646376329"
-    },
-    {
-      "id": "123",
-      "name": "Reserve 10th Anniversary Maduro",
-      "brand": "Perdomo",
-      "origin": "Nicaragua",
-      "wrapper": "Nicaraguan Maduro",
-      "body": "Medium-Full",
-      "strength": "Medium",
-      "priceRange": "$20",
-      "description": "Value-driven cigar with well-aged tobaccos and rich flavor.",
-      "tastingNotes": [
-        "Chocolate",
-        "Coffee",
-        "Cedar",
-        "Earth"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Bourbon",
-          "Rum"
-        ],
-        "nonAlcoholic": [
-          "Coffee",
-          "Black Tea"
-        ]
-      },
-      "inventory": 35,
-      "productUrl": "https://www.cigarsinternational.com/p/perdomo-reserve-10th-anniversary-champagne-maduro-cigars/1490671/",
-      "imageUrl": "https://www.cigarsdirect.com/cdn/shop/products/perdomo-reserve-10th-anniversary-maduro-torpedo-closed-box_400x.jpg?v=1646362347"
-    },
-    {
-      "id": "124",
-      "name": "Vintage 2002",
-      "brand": "Rocky Patel",
-      "origin": "Honduras",
-      "wrapper": "Sumatra",
-      "body": "Medium-Full",
-      "strength": "Medium",
-      "priceRange": "$20",
-      "description": "Features tobaccos from the exceptional 2002 harvest with aged complexity.",
-      "tastingNotes": [
-        "Cedar",
-        "Coffee",
-        "Leather",
-        "Sweet Spice"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Cognac",
-          "Port"
-        ],
-        "nonAlcoholic": [
-          "Espresso",
-          "Earl Grey"
-        ]
-      },
-      "inventory": 20,
-      "productUrl": "https://www.cigarsinternational.com/p/rocky-patel-vintage-2002-cigars/1415494/",
-      "imageUrl": "https://www.cigarsdirect.com/cdn/shop/products/rocky-patel-vintage-1992-robusto-closed-box.jpg?v=1664462874"
-    },
-    {
-      "id": "125",
-      "name": "Vintage 1999 Connecticut",
-      "brand": "Rocky Patel",
-      "origin": "Honduras",
-      "wrapper": "Connecticut",
-      "body": "Medium",
-      "strength": "Mild-Medium",
-      "priceRange": "$20",
-      "description": "A smooth, creamy cigar from the acclaimed 1999 vintage.",
-      "tastingNotes": [
-        "Cream",
-        "Cedar",
-        "Nuts",
-        "Light Coffee"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "White Wine",
-          "Light Rum"
-        ],
-        "nonAlcoholic": [
-          "Latte",
-          "Green Tea"
-        ]
-      },
-      "inventory": 18,
-      "productUrl": "https://www.cigarsinternational.com/p/rocky-patel-vintage-1999-cigars/1415489/",
-      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/r/o/rocky-patel-vintage-1999_1.png"
-    },
-    {
-      "id": "126",
-      "name": "Decade",
-      "brand": "Rocky Patel",
-      "origin": "Honduras",
-      "wrapper": "Honduran",
-      "body": "Medium-Full",
-      "strength": "Medium",
-      "priceRange": "$20",
-      "description": "Celebrates 10 years of Rocky Patel with bold, rich character.",
-      "tastingNotes": [
-        "Cedar",
-        "Coffee",
-        "Pepper",
-        "Leather"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Bourbon",
-          "Red Wine"
-        ],
-        "nonAlcoholic": [
-          "Black Coffee",
-          "Black Tea"
-        ]
-      },
-      "inventory": 25,
-      "productUrl": "https://www.cigarsinternational.com/p/rocky-patel-decade-cigars/1415444/",
-      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/r/o/rocky-patel-decade_2.png"
-    },
-    {
-      "id": "127",
-      "name": "Fifteenth Anniversary",
-      "brand": "Rocky Patel",
-      "origin": "Honduras",
-      "wrapper": "Ecuadorian Habano",
-      "body": "Medium-Full",
-      "strength": "Medium",
-      "priceRange": "$20",
-      "description": "Premium anniversary cigar with exceptional balance and complexity.",
-      "tastingNotes": [
-        "Cedar",
-        "Leather",
-        "Coffee",
-        "Sweet Spice",
-        "Cocoa"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Cognac",
-          "Aged Rum"
-        ],
-        "nonAlcoholic": [
-          "Espresso",
-          "Dark Tea"
-        ]
-      },
-      "inventory": 15,
-      "productUrl": "https://www.cigarsinternational.com/p/rocky-patel-fifteenth-anniversary-cigars/2005027/",
-      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/r/o/rocky-patel-15th-anniversary_2.png"
-    },
-    {
-      "id": "128",
-      "name": "Sun Grown Maduro",
-      "brand": "Rocky Patel",
-      "origin": "Honduras",
-      "wrapper": "Sun Grown Maduro",
-      "body": "Full",
-      "strength": "Medium-Full",
-      "priceRange": "$20",
-      "description": "A bold, dark cigar with rich, intense flavors.",
-      "tastingNotes": [
-        "Dark Chocolate",
-        "Coffee",
-        "Leather",
-        "Earth"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Bourbon",
-          "Stout"
-        ],
-        "nonAlcoholic": [
-          "Strong Coffee",
-          "Hot Chocolate"
-        ]
-      },
-      "inventory": 22,
-      "productUrl": "https://www.cigarsinternational.com/p/rocky-patel-sun-grown-maduro-cigars/1491621/",
-      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/r/o/rocky-patel-sungrown-maduro_1.png"
-    },
-    {
-      "id": "129",
-      "name": "Reserva Real",
-      "brand": "Romeo y Julieta",
-      "origin": "Honduras",
-      "wrapper": "Ecuadorian Connecticut",
-      "body": "Light-Medium",
-      "strength": "Mild",
-      "priceRange": "$20",
-      "description": "A smooth, accessible cigar from the legendary Romeo y Julieta brand.",
-      "tastingNotes": [
-        "Cream",
-        "Cedar",
-        "Nuts",
-        "Hay"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Champagne",
-          "Light Rum"
-        ],
-        "nonAlcoholic": [
-          "Latte",
-          "White Tea"
-        ]
-      },
-      "inventory": 40,
-      "productUrl": "https://www.cigarsinternational.com/p/romeo-y-julieta-reserva-real-cigars/1415577/",
-      "imageUrl": "http://www.cigarsdirect.com/cdn/shop/products/romeo-y-julieta-reserva-real-robusto-closed-box.jpg?v=1661566060"
-    },
-    {
-      "id": "130",
-      "name": "1875",
-      "brand": "Romeo y Julieta",
-      "origin": "Dominican Republic",
-      "wrapper": "Indonesian",
-      "body": "Medium",
-      "strength": "Mild-Medium",
-      "priceRange": "$20",
-      "description": "Classic cigar honoring the brand's founding year with traditional character.",
-      "tastingNotes": [
-        "Cedar",
-        "Earth",
-        "Cream",
-        "Light Spice"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Rum",
-          "Red Wine"
-        ],
-        "nonAlcoholic": [
-          "Coffee",
-          "Black Tea"
-        ]
-      },
-      "inventory": 30,
-      "productUrl": "https://www.cigarsinternational.com/p/romeo-y-julieta-1875-cigars/1415571/",
-      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/r/o/romeo-y-julieta-1875_7.png"
-    },
-    {
-      "id": "131",
-      "name": "Revelation",
-      "brand": "San Cristobal",
-      "origin": "Nicaragua",
-      "wrapper": "Nicaraguan Oscuro",
-      "body": "Full",
-      "strength": "Medium-Full",
-      "priceRange": "$20",
-      "description": "A bold, dark cigar with rich Nicaraguan character.",
-      "tastingNotes": [
-        "Dark Chocolate",
-        "Espresso",
-        "Leather",
-        "Pepper"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Bourbon",
-          "Aged Rum"
-        ],
-        "nonAlcoholic": [
-          "Turkish Coffee",
-          "Strong Espresso"
-        ]
-      },
-      "inventory": 12,
-      "productUrl": "https://www.cigarsinternational.com/p/san-cristobal-revelation-cigars/1491650/",
-      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/s/a/san-cristobal-revelation-legend-2025.png"
-    },
-    {
-      "id": "132",
-      "name": "Elegancia",
-      "brand": "San Cristobal",
-      "origin": "Nicaragua",
-      "wrapper": "Ecuadorian Connecticut",
-      "body": "Medium",
-      "strength": "Mild-Medium",
-      "priceRange": "$20",
-      "description": "A smooth, refined cigar with elegant Connecticut character.",
-      "tastingNotes": [
-        "Cream",
-        "Cedar",
-        "Nuts",
-        "Light Pepper"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "White Wine",
-          "Light Rum"
-        ],
-        "nonAlcoholic": [
-          "Latte",
-          "Green Tea"
-        ]
-      },
-      "inventory": 20,
-      "productUrl": "https://www.cigarsinternational.com/p/san-cristobal-elegancia-cigars/1491652/",
-      "imageUrl": "http://www.cigarsdirect.com/cdn/shop/products/san-cristobal-elegancia-imperial-toro-closed-box.jpg?v=1646361688"
-    },
-    {
-      "id": "133",
-      "name": "Oro Oscuro",
-      "brand": "San Lotano",
-      "origin": "Nicaragua",
-      "wrapper": "Maduro",
-      "body": "Medium-Full",
-      "strength": "Medium",
-      "priceRange": "$20",
-      "description": "AJ Fernandez's collaboration with San Lotano featuring rich maduro character.",
-      "tastingNotes": [
-        "Dark Chocolate",
-        "Coffee",
-        "Cedar",
-        "Pepper"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Bourbon",
-          "Porter"
-        ],
-        "nonAlcoholic": [
-          "Espresso",
-          "Hot Chocolate"
-        ]
-      },
-      "inventory": 25,
-      "productUrl": "https://www.cigarsinternational.com/p/san-lotano-oro-cigars/1476329/",
-      "imageUrl": "https://mikescigars.com/media/catalog/product/cache/e5410cdb9d5ae58911546adee63f83c5/image/san-lotano-oro.jpg"
-    },
-    {
-      "id": "134",
-      "name": "Requiem Maduro",
-      "brand": "San Lotano",
-      "origin": "Nicaragua",
-      "wrapper": "San Andres Maduro",
-      "body": "Full",
-      "strength": "Medium-Full",
-      "priceRange": "$20",
-      "description": "A dark, complex cigar with bold, refined flavors.",
-      "tastingNotes": [
-        "Espresso",
-        "Dark Chocolate",
-        "Leather",
-        "Earth"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Aged Rum",
-          "Single Malt"
-        ],
-        "nonAlcoholic": [
-          "Turkish Coffee",
-          "Strong Coffee"
-        ]
-      },
-      "inventory": 15,
-      "productUrl": "https://www.cigarsinternational.com/p/san-lotano-requiem-cigars/2020282/",
-      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/s/a/san-lotano-requiem-maduro.png"
-    },
-    {
-      "id": "135",
-      "name": "The Bull",
-      "brand": "San Lotano",
-      "origin": "Nicaragua",
-      "wrapper": "Nicaraguan Habano",
-      "body": "Full",
-      "strength": "Full",
-      "priceRange": "$20",
-      "description": "A powerful, bold cigar for those who prefer full strength.",
-      "tastingNotes": [
-        "Pepper",
-        "Earth",
-        "Leather",
-        "Coffee",
-        "Dark Chocolate"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Bourbon",
-          "Aged Rum"
-        ],
-        "nonAlcoholic": [
-          "Strong Espresso",
-          "Black Coffee"
-        ]
-      },
-      "inventory": 10,
-      "productUrl": "https://www.cigarsinternational.com/p/san-lotano-the-bull-cigars/2017696/",
-      "imageUrl": "https://www.cigarsdirect.com/cdn/shop/products/aj-fernandez-san-lotano-the-bull-gordo-5pack_400x.jpg?v=1684466224"
-    },
-    {
-      "id": "136",
-      "name": "Classic",
-      "brand": "Tatuaje",
-      "origin": "Nicaragua",
-      "wrapper": "Nicaraguan Habano",
-      "body": "Medium-Full",
-      "strength": "Medium",
-      "priceRange": "$20",
-      "description": "Pete Johnson's flagship cigar with classic Cuban-inspired character.",
-      "tastingNotes": [
-        "Cedar",
-        "Pepper",
-        "Leather",
-        "Coffee",
-        "Earth"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Rum",
-          "Bourbon"
-        ],
-        "nonAlcoholic": [
-          "Espresso",
-          "Black Tea"
-        ]
-      },
-      "inventory": 15,
-      "productUrl": "https://www.cigarsinternational.com/p/tatuaje-cigars/1476463/",
-      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/270x270/t/a/tatuaje_2-coj.png"
-    },
-    {
-      "id": "137",
-      "name": "Havana VI",
-      "brand": "Tatuaje",
-      "origin": "Nicaragua",
-      "wrapper": "Nicaraguan",
-      "body": "Medium",
-      "strength": "Medium",
-      "priceRange": "$20",
-      "description": "A value-driven cigar maintaining Tatuaje's quality standards.",
-      "tastingNotes": [
-        "Cedar",
-        "Coffee",
-        "Pepper",
-        "Earth"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Rum",
-          "Red Wine"
-        ],
-        "nonAlcoholic": [
-          "Black Coffee",
-          "Black Tea"
-        ]
-      },
-      "inventory": 25,
-      "productUrl": "https://www.cigarsinternational.com/p/tatuaje-havana-vi-cigars/1491710/",
-      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/t/a/tatuaje-havana-vi_2.png"
-    },
-    {
-      "id": "138",
-      "name": "Black Label Corona Gorda",
-      "brand": "Tatuaje",
-      "origin": "Nicaragua",
-      "wrapper": "Nicaraguan",
-      "body": "Full",
-      "strength": "Medium-Full",
-      "priceRange": "$30",
-      "description": "A bold, dark expression of the Tatuaje line.",
-      "tastingNotes": [
-        "Dark Chocolate",
-        "Espresso",
-        "Pepper",
-        "Leather"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Bourbon",
-          "Stout"
-        ],
-        "nonAlcoholic": [
-          "Turkish Coffee",
-          "Strong Coffee"
-        ]
-      },
-      "inventory": 10,
-      "productUrl": "https://www.cigarsinternational.com/p/tatuaje-black-label-cigars/1478987/",
-      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/t/a/tatuaje-black_3.png"
-    },
-    {
-      "id": "139",
-      "name": "Reserva Broadleaf",
-      "brand": "Tatuaje",
-      "origin": "Nicaragua",
-      "wrapper": "Connecticut Broadleaf",
-      "body": "Full",
-      "strength": "Medium-Full",
-      "priceRange": "$30",
-      "description": "Limited production cigar with rare Connecticut Broadleaf wrapper.",
-      "tastingNotes": [
-        "Dark Chocolate",
-        "Coffee",
-        "Leather",
-        "Earth",
-        "Pepper"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Single Malt",
-          "Cognac"
-        ],
-        "nonAlcoholic": [
-          "Espresso",
-          "Dark Hot Chocolate"
-        ]
-      },
-      "inventory": 6,
-      "productUrl": "https://www.cigarsinternational.com/p/tatuaje-reserva-cigars/2012391/",
-      "imageUrl": "https://www.cigarsdirect.com/cdn/shop/products/tatuaje-nicaragua-7th-reserva-broadleaf-5pack_400x.jpg?v=1737056305"
-    },
-    {
-      "id": "140",
-      "name": "Serie 1942",
-      "brand": "Trinidad Santiago",
-      "origin": "Nicaragua",
-      "wrapper": "Nicaraguan Habano",
-      "body": "Medium-Full",
-      "strength": "Medium",
-      "priceRange": "$20",
-      "description": "Honors a heritage year with refined, complex character.",
-      "tastingNotes": [
-        "Cedar",
-        "Leather",
-        "Coffee",
-        "Pepper"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Rum",
-          "Cognac"
-        ],
-        "nonAlcoholic": [
-          "Espresso",
-          "Black Tea"
-        ]
-      },
-      "inventory": 15,
-      "productUrl": "",
-      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/270x270/t/r/trinidad-santiago.png"
-    },
-    {
-      "id": "141",
-      "name": "Oro",
-      "brand": "Villiger",
-      "origin": "Dominican Republic",
-      "wrapper": "Connecticut",
-      "body": "Light",
-      "strength": "Mild",
-      "priceRange": "$20",
-      "description": "A smooth, mellow cigar perfect for newcomers or relaxed smoking.",
-      "tastingNotes": [
-        "Cream",
-        "Cedar",
-        "Hay",
-        "Vanilla"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "White Wine",
-          "Champagne"
-        ],
-        "nonAlcoholic": [
-          "Green Tea",
-          "Latte"
-        ]
-      },
-      "inventory": 30,
-      "productUrl": "",
-      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/270x270/v/i/villiger-la-vencedora.png"
-    },
-    {
-      "id": "142",
-      "name": "La Flor",
-      "brand": "Villiger",
-      "origin": "Dominican Republic",
-      "wrapper": "Connecticut",
-      "body": "Light-Medium",
-      "strength": "Mild",
-      "priceRange": "$20",
-      "description": "An approachable, everyday smoke with consistent quality.",
-      "tastingNotes": [
-        "Cedar",
-        "Cream",
-        "Light Spice",
-        "Nuts"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Light Rum",
-          "Prosecco"
-        ],
-        "nonAlcoholic": [
-          "Café au Lait",
-          "White Tea"
-        ]
-      },
-      "inventory": 25,
-      "productUrl": "",
-      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/v/i/villiger-la-flor-de-ynclan-10-count.png"
-    },
-    {
-      "id": "143",
-      "name": "Selecto Connecticut",
-      "brand": "Villiger",
-      "origin": "Dominican Republic",
-      "wrapper": "Ecuadorian Connecticut",
-      "body": "Light",
-      "strength": "Mild",
-      "priceRange": "$20",
-      "description": "Smooth and creamy with excellent construction.",
-      "tastingNotes": [
-        "Cream",
-        "Cedar",
-        "Nuts",
-        "Hay"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Champagne",
-          "White Wine"
-        ],
-        "nonAlcoholic": [
-          "Latte",
-          "Green Tea"
-        ]
-      },
-      "inventory": 20,
-      "productUrl": "",
-      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/v/i/villiger-selecto-connecticut-new.png"
-    },
-    {
-      "id": "144",
-      "name": "Undercrown Sun Grown",
-      "brand": "Liga Privada",
-      "origin": "Nicaragua",
-      "wrapper": "Ecuadorian Sun Grown",
-      "body": "Medium-Full",
-      "strength": "Medium",
-      "priceRange": "$20",
-      "description": "Sun grown wrapper adds spice and complexity to the Undercrown line.",
-      "tastingNotes": [
-        "Pepper",
-        "Cedar",
-        "Coffee",
-        "Leather"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Bourbon",
-          "Red Wine"
-        ],
-        "nonAlcoholic": [
-          "Espresso",
-          "Black Tea"
-        ]
-      },
-      "inventory": 22,
-      "productUrl": "https://www.cigarsinternational.com/p/liga-undercrown-sun-grown-cigars/2019300/",
-      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/l/i/liga-privada-undercrown-sun-grown.png"
-    },
-    {
-      "id": "145",
-      "name": "Herencia Cubana",
-      "brand": "AJ Fernandez",
-      "origin": "Nicaragua",
-      "wrapper": "Habano",
-      "body": "Medium",
-      "strength": "Medium",
-      "priceRange": "$20",
-      "description": "Cuban-inspired cigar paying homage to traditional blending.",
-      "tastingNotes": [
-        "Cedar",
-        "Coffee",
-        "Cream",
-        "Pepper"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Rum",
-          "Red Wine"
-        ],
-        "nonAlcoholic": [
-          "Coffee",
-          "Black Tea"
-        ]
-      },
-      "inventory": 25,
-      "productUrl": "https://www.cigarsinternational.com/p/aj-fernandez-enclave-cigars/2008959/",
-      "imageUrl": "https://mikescigars.com/media/catalog/product/cache/e5410cdb9d5ae58911546adee63f83c5/image/herencia-cubana.jpg"
-    },
-    {
-      "id": "146",
-      "name": "New World Redondo",
-      "brand": "AJ Fernandez",
-      "origin": "Nicaragua",
-      "wrapper": "Nicaraguan",
-      "body": "Medium-Full",
-      "strength": "Medium",
-      "priceRange": "$20",
-      "description": "A rounded, balanced cigar with excellent Nicaraguan character.",
-      "tastingNotes": [
-        "Earth",
-        "Coffee",
-        "Pepper",
-        "Cedar"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Bourbon",
-          "Amber Ale"
-        ],
-        "nonAlcoholic": [
-          "Black Coffee",
-          "Chai"
-        ]
-      },
-      "inventory": 20,
-      "productUrl": "https://www.cigarsinternational.com/p/new-world-by-aj-fernandez-cigars/1489596/",
-      "imageUrl": "https://mikescigars.com/media/catalog/product/cache/e5410cdb9d5ae58911546adee63f83c5/image/new-world-redondo.jpg"
-    },
-    {
-      "id": "147",
-      "name": "Cimarron",
-      "brand": "El Titan de Bronze",
-      "origin": "Miami, USA",
-      "wrapper": "Nicaraguan",
-      "body": "Medium-Full",
-      "strength": "Medium",
-      "priceRange": "$20",
-      "description": "Hand-rolled in Miami's Little Havana with authentic Cuban heritage.",
-      "tastingNotes": [
-        "Cedar",
-        "Leather",
-        "Coffee",
-        "Pepper"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Rum",
-          "Bourbon"
-        ],
-        "nonAlcoholic": [
-          "Espresso",
-          "Black Coffee"
-        ]
-      },
-      "inventory": 10,
-      "productUrl": "",
-      "imageUrl": "https://mikescigars.com/media/catalog/product/cache/e5410cdb9d5ae58911546adee63f83c5/image/el-titan-de-bronze-cimarron.jpg"
-    },
-    {
-      "id": "148",
-      "name": "Sumatran",
-      "brand": "El Titan de Bronze",
-      "origin": "Miami, USA",
-      "wrapper": "Sumatra",
-      "body": "Medium",
-      "strength": "Medium",
-      "priceRange": "$20",
-      "description": "Sumatran wrapper adds sweetness to this Miami-rolled cigar.",
-      "tastingNotes": [
-        "Sweet Spice",
-        "Cedar",
-        "Coffee",
-        "Cream"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Cognac",
-          "Port"
-        ],
-        "nonAlcoholic": [
-          "Café au Lait",
-          "Earl Grey"
-        ]
-      },
-      "inventory": 8,
-      "productUrl": "",
-      "imageUrl": "https://mikescigars.com/media/catalog/product/cache/e5410cdb9d5ae58911546adee63f83c5/image/el-titan-de-bronze-sumatran.jpg"
-    },
-    {
-      "id": "149",
-      "name": "Gran Habano #3",
-      "brand": "Gran Habano",
-      "origin": "Honduras",
-      "wrapper": "Habano",
-      "body": "Medium",
-      "strength": "Medium",
-      "priceRange": "$20",
-      "description": "An affordable, well-balanced cigar with classic character.",
-      "tastingNotes": [
-        "Cedar",
-        "Coffee",
-        "Earth",
-        "Pepper"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "Rum",
-          "Red Wine"
-        ],
-        "nonAlcoholic": [
-          "Coffee",
-          "Black Tea"
-        ]
-      },
-      "inventory": 30,
-      "productUrl": "",
-      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/g/r/gran-habano-habano-3_2.png"
-    },
-    {
-      "id": "150",
-      "name": "Gran Habano Connecticut",
-      "brand": "Gran Habano",
-      "origin": "Honduras",
-      "wrapper": "Connecticut",
-      "body": "Light-Medium",
-      "strength": "Mild-Medium",
-      "priceRange": "$20",
-      "description": "A smooth, creamy cigar at an excellent value.",
-      "tastingNotes": [
-        "Cream",
-        "Cedar",
-        "Nuts",
-        "Light Spice"
-      ],
-      "pairings": {
-        "alcoholic": [
-          "White Wine",
-          "Light Rum"
-        ],
-        "nonAlcoholic": [
-          "Latte",
-          "Green Tea"
-        ]
-      },
-      "inventory": 25,
-      "productUrl": "",
-      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/g/r/gran-habano-connecticut-1_5.png"
-    },
-    {
       "id": "151",
       "name": "KKP Never Back Down Piramide 56",
       "brand": "God of Fire",
@@ -4628,6 +2475,36 @@
       "productUrl": "https://www.cigarsdirect.com/products/god-of-fire-kkp-never-back-down-piramide-58"
     },
     {
+      "id": "82",
+      "name": "KKP 54",
+      "brand": "God of Fire",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Full",
+      "strength": "Medium-Full",
+      "priceRange": "$50",
+      "description": "Carlito Fuente's collaboration with Prometheus in 54 ring gauge.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Coffee",
+        "Spice"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Cognac",
+          "Single Malt"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Dark Coffee"
+        ]
+      },
+      "inventory": 3,
+      "productUrl": "",
+      "imageUrl": "http://www.cigarsdirect.com/cdn/shop/files/god-of-fire-kkp-never-back-down-toro-extra-54-cigars-on-humidor-2.jpg?v=1753829782"
+    },
+    {
       "id": "153",
       "name": "KKP Red",
       "brand": "God of Fire",
@@ -4656,6 +2533,66 @@
       "inventory": 10,
       "imageUrl": "https://www.cigarsdirect.com/cdn/shop/products/god-of-fire-kkp-special-reserve-gran-toro-56-single.jpg?v=1743797956",
       "productUrl": "https://www.cigarsdirect.com/products/god-of-fire-kkp-special-reserve-gran-toro-56"
+    },
+    {
+      "id": "83",
+      "name": "Don Carlos",
+      "brand": "God of Fire",
+      "origin": "Dominican Republic",
+      "wrapper": "Cameroon",
+      "body": "Medium-Full",
+      "strength": "Medium",
+      "priceRange": "$50",
+      "description": "Don Carlos blend in the prestigious God of Fire line.",
+      "tastingNotes": [
+        "Cedar",
+        "Sweet Spice",
+        "Leather",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Cognac",
+          "Port"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Tea"
+        ]
+      },
+      "inventory": 4,
+      "productUrl": "https://foxcigar.com/shop/cigars/arturo-fuente/fuente-friday/god-of-fire-robusto-tubos/",
+      "imageUrl": "http://www.cigarsdirect.com/cdn/shop/products/god-of-fire-by-don-carlos-churchill-closed-box.jpg?v=1646351224"
+    },
+    {
+      "id": "84",
+      "name": "Carlito Tubo",
+      "brand": "God of Fire",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium-Full",
+      "strength": "Medium",
+      "priceRange": "$50",
+      "description": "Carlito Fuente's vision in an elegant tube presentation.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Coffee",
+        "Cream"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "XO Cognac",
+          "Scotch"
+        ],
+        "nonAlcoholic": [
+          "Premium Espresso",
+          "Earl Grey"
+        ]
+      },
+      "inventory": 3,
+      "productUrl": "https://www.godoffire.com/by-carlito",
+      "imageUrl": "http://www.cigarsdirect.com/cdn/shop/products/god-of-fire-by-carlito-double-robusto-tubo-box-closed.jpg?v=1646351230"
     },
     {
       "id": "154",
@@ -4808,6 +2745,67 @@
       "productUrl": "https://www.cigarsdirect.com/products/god-of-fire-serie-b-double-robusto"
     },
     {
+      "id": "85",
+      "name": "Cellar Reserve",
+      "brand": "Gurkha",
+      "origin": "Nicaragua",
+      "wrapper": "Connecticut Broadleaf",
+      "body": "Full",
+      "strength": "Medium-Full",
+      "priceRange": "$30",
+      "description": "Aged 15 years, this is one of Gurkha's most acclaimed offerings.",
+      "tastingNotes": [
+        "Dark Chocolate",
+        "Coffee",
+        "Leather",
+        "Pepper",
+        "Cedar"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Aged Rum",
+          "Bourbon"
+        ],
+        "nonAlcoholic": [
+          "Strong Espresso",
+          "Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.cigarsinternational.com/p/gurkha-cellar-reserve-cigars/2022000/",
+      "imageUrl": "https://www.cigarsdirect.com/cdn/shop/products/gurkha-cellar-reserve-12-year-platinum-toro-closed-box_400x.jpg?v=1658077044"
+    },
+    {
+      "id": "86",
+      "name": "Cameroon Major",
+      "brand": "H. Upmann",
+      "origin": "Dominican Republic",
+      "wrapper": "Cameroon",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$20",
+      "description": "Classic H. Upmann with African Cameroon wrapper.",
+      "tastingNotes": [
+        "Sweet Spice",
+        "Cedar",
+        "Cream",
+        "Nuts"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Cognac",
+          "Port"
+        ],
+        "nonAlcoholic": [
+          "Café au Lait",
+          "Earl Grey"
+        ]
+      },
+      "inventory": 20,
+      "productUrl": "",
+      "imageUrl": "https://mikescigars.com/media/catalog/product/cache/e5410cdb9d5ae58911546adee63f83c5/image/31472e5af/december-to-remember-cigar-sampler.jpg"
+    },
+    {
       "id": "159",
       "name": "Wuhrmann",
       "brand": "Habana",
@@ -4836,6 +2834,4352 @@
       "inventory": 15,
       "imageUrl": "https://www.cigarsdirect.com/cdn/shop/products/h-upmann-1844-reserve-corona-single.jpg?v=1694901419",
       "productUrl": "https://www.cigarsdirect.com/products/h-upmann-1844-reserve-corona"
+    },
+    {
+      "id": "87",
+      "name": "Esteli Toro Tubo",
+      "brand": "Herrera Esteli",
+      "origin": "Nicaragua",
+      "wrapper": "Ecuadorian Habano",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$30",
+      "description": "Drew Estate and Willy Herrera's acclaimed collaboration.",
+      "tastingNotes": [
+        "Cedar",
+        "Coffee",
+        "Pepper",
+        "Cream"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Rum"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Tea"
+        ]
+      },
+      "inventory": 12,
+      "productUrl": "",
+      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/h/e/herrera-esteli-habano.png"
+    },
+    {
+      "id": "88",
+      "name": "Connecticut Toro",
+      "brand": "JFR",
+      "origin": "Nicaragua",
+      "wrapper": "Connecticut",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$20",
+      "description": "A smooth Connecticut wrapped cigar from Casa Fernandez.",
+      "tastingNotes": [
+        "Cream",
+        "Cedar",
+        "Nuts",
+        "Light Pepper"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Light Rum",
+          "White Wine"
+        ],
+        "nonAlcoholic": [
+          "Latte",
+          "Green Tea"
+        ]
+      },
+      "inventory": 20,
+      "productUrl": "https://www.jrcigars.com/item/jfr-connecticut/super-toro/JFRCST.html",
+      "imageUrl": "https://mikescigars.com/media/catalog/product/cache/e5410cdb9d5ae58911546adee63f83c5/image/jfr-connecticut.jpg"
+    },
+    {
+      "id": "89",
+      "name": "Cabinetta No. 60",
+      "brand": "Joya de Nicaragua",
+      "origin": "Nicaragua",
+      "wrapper": "Connecticut/Habano",
+      "body": "Medium",
+      "strength": "Mild-Medium",
+      "priceRange": "$20",
+      "description": "Features a unique barber pole wrapper for visual appeal and complex flavor.",
+      "tastingNotes": [
+        "Cedar",
+        "Cream",
+        "Pepper",
+        "Coffee"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Rum",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Cappuccino",
+          "Oolong Tea"
+        ]
+      },
+      "inventory": 18,
+      "productUrl": "",
+      "imageUrl": "https://joyacigars.com/wp-content/uploads/2017/07/Joya-Cabinetta_Thumbnail_2019.png"
+    },
+    {
+      "id": "95",
+      "name": "No. 9",
+      "brand": "Liga Privada",
+      "origin": "Nicaragua",
+      "wrapper": "Connecticut Broadleaf",
+      "body": "Full",
+      "strength": "Medium-Full",
+      "priceRange": "$40",
+      "description": "Drew Estate's flagship ultra-premium cigar with exceptional complexity.",
+      "tastingNotes": [
+        "Dark Chocolate",
+        "Espresso",
+        "Earth",
+        "Pepper",
+        "Cream"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Single Malt",
+          "Bourbon"
+        ],
+        "nonAlcoholic": [
+          "Turkish Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 8,
+      "productUrl": "https://www.cigarsinternational.com/p/drew-estate-liga-privada-no-9-cigars/1411550/",
+      "imageUrl": "http://www.cigarsdirect.com/cdn/shop/products/drew-estate-liga-privada-no-9-toro-box-closed.jpg?v=1755200802"
+    },
+    {
+      "id": "99",
+      "name": "Platinum Toro Tubo",
+      "brand": "Montecristo",
+      "origin": "Dominican Republic",
+      "wrapper": "Connecticut",
+      "body": "Light",
+      "strength": "Mild",
+      "priceRange": "$30",
+      "description": "A smooth, refined cigar from the legendary Montecristo brand.",
+      "tastingNotes": [
+        "Cream",
+        "Cedar",
+        "Nuts",
+        "Light Spice"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Champagne",
+          "Light Rum"
+        ],
+        "nonAlcoholic": [
+          "Latte",
+          "Green Tea"
+        ]
+      },
+      "inventory": 12,
+      "productUrl": "https://www.casademontecristo.com/item/montecristo-platinum-series/toro/MXPLTO.html",
+      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/m/o/montecristo-platinum_1.png"
+    },
+    {
+      "id": "101",
+      "name": "Epic",
+      "brand": "Montecristo",
+      "origin": "Nicaragua",
+      "wrapper": "Nicaraguan Habano",
+      "body": "Medium-Full",
+      "strength": "Medium",
+      "priceRange": "$40",
+      "description": "A bolder expression from Montecristo with Nicaraguan character.",
+      "tastingNotes": [
+        "Pepper",
+        "Leather",
+        "Coffee",
+        "Cedar"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Tea"
+        ]
+      },
+      "inventory": 18,
+      "productUrl": "https://www.holts.com/cigars/all-cigar-brands/montecristo-epic.html",
+      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/m/o/montecristo-epic.png"
+    },
+    {
+      "id": "100",
+      "name": "White Series",
+      "brand": "Montecristo",
+      "origin": "Dominican Republic",
+      "wrapper": "Ecuadorian Connecticut",
+      "body": "Light-Medium",
+      "strength": "Mild",
+      "priceRange": "$30",
+      "description": "A creamy, approachable Montecristo for everyday enjoyment.",
+      "tastingNotes": [
+        "Cream",
+        "Cedar",
+        "Vanilla",
+        "Hay"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "White Wine",
+          "Prosecco"
+        ],
+        "nonAlcoholic": [
+          "Café au Lait",
+          "White Tea"
+        ]
+      },
+      "inventory": 35,
+      "productUrl": "https://www.casademontecristo.com/item/montecristo-white-series/court-tube/MXWC15.html",
+      "imageUrl": "http://www.cigarsdirect.com/cdn/shop/products/montecristo-white-label-toro-open-box.jpg?v=1661566126"
+    },
+    {
+      "id": "160",
+      "name": "Blue",
+      "brand": "My Father",
+      "origin": "Honduras",
+      "wrapper": "Connecticut Broadleaf Rosado",
+      "body": "Medium-Full",
+      "strength": "Medium-Full",
+      "priceRange": "$30",
+      "smokingTime": "45-60min",
+      "description": "The inaugural blend from the Garcias' new Honduran factory. Connecticut Broadleaf Rosado wrapper over Honduran Corojo and Criollo tobaccos from Finca La Opulencia. Blue-and-white band pays homage to the Honduran flag.",
+      "tastingNotes": [
+        "Leather",
+        "Cayenne",
+        "Wood",
+        "Sweetness",
+        "Dried Fruit"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Aged Rum",
+          "Bourbon"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Turkish Coffee"
+        ]
+      },
+      "inventory": 12,
+      "productUrl": "https://www.holts.com/cigars/all-cigar-brands/my-father-blue.html",
+      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/m/y/my-father-blue.png"
+    },
+    {
+      "id": "103",
+      "name": "Flor de las Antillas",
+      "brand": "My Father",
+      "origin": "Nicaragua",
+      "wrapper": "Nicaraguan Sun Grown",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$20",
+      "description": "Cigar Aficionado's 2012 Cigar of the Year with classic Cuban-inspired flavors.",
+      "tastingNotes": [
+        "Cedar",
+        "Coffee",
+        "Cream",
+        "Pepper",
+        "Sweet Spice"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Rum",
+          "Red Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Tea"
+        ]
+      },
+      "inventory": 25,
+      "productUrl": "https://www.neptunecigar.com/flor-de-las-antillas-cigar",
+      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/m/y/my-father-flor-de-las-antillas.png"
+    },
+    {
+      "id": "102",
+      "name": "Le Bijou 1922",
+      "brand": "My Father",
+      "origin": "Nicaragua",
+      "wrapper": "Ecuadorian Habano Oscuro",
+      "body": "Full",
+      "strength": "Medium-Full",
+      "priceRange": "$30",
+      "description": "Honors the birth year of the Garcia family patriarch with bold complexity.",
+      "tastingNotes": [
+        "Dark Chocolate",
+        "Coffee",
+        "Pepper",
+        "Leather",
+        "Cedar"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Aged Rum",
+          "Bourbon"
+        ],
+        "nonAlcoholic": [
+          "Turkish Coffee",
+          "Strong Espresso"
+        ]
+      },
+      "inventory": 15,
+      "productUrl": "https://www.cigarsinternational.com/p/my-father-le-bijou-1922-cigars/1411599/",
+      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/m/y/my-father-le-bijou-1922-toro_1.png"
+    },
+    {
+      "id": "104",
+      "name": "The Judge",
+      "brand": "My Father",
+      "origin": "Nicaragua",
+      "wrapper": "Ecuadorian Habano",
+      "body": "Full",
+      "strength": "Full",
+      "priceRange": "$30",
+      "description": "A powerful, complex cigar named for Judge Edwin Torres.",
+      "tastingNotes": [
+        "Espresso",
+        "Dark Chocolate",
+        "Pepper",
+        "Earth",
+        "Leather"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Single Malt",
+          "Cognac"
+        ],
+        "nonAlcoholic": [
+          "Turkish Coffee",
+          "Dark Espresso"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.cigarsinternational.com/p/my-father-the-judge-cigars/1511038/",
+      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/m/y/my-father-the-judge_1.png"
+    },
+    {
+      "id": "109",
+      "name": "Connecticut Reserve",
+      "brand": "Oliva",
+      "origin": "Nicaragua",
+      "wrapper": "Ecuadorian Connecticut",
+      "body": "Light-Medium",
+      "strength": "Mild-Medium",
+      "priceRange": "$20",
+      "description": "A smooth, creamy cigar perfect for those who prefer milder smokes.",
+      "tastingNotes": [
+        "Cream",
+        "Cedar",
+        "Nuts",
+        "Light Pepper"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "White Wine",
+          "Light Lager"
+        ],
+        "nonAlcoholic": [
+          "Latte",
+          "Green Tea"
+        ]
+      },
+      "inventory": 30,
+      "productUrl": "https://www.cigarsinternational.com/p/oliva-connecticut-reserve-cigars/1410598/",
+      "imageUrl": "http://www.cigarsdirect.com/cdn/shop/products/oliva-connecticut-reserve-robusto-box-closed.jpg?v=1646373039"
+    },
+    {
+      "id": "106",
+      "name": "Serie V Melanio",
+      "brand": "Oliva",
+      "origin": "Nicaragua",
+      "wrapper": "Ecuadorian Sumatra",
+      "body": "Full",
+      "strength": "Medium-Full",
+      "priceRange": "$40",
+      "description": "Named after patriarch Melanio Oliva, this is the pinnacle of the Oliva line.",
+      "tastingNotes": [
+        "Espresso",
+        "Leather",
+        "Dark Chocolate",
+        "Cedar",
+        "Pepper"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Single Malt",
+          "Cognac"
+        ],
+        "nonAlcoholic": [
+          "Turkish Coffee",
+          "Strong Espresso"
+        ]
+      },
+      "inventory": 15,
+      "productUrl": "https://www.cigaraficionado.com/article/oliva-launching-limited-edition-serie-v-melanio",
+      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/o/l/oliva-serie-v-melanio_8.png"
+    },
+    {
+      "id": "107",
+      "name": "Serie V",
+      "brand": "Oliva",
+      "origin": "Nicaragua",
+      "wrapper": "Nicaraguan Sun Grown",
+      "body": "Full",
+      "strength": "Medium-Full",
+      "priceRange": "$20",
+      "description": "A bold, complex cigar with rich Nicaraguan character.",
+      "tastingNotes": [
+        "Cedar",
+        "Pepper",
+        "Leather",
+        "Coffee",
+        "Earth"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Aged Rum"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee"
+        ]
+      },
+      "inventory": 25,
+      "productUrl": "https://www.cigarsinternational.com/p/oliva-serie-v-cigars/1410163/",
+      "imageUrl": "http://www.cigarsdirect.com/cdn/shop/products/oliva-serie-v-double-toro-box-closed.jpg?v=1654113916"
+    },
+    {
+      "id": "113",
+      "name": "1926 Serie No. 2",
+      "brand": "Padron",
+      "origin": "Nicaragua",
+      "wrapper": "Nicaraguan Habano",
+      "body": "Full",
+      "strength": "Medium-Full",
+      "priceRange": "$50",
+      "description": "Ultra-premium cigar honoring Jose O. Padron's birth year with exceptional quality.",
+      "tastingNotes": [
+        "Espresso",
+        "Dark Chocolate",
+        "Leather",
+        "Cedar",
+        "Earth"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "XO Cognac",
+          "Single Malt"
+        ],
+        "nonAlcoholic": [
+          "Turkish Coffee",
+          "Premium Espresso"
+        ]
+      },
+      "inventory": 6,
+      "productUrl": "https://www.cigarsinternational.com/p/padron-1926-series-no-90-cigars/1514803/",
+      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/p/a/padron-1926-series_1.png"
+    },
+    {
+      "id": "114",
+      "name": "1926 Serie No. 6",
+      "brand": "Padron",
+      "origin": "Nicaragua",
+      "wrapper": "Nicaraguan Habano",
+      "body": "Full",
+      "strength": "Medium-Full",
+      "priceRange": "$40",
+      "description": "A smaller format of the legendary 1926 Serie with concentrated flavors.",
+      "tastingNotes": [
+        "Dark Chocolate",
+        "Coffee",
+        "Leather",
+        "Cedar"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Cognac",
+          "Aged Rum"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Strong Coffee"
+        ]
+      },
+      "inventory": 8,
+      "productUrl": "https://padron.com/padron-1926-serie/",
+      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/p/a/padron-1926-series_1.png"
+    },
+    {
+      "id": "115",
+      "name": "1964 Anniversary Maduro",
+      "brand": "Padron",
+      "origin": "Nicaragua",
+      "wrapper": "Nicaraguan Maduro",
+      "body": "Medium-Full",
+      "strength": "Medium",
+      "priceRange": "$40",
+      "description": "Celebrates 30 years of Padron with rich, refined complexity.",
+      "tastingNotes": [
+        "Dark Chocolate",
+        "Coffee",
+        "Cedar",
+        "Sweet Wood",
+        "Leather"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Port"
+        ],
+        "nonAlcoholic": [
+          "Hot Chocolate",
+          "Espresso"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.holts.com/cigars/all-cigar-brands/padron-1964-anniversary.html",
+      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/p/a/padron-1964-anniversary_2.png"
+    },
+    {
+      "id": "119",
+      "name": "3000 Maduro",
+      "brand": "Padron",
+      "origin": "Nicaragua",
+      "wrapper": "Nicaraguan Maduro",
+      "body": "Medium-Full",
+      "strength": "Medium",
+      "priceRange": "$20",
+      "description": "A larger format with richer, more developed maduro flavors.",
+      "tastingNotes": [
+        "Dark Chocolate",
+        "Coffee",
+        "Cedar",
+        "Leather"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Porter"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Hot Chocolate"
+        ]
+      },
+      "inventory": 30,
+      "productUrl": "https://www.holts.com/clubhouse/staff-reviews/padron-3000-maduro",
+      "imageUrl": "http://www.cigarsdirect.com/cdn/shop/products/padron-thousand-series-3000-maduro-box-closed.jpg?v=1726756371"
+    },
+    {
+      "id": "126",
+      "name": "Decade",
+      "brand": "Rocky Patel",
+      "origin": "Honduras",
+      "wrapper": "Honduran",
+      "body": "Medium-Full",
+      "strength": "Medium",
+      "priceRange": "$30",
+      "description": "Celebrates 10 years of Rocky Patel with bold, rich character.",
+      "tastingNotes": [
+        "Cedar",
+        "Coffee",
+        "Pepper",
+        "Leather"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine"
+        ],
+        "nonAlcoholic": [
+          "Black Coffee",
+          "Black Tea"
+        ]
+      },
+      "inventory": 25,
+      "productUrl": "https://www.casademontecristo.com/item/rocky-patel-decade/torpedo/RPDECT.html",
+      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/r/o/rocky-patel-decade_2.png"
+    },
+    {
+      "id": "125",
+      "name": "Vintage 1999 Connecticut",
+      "brand": "Rocky Patel",
+      "origin": "Honduras",
+      "wrapper": "Connecticut",
+      "body": "Medium",
+      "strength": "Mild-Medium",
+      "priceRange": "$30",
+      "description": "A smooth, creamy cigar from the acclaimed 1999 vintage.",
+      "tastingNotes": [
+        "Cream",
+        "Cedar",
+        "Nuts",
+        "Light Coffee"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "White Wine",
+          "Light Rum"
+        ],
+        "nonAlcoholic": [
+          "Latte",
+          "Green Tea"
+        ]
+      },
+      "inventory": 18,
+      "productUrl": "https://cigarcountry.com/product/rocky-patel-vintage-1999-connecticut-toro-tubo/",
+      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/r/o/rocky-patel-vintage-1999_1.png"
+    },
+    {
+      "id": "130",
+      "name": "1875",
+      "brand": "Romeo y Julieta",
+      "origin": "Dominican Republic",
+      "wrapper": "Indonesian",
+      "body": "Medium",
+      "strength": "Mild-Medium",
+      "priceRange": "$20",
+      "description": "Classic cigar honoring the brand's founding year with traditional character.",
+      "tastingNotes": [
+        "Cedar",
+        "Earth",
+        "Cream",
+        "Light Spice"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Rum",
+          "Red Wine"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea"
+        ]
+      },
+      "inventory": 30,
+      "productUrl": "https://www.holts.com/cigars/all-cigar-brands/romeo-y-julieta-1875-nicaragua.html",
+      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/r/o/romeo-y-julieta-1875_7.png"
+    },
+    {
+      "id": "129",
+      "name": "Reserva Real",
+      "brand": "Romeo y Julieta",
+      "origin": "Honduras",
+      "wrapper": "Ecuadorian Connecticut",
+      "body": "Light-Medium",
+      "strength": "Mild",
+      "priceRange": "$20",
+      "description": "A smooth, accessible cigar from the legendary Romeo y Julieta brand.",
+      "tastingNotes": [
+        "Cream",
+        "Cedar",
+        "Nuts",
+        "Hay"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Champagne",
+          "Light Rum"
+        ],
+        "nonAlcoholic": [
+          "Latte",
+          "White Tea"
+        ]
+      },
+      "inventory": 40,
+      "productUrl": "https://www.casademontecristo.com/item/romeo-y-julieta-reserva-real/robusto/JURORR.html",
+      "imageUrl": "http://www.cigarsdirect.com/cdn/shop/products/romeo-y-julieta-reserva-real-robusto-closed-box.jpg?v=1661566060"
+    },
+    {
+      "id": "132",
+      "name": "Elegancia",
+      "brand": "San Cristobal",
+      "origin": "Nicaragua",
+      "wrapper": "Ecuadorian Connecticut",
+      "body": "Medium",
+      "strength": "Mild-Medium",
+      "priceRange": "$30",
+      "description": "A smooth, refined cigar with elegant Connecticut character.",
+      "tastingNotes": [
+        "Cream",
+        "Cedar",
+        "Nuts",
+        "Light Pepper"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "White Wine",
+          "Light Rum"
+        ],
+        "nonAlcoholic": [
+          "Latte",
+          "Green Tea"
+        ]
+      },
+      "inventory": 20,
+      "productUrl": "https://www.holts.com/cigars/all-cigar-brands/san-cristobal-elegancia.html",
+      "imageUrl": "http://www.cigarsdirect.com/cdn/shop/products/san-cristobal-elegancia-imperial-toro-closed-box.jpg?v=1646361688"
+    },
+    {
+      "id": "97",
+      "name": "Undercrown Shade",
+      "brand": "Liga Privada",
+      "origin": "Nicaragua",
+      "wrapper": "Ecuadorian Connecticut",
+      "body": "Medium",
+      "strength": "Mild-Medium",
+      "priceRange": "$20",
+      "description": "A smooth, approachable cigar in the Liga Privada family.",
+      "tastingNotes": [
+        "Cream",
+        "Cedar",
+        "Pepper",
+        "Nuts"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "White Wine",
+          "Light Rum"
+        ],
+        "nonAlcoholic": [
+          "Latte",
+          "Green Tea"
+        ]
+      },
+      "inventory": 25,
+      "productUrl": "https://cigarcountry.com/product/undercrown-shade-corona-pequena/",
+      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/l/i/liga-privada-undercrown-shade_1.png"
+    },
+    {
+      "id": "161",
+      "name": "Crystal Belicoso",
+      "brand": "Ashton",
+      "origin": "Various",
+      "wrapper": "Natural",
+      "body": "Light",
+      "strength": "Mild",
+      "priceRange": "$40",
+      "description": "A light Ashton Crystal Belicoso cigar with mild strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cream",
+        "Grass",
+        "Light Cedar",
+        "Almond"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "White Wine",
+          "Light Beer",
+          "Champagne"
+        ],
+        "nonAlcoholic": [
+          "Green Tea",
+          "Sparkling Water",
+          "Lemonade"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://cigarcountry.com/product/ashton-classic-crystal-no-1/",
+      "imageUrl": ""
+    },
+    {
+      "id": "162",
+      "name": "By A J Fernandez",
+      "brand": "El Rey del Mundo",
+      "origin": "Various",
+      "wrapper": "Natural",
+      "body": "Medium-Full",
+      "strength": "Medium-Full",
+      "priceRange": "$30",
+      "description": "A medium-full El Rey del Mundo By A J Fernandez cigar with medium-full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Dark Chocolate",
+        "Espresso",
+        "Pepper",
+        "Leather"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.leafenthusiast.com/cigar-review-el-rey-del-mundo-by-aj-fernandez/",
+      "imageUrl": ""
+    },
+    {
+      "id": "163",
+      "name": "Bundle Single",
+      "brand": "Kristoff",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$50",
+      "description": "A medium Kristoff Bundle Single cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.cigarsinternational.com/p/joya-de-nicaragua-cabinetta-cigars/1472079/",
+      "imageUrl": ""
+    },
+    {
+      "id": "164",
+      "name": "Guardrail",
+      "brand": "Kristoff",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$20",
+      "description": "A medium Kristoff Guardrail cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.cigarplace.biz/all-brands/kristoff-cigars/kristoff-guardrail.html",
+      "imageUrl": ""
+    },
+    {
+      "id": "165",
+      "name": "Ligero Maduro Churchill",
+      "brand": "Kristoff",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium-Full",
+      "strength": "Medium-Full",
+      "priceRange": "$20",
+      "description": "A medium-full Kristoff Ligero Maduro Churchill cigar with medium-full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Dark Chocolate",
+        "Espresso",
+        "Pepper",
+        "Leather"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "",
+      "imageUrl": ""
+    },
+    {
+      "id": "166",
+      "name": "Limited Veinte",
+      "brand": "Kristoff",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$30",
+      "description": "A medium Kristoff Limited Veinte cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.cigarsinternational.com/p/kristoff-ligero-maduro-cigars/1411457/",
+      "imageUrl": ""
+    },
+    {
+      "id": "167",
+      "name": "San Andres",
+      "brand": "Kristoff",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Full",
+      "strength": "Full",
+      "priceRange": "$20",
+      "description": "A full Kristoff San Andres cigar with full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Pepper",
+        "Earth",
+        "Dark Chocolate",
+        "Charred Wood"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.cigarsinternational.com/p/kristoff-san-andres-cigars/1499032/",
+      "imageUrl": ""
+    },
+    {
+      "id": "168",
+      "name": "Maduro Original Churchill",
+      "brand": "Kristoff",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium-Full",
+      "strength": "Medium-Full",
+      "priceRange": "$20",
+      "description": "A medium-full Kristoff Maduro Original Churchill cigar with medium-full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Dark Chocolate",
+        "Espresso",
+        "Pepper",
+        "Leather"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.cigarsinternational.com/p/kristoff-maduro-cigars/1411455/",
+      "imageUrl": ""
+    },
+    {
+      "id": "169",
+      "name": "Magnifico",
+      "brand": "La Aroma de Cuba",
+      "origin": "Nicaragua",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$30",
+      "description": "A medium La Aroma de Cuba Magnifico cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://mikescigars.com/la-aroma-de-cuba-mi-amor-magnifico",
+      "imageUrl": ""
+    },
+    {
+      "id": "170",
+      "name": "Preferidos Emerald Green",
+      "brand": "La Aurora",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium-Full",
+      "strength": "Medium-Full",
+      "priceRange": "$50",
+      "description": "A medium-full La Aurora Preferidos Emerald Green cigar with medium-full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Dark Chocolate",
+        "Espresso",
+        "Pepper",
+        "Leather"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.cigarsinternational.com/p/la-aurora-preferidos-emerald-cigars/2030958/",
+      "imageUrl": ""
+    },
+    {
+      "id": "171",
+      "name": "Preferidos 1903 Diamond Tubo",
+      "brand": "La Aurora",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium-Full",
+      "strength": "Medium-Full",
+      "priceRange": "$50",
+      "description": "A medium-full La Aurora Preferidos 1903 Diamond Tubo cigar with medium-full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Dark Chocolate",
+        "Espresso",
+        "Pepper",
+        "Leather"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.laaurora.com/products/preferidos-1903-diamond-tubo?srsltid=AfmBOoqzOgA2871t36lQSMxfqPn1z-lJ6tCUANnOC5QZpdo6TOGFThyl",
+      "imageUrl": ""
+    },
+    {
+      "id": "172",
+      "name": "Box Pressed El Lector",
+      "brand": "La Galera",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$20",
+      "description": "A medium La Galera Box Pressed El Lector cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.famous-smoke.com/la-galera-1936-box-pressed-el-lector-cigars-natural#:~:text=Description,at%20our%20everyday%20low%20prices.",
+      "imageUrl": ""
+    },
+    {
+      "id": "173",
+      "name": "Gavillero Maduro Perfecto",
+      "brand": "La Galera",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$20",
+      "description": "A medium La Galera Gavillero Maduro Perfecto cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://cigarcountry.com/product/la-galera-gavillero-maduro-perfecto/",
+      "imageUrl": ""
+    },
+    {
+      "id": "174",
+      "name": "Imperial Jade Chiquito Perfecto by Box",
+      "brand": "La Glaria",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Light-Medium",
+      "strength": "Mild-Medium",
+      "priceRange": "$20",
+      "description": "A light-medium La Glaria Imperial Jade Chiquito Perfecto by Box cigar with mild-medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Cream",
+        "Nuts",
+        "Mild Pepper"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "White Wine",
+          "Light Beer",
+          "Champagne"
+        ],
+        "nonAlcoholic": [
+          "Green Tea",
+          "Sparkling Water",
+          "Lemonade"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://cigarcountry.com/product/la-galera-imperial-jade-chiquito-perfecto/#:~:text=Details,you%20feel%20one%20with%20nature.%22",
+      "imageUrl": ""
+    },
+    {
+      "id": "175",
+      "name": "Serie R Esteli",
+      "brand": "La Gloria Cubana",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$20",
+      "description": "A medium La Gloria Cubana Serie R Esteli cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.cigarsinternational.com/p/la-gloria-cubana-serie-r-esteli-cigars/2038143/",
+      "imageUrl": ""
+    },
+    {
+      "id": "176",
+      "name": "Pipe Tobacco 5 lb",
+      "brand": "Lane Limited !Q",
+      "origin": "Various",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$20",
+      "description": "A medium Lane Limited !Q Pipe Tobacco 5 lb cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "",
+      "imageUrl": ""
+    },
+    {
+      "id": "177",
+      "name": "Pipe Tobacco 5 lb",
+      "brand": "Lane Limited RLP6",
+      "origin": "Various",
+      "wrapper": "Natural",
+      "body": "Light-Medium",
+      "strength": "Mild-Medium",
+      "priceRange": "$20",
+      "description": "A light-medium Lane Limited RLP6 Pipe Tobacco 5 lb cigar with mild-medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Cream",
+        "Nuts",
+        "Mild Pepper"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "White Wine",
+          "Light Beer",
+          "Champagne"
+        ],
+        "nonAlcoholic": [
+          "Green Tea",
+          "Sparkling Water",
+          "Lemonade"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "",
+      "imageUrl": ""
+    },
+    {
+      "id": "178",
+      "name": "Sumatra Toro",
+      "brand": "Leaf",
+      "origin": "Honduras",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$20",
+      "description": "A medium Leaf Sumatra Toro cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://thecigarauthority.com/leaf-oscar-sumatra-toro-cigar-review/",
+      "imageUrl": ""
+    },
+    {
+      "id": "179",
+      "name": "Oscar Maduro",
+      "brand": "Leaf",
+      "origin": "Honduras",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$20",
+      "description": "A medium Leaf Oscar Maduro cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.cigarsinternational.com/p/leaf-by-oscar-maduro/2010660/",
+      "imageUrl": ""
+    },
+    {
+      "id": "180",
+      "name": "Oscar Connecticut",
+      "brand": "Leaf",
+      "origin": "Honduras",
+      "wrapper": "Natural",
+      "body": "Light",
+      "strength": "Mild",
+      "priceRange": "$20",
+      "description": "A light Leaf Oscar Connecticut cigar with mild strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cream",
+        "Grass",
+        "Light Cedar",
+        "Almond"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "White Wine",
+          "Light Beer",
+          "Champagne"
+        ],
+        "nonAlcoholic": [
+          "Green Tea",
+          "Sparkling Water",
+          "Lemonade"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.cigarsinternational.com/p/leaf-by-oscar-connecticut/2010658/",
+      "imageUrl": ""
+    },
+    {
+      "id": "181",
+      "name": "Unico Serie Ratzilla",
+      "brand": "Liga Privada",
+      "origin": "Nicaragua",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$40",
+      "description": "A medium Liga Privada Unico Serie Ratzilla cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://cigarcountry.com/product/liga-privada-unico-serie-ratzilla/",
+      "imageUrl": ""
+    },
+    {
+      "id": "182",
+      "name": "Belicoso No. 9",
+      "brand": "Liga Privada",
+      "origin": "Nicaragua",
+      "wrapper": "Natural",
+      "body": "Medium-Full",
+      "strength": "Medium-Full",
+      "priceRange": "$40",
+      "description": "A medium-full Liga Privada Belicoso No. 9 cigar with medium-full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Dark Chocolate",
+        "Espresso",
+        "Pepper",
+        "Leather"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "",
+      "imageUrl": ""
+    },
+    {
+      "id": "183",
+      "name": "No. 9 Tube",
+      "brand": "Liga Privada",
+      "origin": "Nicaragua",
+      "wrapper": "Natural",
+      "body": "Medium-Full",
+      "strength": "Medium-Full",
+      "priceRange": "$40",
+      "description": "A medium-full Liga Privada No. 9 Tube cigar with medium-full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Dark Chocolate",
+        "Espresso",
+        "Pepper",
+        "Leather"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "",
+      "imageUrl": ""
+    },
+    {
+      "id": "184",
+      "name": "T52 Toro",
+      "brand": "Liga Privada",
+      "origin": "Nicaragua",
+      "wrapper": "Natural",
+      "body": "Full",
+      "strength": "Full",
+      "priceRange": "$40",
+      "description": "A full Liga Privada T52 Toro cigar with full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Pepper",
+        "Earth",
+        "Dark Chocolate",
+        "Charred Wood"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://cigarcountry.com/product/liga-privada-t52-toro-tubo/",
+      "imageUrl": ""
+    },
+    {
+      "id": "185",
+      "name": "T 52",
+      "brand": "Liga Privada",
+      "origin": "Nicaragua",
+      "wrapper": "Natural",
+      "body": "Full",
+      "strength": "Full",
+      "priceRange": "$40",
+      "description": "A full Liga Privada T 52 cigar with full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Pepper",
+        "Earth",
+        "Dark Chocolate",
+        "Charred Wood"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://drewestate.com/products/liga-privada/liga-privada-t52/",
+      "imageUrl": ""
+    },
+    {
+      "id": "186",
+      "name": "FSG",
+      "brand": "Liga Privada",
+      "origin": "Nicaragua",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$30",
+      "description": "A medium Liga Privada FSG cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.coronacigar.com/brands/corona-cigar-co/fsg-by-drew-estate/?srsltid=AfmBOopqy9qfkLcaX8pG32uB0LCdRLIO-Dk6BSTH9XNN-14za9narmkJ",
+      "imageUrl": ""
+    },
+    {
+      "id": "187",
+      "name": "Aniversario 10",
+      "brand": "Liga Privada",
+      "origin": "Nicaragua",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$40",
+      "description": "A medium Liga Privada Aniversario 10 cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.cigarsinternational.com/p/drew-estate-liga-privada-aniversario-10/2055991/",
+      "imageUrl": ""
+    },
+    {
+      "id": "188",
+      "name": "Unico Serie Feral Flying Pig",
+      "brand": "Liga Privada",
+      "origin": "Nicaragua",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$40",
+      "description": "A medium Liga Privada Unico Serie Feral Flying Pig cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.cigarsinternational.com/p/drew-estate-liga-privada-unico-serie-feral-flying-pig/2066418/",
+      "imageUrl": ""
+    },
+    {
+      "id": "189",
+      "name": "Ascots by Box",
+      "brand": "Macanudo",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Light",
+      "strength": "Mild",
+      "priceRange": "$50",
+      "description": "A light Macanudo Ascots by Box cigar with mild strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cream",
+        "Grass",
+        "Light Cedar",
+        "Almond"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "White Wine",
+          "Light Beer",
+          "Champagne"
+        ],
+        "nonAlcoholic": [
+          "Green Tea",
+          "Sparkling Water",
+          "Lemonade"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.cigarsinternational.com/p/macanudo-ascot-tins/2012737/",
+      "imageUrl": ""
+    },
+    {
+      "id": "190",
+      "name": "Vintage Maduro 1997",
+      "brand": "Macanudo",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$40",
+      "description": "A medium Macanudo Vintage Maduro 1997 cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.cigarsinternational.com/p/macanudo-vintage-maduro-1997-cigars/1411633/",
+      "imageUrl": ""
+    },
+    {
+      "id": "191",
+      "name": "1935 Anniversary",
+      "brand": "Montecristo",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium-Full",
+      "strength": "Medium-Full",
+      "priceRange": "$40",
+      "description": "A medium-full Montecristo 1935 Anniversary cigar with medium-full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Dark Chocolate",
+        "Espresso",
+        "Pepper",
+        "Leather"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.cigarsinternational.com/p/montecristo-1935-anniversary-nicaragua-cigar/2036257/",
+      "imageUrl": ""
+    },
+    {
+      "id": "192",
+      "name": "Original No. 2",
+      "brand": "Montecristo",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$50",
+      "description": "A medium Montecristo Original No. 2 cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://cigarcountry.com/product/montecristo-no-2/",
+      "imageUrl": ""
+    },
+    {
+      "id": "193",
+      "name": "Epic Red",
+      "brand": "Montecristo",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$40",
+      "description": "A medium Montecristo Epic Red cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://halfwheel.com/review-montecristo-epic-no-2-premium-selection-2007/33727/",
+      "imageUrl": ""
+    },
+    {
+      "id": "194",
+      "name": "Fonseca",
+      "brand": "My Father",
+      "origin": "Nicaragua",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$30",
+      "description": "A medium My Father Fonseca cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.cigarsinternational.com/p/fonseca-myfather-cigars/2034372/",
+      "imageUrl": ""
+    },
+    {
+      "id": "195",
+      "name": "Limited Edition Cuffins",
+      "brand": "My Father",
+      "origin": "Nicaragua",
+      "wrapper": "Natural",
+      "body": "Full",
+      "strength": "Full",
+      "priceRange": "$50",
+      "description": "A full My Father Limited Edition Cuffins cigar with full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Pepper",
+        "Earth",
+        "Dark Chocolate",
+        "Charred Wood"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "",
+      "imageUrl": ""
+    },
+    {
+      "id": "196",
+      "name": "El Centrion H2K",
+      "brand": "My Father",
+      "origin": "Nicaragua",
+      "wrapper": "Natural",
+      "body": "Light-Medium",
+      "strength": "Mild-Medium",
+      "priceRange": "$20",
+      "description": "A light-medium My Father El Centrion H2K cigar with mild-medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Cream",
+        "Nuts",
+        "Mild Pepper"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "White Wine",
+          "Light Beer",
+          "Champagne"
+        ],
+        "nonAlcoholic": [
+          "Green Tea",
+          "Sparkling Water",
+          "Lemonade"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.holts.com/cigars/all-cigar-brands/el-centurion-h-2k-ct.html",
+      "imageUrl": ""
+    },
+    {
+      "id": "197",
+      "name": "Habano",
+      "brand": "Nub",
+      "origin": "Nicaragua",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$20",
+      "description": "A medium Nub Habano cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.cigarsinternational.com/p/nub-habano-by-oliva-cigars/1411708/",
+      "imageUrl": ""
+    },
+    {
+      "id": "198",
+      "name": "Cameroon",
+      "brand": "Nub",
+      "origin": "Nicaragua",
+      "wrapper": "Natural",
+      "body": "Light-Medium",
+      "strength": "Mild-Medium",
+      "priceRange": "$20",
+      "description": "A light-medium Nub Cameroon cigar with mild-medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Cream",
+        "Nuts",
+        "Mild Pepper"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "White Wine",
+          "Light Beer",
+          "Champagne"
+        ],
+        "nonAlcoholic": [
+          "Green Tea",
+          "Sparkling Water",
+          "Lemonade"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.cigarsinternational.com/p/nub-cameroon-by-oliva-cigars/2017204/",
+      "imageUrl": ""
+    },
+    {
+      "id": "199",
+      "name": "Connecticut",
+      "brand": "Nub",
+      "origin": "Nicaragua",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$20",
+      "description": "A medium Nub Connecticut cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.cigarsinternational.com/p/nub-connecticut-by-oliva-cigars/1471051/",
+      "imageUrl": ""
+    },
+    {
+      "id": "200",
+      "name": "Gilberto Natural",
+      "brand": "Oliva",
+      "origin": "Nicaragua",
+      "wrapper": "Natural",
+      "body": "Light-Medium",
+      "strength": "Mild-Medium",
+      "priceRange": "$20",
+      "description": "A light-medium Oliva Gilberto Natural cigar with mild-medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Cream",
+        "Nuts",
+        "Mild Pepper"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "White Wine",
+          "Light Beer",
+          "Champagne"
+        ],
+        "nonAlcoholic": [
+          "Green Tea",
+          "Sparkling Water",
+          "Lemonade"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.holts.com/cigars/all-cigar-brands/oliva-gilberto-oliva-reserva-blanc.html",
+      "imageUrl": ""
+    },
+    {
+      "id": "201",
+      "name": "Gilberto Maduro",
+      "brand": "Oliva",
+      "origin": "Nicaragua",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$20",
+      "description": "A medium Oliva Gilberto Maduro cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://olivacigar.com/cigars/gilberto-reserva/",
+      "imageUrl": ""
+    },
+    {
+      "id": "202",
+      "name": "Serie V Melanio",
+      "brand": "Oliva",
+      "origin": "Nicaragua",
+      "wrapper": "Natural",
+      "body": "Full",
+      "strength": "Full",
+      "priceRange": "$40",
+      "description": "A full Oliva Serie V Melanio cigar with full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Pepper",
+        "Earth",
+        "Dark Chocolate",
+        "Charred Wood"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://olivacigar.com/cigars/serie-v-melanio/",
+      "imageUrl": ""
+    },
+    {
+      "id": "203",
+      "name": "Serie V Melanio Maduro Double Toro",
+      "brand": "Oliva",
+      "origin": "Nicaragua",
+      "wrapper": "Natural",
+      "body": "Medium-Full",
+      "strength": "Medium-Full",
+      "priceRange": "$30",
+      "description": "A medium-full Oliva Serie V Melanio Maduro Double Toro cigar with medium-full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Dark Chocolate",
+        "Espresso",
+        "Pepper",
+        "Leather"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.casademontecristo.com/item/oliva-serie-v-melanio-maduro/double-toro/OSVMDT3.html",
+      "imageUrl": ""
+    },
+    {
+      "id": "204",
+      "name": "Serie V 135th Anniversary Edicion Limitada",
+      "brand": "Oliva",
+      "origin": "Nicaragua",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$30",
+      "description": "A medium Oliva Serie V 135th Anniversary Edicion Limitada cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.cigarsinternational.com/p/oliva-serie-v-135th-anniversary-edicion-cigars/2040620/",
+      "imageUrl": ""
+    },
+    {
+      "id": "205",
+      "name": "Angelino toro",
+      "brand": "Arturo Fuente",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Light-Medium",
+      "strength": "Mild-Medium",
+      "priceRange": "$20",
+      "description": "A light-medium Arturo Fuente Angelino toro cigar with mild-medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Cream",
+        "Nuts",
+        "Mild Pepper"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "White Wine",
+          "Light Beer",
+          "Champagne"
+        ],
+        "nonAlcoholic": [
+          "Green Tea",
+          "Sparkling Water",
+          "Lemonade"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "",
+      "imageUrl": ""
+    },
+    {
+      "id": "206",
+      "name": "Angel's Share",
+      "brand": "Arturo Fuente",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$20",
+      "description": "A medium Arturo Fuente Angel's Share cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://cigarcountry.com/brand/arturo-fuente-cigars/fuente-fuente-opus-x-angels-share/",
+      "imageUrl": ""
+    },
+    {
+      "id": "207",
+      "name": "Sencillo Platinum",
+      "brand": "Arturo Fuente",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$20",
+      "description": "A medium Arturo Fuente Sencillo Platinum cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.sencillocigars.com/sencillo-platinum",
+      "imageUrl": ""
+    },
+    {
+      "id": "208",
+      "name": "Seceilllo Black",
+      "brand": "Arturo Fuente",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Full",
+      "strength": "Full",
+      "priceRange": "$20",
+      "description": "A full Arturo Fuente Seceilllo Black cigar with full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Pepper",
+        "Earth",
+        "Dark Chocolate",
+        "Charred Wood"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.sencillocigars.com/sencillo-black",
+      "imageUrl": ""
+    },
+    {
+      "id": "209",
+      "name": "22 individual",
+      "brand": "Arturo Fuente",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium-Full",
+      "strength": "Medium-Full",
+      "priceRange": "$50",
+      "description": "A medium-full Arturo Fuente 22 individual cigar with medium-full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Dark Chocolate",
+        "Espresso",
+        "Pepper",
+        "Leather"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "",
+      "imageUrl": ""
+    },
+    {
+      "id": "210",
+      "name": "Fuente Story - Set Count 4",
+      "brand": "Arturo Fuente",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium-Full",
+      "strength": "Medium-Full",
+      "priceRange": "$50",
+      "description": "A medium-full Arturo Fuente Fuente Story - Set Count 4 cigar with medium-full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Dark Chocolate",
+        "Espresso",
+        "Pepper",
+        "Leather"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "",
+      "imageUrl": ""
+    },
+    {
+      "id": "211",
+      "name": "Lost City Toro",
+      "brand": "Arturo Fuente",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium-Full",
+      "strength": "Medium-Full",
+      "priceRange": "$50",
+      "description": "A medium-full Arturo Fuente Lost City Toro cigar with medium-full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Dark Chocolate",
+        "Espresso",
+        "Pepper",
+        "Leather"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://foxcigar.com/shop/cigars/limited-release/lost-city-toro/",
+      "imageUrl": ""
+    },
+    {
+      "id": "212",
+      "name": "Lost City Piramide",
+      "brand": "Arturo Fuente",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium-Full",
+      "strength": "Medium-Full",
+      "priceRange": "$50",
+      "description": "A medium-full Arturo Fuente Lost City Piramide cigar with medium-full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Dark Chocolate",
+        "Espresso",
+        "Pepper",
+        "Leather"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://foxcigar.com/shop/cigars/limited-release/opus-x-lost-city-piramide/",
+      "imageUrl": ""
+    },
+    {
+      "id": "213",
+      "name": "Lost City Robosto",
+      "brand": "Arturo Fuente",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium-Full",
+      "strength": "Medium-Full",
+      "priceRange": "$50",
+      "description": "A medium-full Arturo Fuente Lost City Robosto cigar with medium-full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Dark Chocolate",
+        "Espresso",
+        "Pepper",
+        "Leather"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://foxcigar.com/product-category/cigars/arturo-fuente/opus-x/the-lost-city/",
+      "imageUrl": ""
+    },
+    {
+      "id": "214",
+      "name": "Lost City D Robosto",
+      "brand": "Arturo Fuente",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium-Full",
+      "strength": "Medium-Full",
+      "priceRange": "$50",
+      "description": "A medium-full Arturo Fuente Lost City D Robosto cigar with medium-full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Dark Chocolate",
+        "Espresso",
+        "Pepper",
+        "Leather"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "",
+      "imageUrl": ""
+    },
+    {
+      "id": "215",
+      "name": "BBMF",
+      "brand": "Arturo Fuente",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium-Full",
+      "strength": "Medium-Full",
+      "priceRange": "$50",
+      "description": "A medium-full Arturo Fuente BBMF cigar with medium-full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Dark Chocolate",
+        "Espresso",
+        "Pepper",
+        "Leather"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "",
+      "imageUrl": ""
+    },
+    {
+      "id": "216",
+      "name": "Tauros the Bull",
+      "brand": "Arturo Fuente",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium-Full",
+      "strength": "Medium-Full",
+      "priceRange": "$50",
+      "description": "A medium-full Arturo Fuente Tauros the Bull cigar with medium-full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Dark Chocolate",
+        "Espresso",
+        "Pepper",
+        "Leather"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.fuenteagedselection.com/tauros-the-bull",
+      "imageUrl": ""
+    },
+    {
+      "id": "217",
+      "name": "Set of 6",
+      "brand": "Arturo Fuente",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium-Full",
+      "strength": "Medium-Full",
+      "priceRange": "$50",
+      "description": "A medium-full Arturo Fuente Set of 6 cigar with medium-full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Dark Chocolate",
+        "Espresso",
+        "Pepper",
+        "Leather"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "",
+      "imageUrl": ""
+    },
+    {
+      "id": "218",
+      "name": "Set of 5",
+      "brand": "Arturo Fuente",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium-Full",
+      "strength": "Medium-Full",
+      "priceRange": "$50",
+      "description": "A medium-full Arturo Fuente Set of 5 cigar with medium-full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Dark Chocolate",
+        "Espresso",
+        "Pepper",
+        "Leather"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "",
+      "imageUrl": ""
+    },
+    {
+      "id": "219",
+      "name": "Set of 11 Count",
+      "brand": "Arturo Fuente",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium-Full",
+      "strength": "Medium-Full",
+      "priceRange": "$50",
+      "description": "A medium-full Arturo Fuente Set of 11 Count cigar with medium-full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Dark Chocolate",
+        "Espresso",
+        "Pepper",
+        "Leather"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "",
+      "imageUrl": ""
+    },
+    {
+      "id": "220",
+      "name": "Set of 4",
+      "brand": "Arturo Fuente",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium-Full",
+      "strength": "Medium-Full",
+      "priceRange": "$50",
+      "description": "A medium-full Arturo Fuente Set of 4 cigar with medium-full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Dark Chocolate",
+        "Espresso",
+        "Pepper",
+        "Leather"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "",
+      "imageUrl": ""
+    },
+    {
+      "id": "221",
+      "name": "Rear Black Torbedo",
+      "brand": "Arturo Fuente",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium-Full",
+      "strength": "Medium-Full",
+      "priceRange": "$50",
+      "description": "A medium-full Arturo Fuente Rear Black Torbedo cigar with medium-full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Dark Chocolate",
+        "Espresso",
+        "Pepper",
+        "Leather"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://cigarcountry.com/product/fuente-fuente-opusx-serie-heaven-and-earth-rare-black-torpedo/",
+      "imageUrl": ""
+    },
+    {
+      "id": "222",
+      "name": "Scorpio Maduro",
+      "brand": "Arturo Fuente",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium-Full",
+      "strength": "Medium-Full",
+      "priceRange": "$50",
+      "description": "A medium-full Arturo Fuente Scorpio Maduro cigar with medium-full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Dark Chocolate",
+        "Espresso",
+        "Pepper",
+        "Leather"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.fuenteagedselection.com/cigar/scorpio-maduro",
+      "imageUrl": ""
+    },
+    {
+      "id": "223",
+      "name": "Maduro el Escorpion",
+      "brand": "Arturo Fuente",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium-Full",
+      "strength": "Medium-Full",
+      "priceRange": "$50",
+      "description": "A medium-full Arturo Fuente Maduro el Escorpion cigar with medium-full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Dark Chocolate",
+        "Espresso",
+        "Pepper",
+        "Leather"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.fuenteagedselection.com/el-escorpion",
+      "imageUrl": ""
+    },
+    {
+      "id": "224",
+      "name": "Hermoso Maduro",
+      "brand": "Padron",
+      "origin": "Nicaragua",
+      "wrapper": "Natural",
+      "body": "Medium-Full",
+      "strength": "Medium-Full",
+      "priceRange": "$40",
+      "description": "A medium-full Padron Hermoso Maduro cigar with medium-full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Dark Chocolate",
+        "Espresso",
+        "Pepper",
+        "Leather"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.cigaraficionado.com/rating/padron-1964-anniversary-series-hermoso-maduro",
+      "imageUrl": ""
+    },
+    {
+      "id": "225",
+      "name": "Damaso No. 15",
+      "brand": "Padron",
+      "origin": "Nicaragua",
+      "wrapper": "Natural",
+      "body": "Light-Medium",
+      "strength": "Mild-Medium",
+      "priceRange": "$40",
+      "description": "A light-medium Padron Damaso No. 15 cigar with mild-medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Cream",
+        "Nuts",
+        "Mild Pepper"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "White Wine",
+          "Light Beer",
+          "Champagne"
+        ],
+        "nonAlcoholic": [
+          "Green Tea",
+          "Sparkling Water",
+          "Lemonade"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://halfwheel.com/padron-damaso-no-15/94451/",
+      "imageUrl": ""
+    },
+    {
+      "id": "226",
+      "name": "50th Anniversary",
+      "brand": "Padron",
+      "origin": "Nicaragua",
+      "wrapper": "Natural",
+      "body": "Full",
+      "strength": "Full",
+      "priceRange": "$50",
+      "description": "A full Padron 50th Anniversary cigar with full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Pepper",
+        "Earth",
+        "Dark Chocolate",
+        "Charred Wood"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.holts.com/cigars/all-cigar-brands/padron-50th-anniversary.html",
+      "imageUrl": ""
+    },
+    {
+      "id": "227",
+      "name": "Presidente Square Tubo Maduro",
+      "brand": "Padron",
+      "origin": "Nicaragua",
+      "wrapper": "Natural",
+      "body": "Medium-Full",
+      "strength": "Medium-Full",
+      "priceRange": "$40",
+      "description": "A medium-full Padron Presidente Square Tubo Maduro cigar with medium-full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Dark Chocolate",
+        "Espresso",
+        "Pepper",
+        "Leather"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://barclayrex.com/product/padron-1964-anniversary-presidente-square-tubo-maduro-6-x-50/",
+      "imageUrl": ""
+    },
+    {
+      "id": "228",
+      "name": "Presidente Square Tubo Natural",
+      "brand": "Padron",
+      "origin": "Nicaragua",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$40",
+      "description": "A medium Padron Presidente Square Tubo Natural cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://barclayrex.com/product/padron-1964-anniversary-presidente-square-tubo-natural-6-x-50/",
+      "imageUrl": ""
+    },
+    {
+      "id": "229",
+      "name": "Decadas tube 10 ct Blue",
+      "brand": "Partagas",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$30",
+      "description": "A medium Partagas Decadas tube 10 ct Blue cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "",
+      "imageUrl": ""
+    },
+    {
+      "id": "230",
+      "name": "Heritage",
+      "brand": "Partagas",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$30",
+      "description": "A medium Partagas Heritage cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://mikescigars.com/cigars/brands/partagas/partagas-heritage",
+      "imageUrl": ""
+    },
+    {
+      "id": "231",
+      "name": "Aniver. red 2015",
+      "brand": "Partagas",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$30",
+      "description": "A medium Partagas Aniver. red 2015 cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "",
+      "imageUrl": ""
+    },
+    {
+      "id": "232",
+      "name": "Legend",
+      "brand": "Partagas",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Full",
+      "strength": "Full",
+      "priceRange": "$40",
+      "description": "A full Partagas Legend cigar with full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Pepper",
+        "Earth",
+        "Dark Chocolate",
+        "Charred Wood"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.cigarsinternational.com/p/partagas-legend/2014722/",
+      "imageUrl": ""
+    },
+    {
+      "id": "233",
+      "name": "Black Label Crystal Tube",
+      "brand": "Partagas",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Full",
+      "strength": "Full",
+      "priceRange": "$30",
+      "description": "A full Partagas Black Label Crystal Tube cigar with full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Pepper",
+        "Earth",
+        "Dark Chocolate",
+        "Charred Wood"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://cccrafter.com/partagas-black-label-crystal-tube-5-x-50/?srsltid=AfmBOopDhyycxbi0TCcqjKncqeJf_Uqgo0qOpVbIB372LWZLwFT8vkfm",
+      "imageUrl": ""
+    },
+    {
+      "id": "234",
+      "name": "Champagne Connecticut",
+      "brand": "Perdomo",
+      "origin": "Nicaragua",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$20",
+      "description": "A medium Perdomo Champagne Connecticut cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://cigarcountry.com/brand/perdomo-cigars/perdomo-reserve-champagne-10th-anniversary/",
+      "imageUrl": ""
+    },
+    {
+      "id": "235",
+      "name": "Cosecha 149",
+      "brand": "Plasencia",
+      "origin": "Nicaragua",
+      "wrapper": "Natural",
+      "body": "Medium-Full",
+      "strength": "Medium-Full",
+      "priceRange": "$30",
+      "description": "A medium-full Plasencia Cosecha 149 cigar with medium-full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Dark Chocolate",
+        "Espresso",
+        "Pepper",
+        "Leather"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.cigarsinternational.com/p/plasencia-cosecha-149-cigars/2052482/",
+      "imageUrl": ""
+    },
+    {
+      "id": "236",
+      "name": "Cosecha 151",
+      "brand": "Plasencia",
+      "origin": "Nicaragua",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$30",
+      "description": "A medium Plasencia Cosecha 151 cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.cigarsinternational.com/p/plasencia-cosecha-151/2055102/",
+      "imageUrl": ""
+    },
+    {
+      "id": "237",
+      "name": "Alma Fuerte Colorado Claro Eduardo",
+      "brand": "Plasencia",
+      "origin": "Nicaragua",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$40",
+      "description": "A medium Plasencia Alma Fuerte Colorado Claro Eduardo cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.neptunecigar.com/cigars/plasencia-alma-fuerte-colorado-claro-eduardo-i",
+      "imageUrl": ""
+    },
+    {
+      "id": "238",
+      "name": "Don Carlos Aniversario Double Robusto Tubo",
+      "brand": "Arturo Fuente",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium-Full",
+      "strength": "Medium-Full",
+      "priceRange": "$50",
+      "description": "A medium-full Arturo Fuente Don Carlos Aniversario Double Robusto Tubo cigar with medium-full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Dark Chocolate",
+        "Espresso",
+        "Pepper",
+        "Leather"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://cigargod.com/products/don-carlos-aniversario-double-robusto-tubo-box-of-8?srsltid=AfmBOoq9G36iMOEdHL3GL_UEENPFwzFckessRKWqnzTehkjbIIuJooKv",
+      "imageUrl": ""
+    },
+    {
+      "id": "239",
+      "name": "Don Carlos Set",
+      "brand": "Arturo Fuente",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium-Full",
+      "strength": "Medium-Full",
+      "priceRange": "$50",
+      "description": "A medium-full Arturo Fuente Don Carlos Set cigar with medium-full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Dark Chocolate",
+        "Espresso",
+        "Pepper",
+        "Leather"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "",
+      "imageUrl": ""
+    },
+    {
+      "id": "240",
+      "name": "Don Carlos Robusto",
+      "brand": "Arturo Fuente",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium-Full",
+      "strength": "Medium-Full",
+      "priceRange": "$50",
+      "description": "A medium-full Arturo Fuente Don Carlos Robusto cigar with medium-full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Dark Chocolate",
+        "Espresso",
+        "Pepper",
+        "Leather"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://cigarcountry.com/product/god-of-fire-by-don-carlos-robusto/",
+      "imageUrl": ""
+    },
+    {
+      "id": "241",
+      "name": "Don Carlos 10 Ct",
+      "brand": "Arturo Fuente",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium-Full",
+      "strength": "Medium-Full",
+      "priceRange": "$50",
+      "description": "A medium-full Arturo Fuente Don Carlos 10 Ct cigar with medium-full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Dark Chocolate",
+        "Espresso",
+        "Pepper",
+        "Leather"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "",
+      "imageUrl": ""
+    },
+    {
+      "id": "242",
+      "name": "Tubo",
+      "brand": "Punch",
+      "origin": "Honduras",
+      "wrapper": "Natural",
+      "body": "Light",
+      "strength": "Mild",
+      "priceRange": "$20",
+      "description": "A light Punch Tubo cigar with mild strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cream",
+        "Grass",
+        "Light Cedar",
+        "Almond"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "White Wine",
+          "Light Beer",
+          "Champagne"
+        ],
+        "nonAlcoholic": [
+          "Green Tea",
+          "Sparkling Water",
+          "Lemonade"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://mikescigars.com/punch-gusto-tubo",
+      "imageUrl": ""
+    },
+    {
+      "id": "243",
+      "name": "Golden Era",
+      "brand": "Punch",
+      "origin": "Honduras",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$20",
+      "description": "A medium Punch Golden Era cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.cigarsinternational.com/p/punch-golden-era/2053366/",
+      "imageUrl": ""
+    },
+    {
+      "id": "244",
+      "name": "Rare Corojo Rare Salomones",
+      "brand": "Punch",
+      "origin": "Honduras",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$20",
+      "description": "A medium Punch Rare Corojo Rare Salomones cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://halfwheel.com/punch-rare-corojo-rare-salomones/52067/",
+      "imageUrl": ""
+    },
+    {
+      "id": "245",
+      "name": "75th Anniversary Limited Edition",
+      "brand": "Manolo Quesada",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$30",
+      "description": "A medium Manolo Quesada 75th Anniversary Limited Edition cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.cuencacigars.com/manolo-quesada-75th-anniversary-limited-edition-cigars/",
+      "imageUrl": ""
+    },
+    {
+      "id": "246",
+      "name": "Vintage 1991",
+      "brand": "Rocky Patel",
+      "origin": "Honduras",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$30",
+      "description": "A medium Rocky Patel Vintage 1991 cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.jrcigars.com/blending-room/blog/cigar-review/rocky-patel-vintage-1992-cigar-review/",
+      "imageUrl": ""
+    },
+    {
+      "id": "247",
+      "name": "Vintage 1992",
+      "brand": "Rocky Patel",
+      "origin": "Honduras",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$30",
+      "description": "A medium Rocky Patel Vintage 1992 cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.jrcigars.com/blending-room/blog/cigar-review/rocky-patel-vintage-1992-cigar-review/",
+      "imageUrl": ""
+    },
+    {
+      "id": "248",
+      "name": "Decade Toro Tubo",
+      "brand": "Rocky Patel",
+      "origin": "Honduras",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$30",
+      "description": "A medium Rocky Patel Decade Toro Tubo cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://cigarcountry.com/product/rocky-patel-decade-toro-tubo/",
+      "imageUrl": ""
+    },
+    {
+      "id": "249",
+      "name": "The Edge Habano",
+      "brand": "Rocky Patel",
+      "origin": "Honduras",
+      "wrapper": "Natural",
+      "body": "Light-Medium",
+      "strength": "Mild-Medium",
+      "priceRange": "$20",
+      "description": "A light-medium Rocky Patel The Edge Habano cigar with mild-medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Cream",
+        "Nuts",
+        "Mild Pepper"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "White Wine",
+          "Light Beer",
+          "Champagne"
+        ],
+        "nonAlcoholic": [
+          "Green Tea",
+          "Sparkling Water",
+          "Lemonade"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.cigarsinternational.com/p/rocky-patel-the-edge-habano-cigars/1410976/",
+      "imageUrl": ""
+    },
+    {
+      "id": "250",
+      "name": "Aged Limited Rare",
+      "brand": "Rocky Patel",
+      "origin": "Honduras",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$30",
+      "description": "A medium Rocky Patel Aged Limited Rare cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.cigarsinternational.com/p/rocky-patel-alr-second-edition-cigars/2024774/",
+      "imageUrl": ""
+    },
+    {
+      "id": "251",
+      "name": "Blue Box Cigarillos",
+      "brand": "Romeo y Julieta",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Light",
+      "strength": "Mild",
+      "priceRange": "$30",
+      "description": "A light Romeo y Julieta Blue Box Cigarillos cigar with mild strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cream",
+        "Grass",
+        "Light Cedar",
+        "Almond"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "White Wine",
+          "Light Beer",
+          "Champagne"
+        ],
+        "nonAlcoholic": [
+          "Green Tea",
+          "Sparkling Water",
+          "Lemonade"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.cigarscity.com/products/romeo-y-julieta-miniatures-blue-box-cigarillos?variant=39785694920786",
+      "imageUrl": ""
+    },
+    {
+      "id": "252",
+      "name": "Little Cups",
+      "brand": "Rough Rider",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Light",
+      "strength": "Mild",
+      "priceRange": "$20",
+      "description": "A light Rough Rider Little Cups cigar with mild strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cream",
+        "Grass",
+        "Light Cedar",
+        "Almond"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "White Wine",
+          "Light Beer",
+          "Champagne"
+        ],
+        "nonAlcoholic": [
+          "Green Tea",
+          "Sparkling Water",
+          "Lemonade"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://boswellpipes.com/product/indian-head-rough-rider-sweets-little-guys-cigar/#:~:text=The%20cigar%20utilizes%20an%20Ecuadorian,bring%20this%20cigars%20all%20together.",
+      "imageUrl": ""
+    },
+    {
+      "id": "253",
+      "name": "Con Toro",
+      "brand": "Rough Rider",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Light",
+      "strength": "Mild",
+      "priceRange": "$20",
+      "description": "A light Rough Rider Con Toro cigar with mild strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cream",
+        "Grass",
+        "Light Cedar",
+        "Almond"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "White Wine",
+          "Light Beer",
+          "Champagne"
+        ],
+        "nonAlcoholic": [
+          "Green Tea",
+          "Sparkling Water",
+          "Lemonade"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "",
+      "imageUrl": ""
+    },
+    {
+      "id": "254",
+      "name": "Habano",
+      "brand": "San Lotano",
+      "origin": "Nicaragua",
+      "wrapper": "Natural",
+      "body": "Medium-Full",
+      "strength": "Medium-Full",
+      "priceRange": "$20",
+      "description": "A medium-full San Lotano Habano cigar with medium-full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Dark Chocolate",
+        "Espresso",
+        "Pepper",
+        "Leather"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.holts.com/cigars/all-cigar-brands/san-lotano-habano.html",
+      "imageUrl": ""
+    },
+    {
+      "id": "255",
+      "name": "The King is Dead",
+      "brand": "The King is Dead",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$20",
+      "description": "A medium The King is Dead The King is Dead cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.cigarsinternational.com/p/caldwell-collection-the-king-is-dead-cigars/1510781/",
+      "imageUrl": ""
+    },
+    {
+      "id": "256",
+      "name": "Corona Vivaj",
+      "brand": "Liga Privada",
+      "origin": "Nicaragua",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$20",
+      "description": "A medium Liga Privada Corona Vivaj cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://halfwheel.com/redux-undercrown-corona-viva/30846/",
+      "imageUrl": ""
+    },
+    {
+      "id": "257",
+      "name": "Botl",
+      "brand": "Liga Privada",
+      "origin": "Nicaragua",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$30",
+      "description": "A medium Liga Privada Botl cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.holts.com/cigars/all-cigar-brands/liga-privada-undercrown.html",
+      "imageUrl": ""
+    },
+    {
+      "id": "258",
+      "name": "Numero Uno",
+      "brand": "Uno",
+      "origin": "Nicaragua",
+      "wrapper": "Natural",
+      "body": "Light-Medium",
+      "strength": "Mild-Medium",
+      "priceRange": "$30",
+      "description": "A light-medium Uno Numero Uno cigar with mild-medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Cream",
+        "Nuts",
+        "Mild Pepper"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "White Wine",
+          "Light Beer",
+          "Champagne"
+        ],
+        "nonAlcoholic": [
+          "Green Tea",
+          "Sparkling Water",
+          "Lemonade"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://halfwheel.com/joya-de-nicaragua-numero-uno-le-premier/380456/",
+      "imageUrl": ""
+    },
+    {
+      "id": "259",
+      "name": "Cuellar Black Fores",
+      "brand": "Villiger",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium-Full",
+      "strength": "Medium-Full",
+      "priceRange": "$20",
+      "description": "A medium-full Villiger Cuellar Black Fores cigar with medium-full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Dark Chocolate",
+        "Espresso",
+        "Pepper",
+        "Leather"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.cigaraficionado.com/article/villiger-goes-dark-with-cuellar-black-forest",
+      "imageUrl": ""
+    },
+    {
+      "id": "260",
+      "name": "Cuellar Kreme",
+      "brand": "Villiger",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Light",
+      "strength": "Mild",
+      "priceRange": "$20",
+      "description": "A light Villiger Cuellar Kreme cigar with mild strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cream",
+        "Grass",
+        "Light Cedar",
+        "Almond"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "White Wine",
+          "Light Beer",
+          "Champagne"
+        ],
+        "nonAlcoholic": [
+          "Green Tea",
+          "Sparkling Water",
+          "Lemonade"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.holts.com/cigars/all-cigar-brands/villiger-cuellar-kreme.html",
+      "imageUrl": ""
+    },
+    {
+      "id": "261",
+      "name": "1888 Nicaragua Toro",
+      "brand": "Villiger",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$20",
+      "description": "A medium Villiger 1888 Nicaragua Toro cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://cigarcountry.com/product/villiger-1888-nicaragua-toro/",
+      "imageUrl": ""
+    },
+    {
+      "id": "262",
+      "name": "La Meridiana",
+      "brand": "Villiger",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$20",
+      "description": "A medium Villiger La Meridiana cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.cigaraficionado.com/article/villiger-s-la-meridiana-coming-to-the-u-s",
+      "imageUrl": ""
+    },
+    {
+      "id": "263",
+      "name": "La Vencedora",
+      "brand": "Villiger",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$20",
+      "description": "A medium Villiger La Vencedora cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.neptunecigar.com/cigar/villiger-la-vencedora",
+      "imageUrl": ""
+    },
+    {
+      "id": "264",
+      "name": "San Doro Colorado",
+      "brand": "Villiger",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$30",
+      "description": "A medium Villiger San Doro Colorado cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.holts.com/cigars/all-cigar-brands/villiger-san-doro-colorado.html",
+      "imageUrl": ""
+    },
+    {
+      "id": "265",
+      "name": "Edicion Limitada",
+      "brand": "Villiger",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$30",
+      "description": "A medium Villiger Edicion Limitada cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://cigar-coop.com/2024/07/villiger-de-nicaragua-edicion-limitada-2022-cigar-review.html",
+      "imageUrl": ""
+    },
+    {
+      "id": "266",
+      "name": "Warzone",
+      "brand": "Espinosa",
+      "origin": "Nicaragua",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$30",
+      "description": "A medium Espinosa Warzone cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://halfwheel.com/warzone-toro/373940/",
+      "imageUrl": ""
+    },
+    {
+      "id": "267",
+      "name": "Circle of life",
+      "brand": "West Tampa",
+      "origin": "Nicaragua",
+      "wrapper": "Natural",
+      "body": "Medium-Full",
+      "strength": "Medium-Full",
+      "priceRange": "$30",
+      "description": "A medium-full West Tampa Circle of life cigar with medium-full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Dark Chocolate",
+        "Espresso",
+        "Pepper",
+        "Leather"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.cigaraficionado.com/article/west-tampa-circle-of-life-ships-next-week",
+      "imageUrl": ""
+    },
+    {
+      "id": "268",
+      "name": "Attic Series No. 1 Toro",
+      "brand": "West Tampa",
+      "origin": "Nicaragua",
+      "wrapper": "Natural",
+      "body": "Medium-Full",
+      "strength": "Medium-Full",
+      "priceRange": "$20",
+      "description": "A medium-full West Tampa Attic Series No. 1 Toro cigar with medium-full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Dark Chocolate",
+        "Espresso",
+        "Pepper",
+        "Leather"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://casadelpuro.com/en/shop/nicaraguan-cigars/west-tampa/west-tampa-attic-series-no-1-toro-14/",
+      "imageUrl": ""
+    },
+    {
+      "id": "269",
+      "name": "Dark Time",
+      "brand": "West Tampa",
+      "origin": "Nicaragua",
+      "wrapper": "Natural",
+      "body": "Medium-Full",
+      "strength": "Medium-Full",
+      "priceRange": "$30",
+      "description": "A medium-full West Tampa Dark Time cigar with medium-full strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Dark Chocolate",
+        "Espresso",
+        "Pepper",
+        "Leather"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Scotch",
+          "Bourbon",
+          "Port Wine"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Black Coffee",
+          "Dark Hot Chocolate"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.cigaraficionado.com/article/dark-time-by-west-tampa-tobacco-co-on-its-way-to-retailers",
+      "imageUrl": ""
+    },
+    {
+      "id": "270",
+      "name": "White Robusto",
+      "brand": "West Tampa",
+      "origin": "Nicaragua",
+      "wrapper": "Natural",
+      "body": "Light-Medium",
+      "strength": "Mild-Medium",
+      "priceRange": "$20",
+      "description": "A light-medium West Tampa White Robusto cigar with mild-medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Cream",
+        "Nuts",
+        "Mild Pepper"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "White Wine",
+          "Light Beer",
+          "Champagne"
+        ],
+        "nonAlcoholic": [
+          "Green Tea",
+          "Sparkling Water",
+          "Lemonade"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.neptunecigar.com/cigars/west-tampa-tobacco-company-white-robusto",
+      "imageUrl": ""
+    },
+    {
+      "id": "271",
+      "name": "Scepter Series Grand Master Tubo",
+      "brand": "Zino",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$40",
+      "description": "A medium Zino Scepter Series Grand Master Tubo cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.thompsoncigar.com/p/zino-platinum-scepter-series-grand-master-tubo-connecticut-robusto/73638/",
+      "imageUrl": ""
+    },
+    {
+      "id": "272",
+      "name": "Nicaragua",
+      "brand": "Zino",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$20",
+      "description": "A medium Zino Nicaragua cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://www.cigarsinternational.com/p/zino-nicaragua-davidoff-cigar/2039118/",
+      "imageUrl": ""
+    },
+    {
+      "id": "273",
+      "name": "Platinum Crown Double Grande Tubos",
+      "brand": "Zino",
+      "origin": "Dominican Republic",
+      "wrapper": "Natural",
+      "body": "Medium",
+      "strength": "Medium",
+      "priceRange": "$50",
+      "description": "A medium Zino Platinum Crown Double Grande Tubos cigar with medium strength, offering a well-balanced smoking experience.",
+      "tastingNotes": [
+        "Cedar",
+        "Leather",
+        "Earth",
+        "Cocoa"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Bourbon",
+          "Red Wine",
+          "Amber Ale"
+        ],
+        "nonAlcoholic": [
+          "Coffee",
+          "Black Tea",
+          "Cola"
+        ]
+      },
+      "inventory": 10,
+      "productUrl": "https://mikescigars.com/cigars/brands/zino/zino-platinum/zino-platinum-crown-double-grande-tubos",
+      "imageUrl": ""
     }
   ]
 }
