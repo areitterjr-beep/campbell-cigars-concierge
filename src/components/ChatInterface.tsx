@@ -28,7 +28,7 @@ interface ChatInterfaceProps {
 const SUGGESTED_QUESTIONS = [
   "What are cigars all about?",
   "What does strength mean in cigars?",
-  "Suggest a medium bodied cigar",
+  "Suggest a medium-bodied cigar",
   "What's good for a celebration?",
   "Mold vs plume (bloom)—what's the difference?",
   "Ideal storage temp and humidity?",

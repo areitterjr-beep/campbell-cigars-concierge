@@ -15,33 +15,136 @@ interface CigarRecommendation {
   tastingNotes: string[]
   pairings: { alcoholic: string[], nonAlcoholic: string[] }
   imageUrl?: string
+  productUrl?: string
 }
 
-// Check if a cigar is in our inventory and get its data
-function getInventoryData(cigarName: string, brandName?: string): { inInventory: boolean; imageUrl?: string; priceRange?: string } {
+// Tokenize a string into meaningful words for matching
+function tokenize(s: string): string[] {
+  return s.toLowerCase()
+    .replace(/['']/g, '')
+    .split(/[\s\-–—\/.,;:()]+/)
+    .filter(w => w.length > 0)
+}
+
+// Words too generic to be useful for matching on their own
+const NOISE_WORDS = new Set([
+  'the', 'de', 'del', 'la', 'las', 'los', 'and', 'by', 'of', 'no', 'a', 'el',
+  'cigar', 'cigars', 'toro', 'robusto', 'churchill', 'corona', 'gordo', 'lancero',
+  'belicoso', 'torpedo', 'perfecto', 'petit', 'double', 'gran', 'grande'
+])
+
+// Robust inventory match — same logic as chat route
+function findInventoryMatch(cigarName: string, brandName?: string): any | null {
   const queryName = cigarName.toLowerCase().trim()
-  const queryBrand = (brandName || '').toLowerCase().trim()
-  const cFull = queryBrand ? `${queryBrand} ${queryName}` : queryName
-  const found = (cigarsData.cigars as any[]).find(c => {
+  const queryBrand = brandName?.toLowerCase().trim() || ''
+
+  const nameTokens = tokenize(queryName)
+  const brandTokens = tokenize(queryBrand)
+
+  const deduped = nameTokens.filter(t => !brandTokens.includes(t))
+  const allQueryTokens = [...brandTokens, ...deduped]
+
+  let bestMatch: any = null
+  let bestScore = 0
+
+  for (const c of cigarsData.cigars as any[]) {
     const cName = c.name.toLowerCase()
     const cBrand = c.brand.toLowerCase()
-    const invFull = `${cBrand} ${cName}`
-    // Exact match
-    if (cName === queryName && (!queryBrand || cBrand === queryBrand)) return true
-    if (invFull === cFull || invFull === queryName) return true
-    // Substring match (AI may include brand in name or use shorthand)
-    if (invFull.includes(queryName) || queryName.includes(cName)) return true
-    if (queryBrand && cBrand.includes(queryBrand) && (cName.includes(queryName) || queryName.includes(cName))) return true
-    return false
-  })
-  return {
-    inInventory: !!found,
-    imageUrl: found?.imageUrl || undefined,
-    priceRange: found?.priceRange || undefined
+
+    const cFull = `${cBrand} ${cName}`
+    const qFull = queryBrand ? `${queryBrand} ${queryName}` : queryName
+
+    if (cFull === qFull || cName === queryName) {
+      if (100 > bestScore) { bestScore = 100; bestMatch = c }
+      continue
+    }
+    if (cFull === queryName || qFull === cFull) {
+      if (98 > bestScore) { bestScore = 98; bestMatch = c }
+      continue
+    }
+
+    const cBrandTokens = tokenize(cBrand)
+    const cNameTokens = tokenize(cName)
+    const cAllTokens = [...cBrandTokens, ...cNameTokens]
+
+    const brandMatch = queryBrand && (
+      cBrand === queryBrand ||
+      cBrand.includes(queryBrand) || queryBrand.includes(cBrand) ||
+      cBrandTokens.some(bt => brandTokens.includes(bt))
+    )
+
+    let matchCount = 0
+    let matchWeight = 0
+    const matched: string[] = []
+
+    for (const qt of allQueryTokens) {
+      if (NOISE_WORDS.has(qt)) continue
+      for (const ct of cAllTokens) {
+        if (qt === ct) {
+          matchCount++
+          const isNumber = /^\d+$/.test(qt)
+          const isDistinctive = qt.length >= 6
+          matchWeight += isNumber ? 30 : isDistinctive ? 20 : 10
+          matched.push(qt)
+          break
+        }
+      }
+    }
+
+    const nonBrandMatches = matched.filter(m => !brandTokens.includes(m))
+
+    let score = 0
+    if (brandMatch && nonBrandMatches.length >= 1) {
+      score = 20 + matchWeight
+    } else if (nonBrandMatches.length >= 2) {
+      score = 10 + matchWeight
+    }
+
+    if (score > 0 && (queryName.includes(cName) || cName.includes(queryName))) {
+      score += 15
+    }
+    if (score > 0 && (qFull.includes(cFull) || cFull.includes(qFull))) {
+      score += 10
+    }
+
+    if (score > bestScore) {
+      bestScore = score
+      bestMatch = c
+    }
   }
+
+  return bestScore >= 25 ? bestMatch : null
 }
 
-const SYSTEM_PROMPT = `You are an expert cigar concierge at Campbell Cigars. A customer just completed a preference quiz.
+// Enrich AI-returned cigars with authoritative inventory data
+function enrichWithInventoryData(cigars: CigarRecommendation[]): CigarRecommendation[] {
+  return cigars.map(cigar => {
+    const inv = findInventoryMatch(cigar.name, cigar.brand)
+    if (!inv) return cigar
+
+    return {
+      name: `${inv.brand} ${inv.name}`,
+      brand: inv.brand,
+      origin: inv.origin || cigar.origin,
+      wrapper: inv.wrapper || cigar.wrapper,
+      body: inv.body || cigar.body,
+      strength: inv.strength || cigar.strength,
+      price: inv.priceRange || cigar.price,
+      time: inv.smokingTime || cigar.time,
+      description: inv.description || cigar.description,
+      tastingNotes: Array.isArray(inv.tastingNotes) && inv.tastingNotes.length > 0
+        ? inv.tastingNotes
+        : cigar.tastingNotes,
+      pairings: inv.pairings && (inv.pairings.alcoholic?.length || inv.pairings.nonAlcoholic?.length)
+        ? inv.pairings
+        : cigar.pairings,
+      productUrl: inv.productUrl || undefined,
+      imageUrl: inv.imageUrl || undefined,
+    }
+  })
+}
+
+const SYSTEM_PROMPT = `You are an expert cigar advisor for Campbell Cigars. A customer just completed a preference quiz and you are helping them make an informed purchasing decision.
 
 CRITICAL - INVENTORY ONLY: You may ONLY recommend cigars that appear in the store's inventory list provided below. Never suggest cigars that are not in this list. Recommend the closest match from the list based on the customer's preferences.
 
@@ -74,6 +177,8 @@ GUIDELINES:
 - Vary your recommendations across different brands and origins
 - Be conversational in your intro message
 - You MUST use the EXACT "brand" and "name" from the inventory list for each cigar you recommend`
+
+export const maxDuration = 30
 
 export async function POST(request: NextRequest) {
   try {
@@ -115,45 +220,39 @@ export async function POST(request: NextRequest) {
       let cigars: CigarRecommendation[] = []
       
       try {
-        const jsonMatch = responseText.match(/\{[\s\S]*\}/)
+        // Strip markdown code fences if present
+        const cleaned = responseText.replace(/```json\s*/gi, '').replace(/```\s*/g, '')
+        const jsonMatch = cleaned.match(/\{[\s\S]*\}/)
         if (jsonMatch) {
           const parsed = JSON.parse(jsonMatch[0])
           message = parsed.message || message
           cigars = Array.isArray(parsed.cigars) ? parsed.cigars : []
         }
       } catch {
-        console.log('Could not parse quiz recommendations JSON')
+        console.log('[Quiz] Could not parse recommendations JSON, raw:', responseText.substring(0, 200))
       }
       
-      // Filter to only cigars in inventory, add inventory data, limit to 2 (like chat)
-      const mapped = cigars.map(cigar => {
-        const data = getInventoryData(cigar.name, cigar.brand)
-        if (!data.inInventory) return null
-        return {
-          ...cigar,
-          imageUrl: data.imageUrl,
-          price: data.priceRange || cigar.price
-        }
-      })
-      const filtered = mapped.filter((c): c is NonNullable<typeof c> => c !== null)
-      const enrichedCigars = filtered.slice(0, 2)
+      // Enrich with authoritative inventory data (images, correct prices, etc.)
+      const enrichedCigars = enrichWithInventoryData(cigars).slice(0, 2)
+
+      console.log(`[Quiz] Recommendations: ${enrichedCigars.map(c => c.name).join(', ')}`)
 
       return NextResponse.json({
         message,
         cigars: enrichedCigars
       })
     } catch (aiError) {
-      console.error('AI error:', aiError)
+      console.error('[Quiz] AI error:', aiError)
       return NextResponse.json({
-        message: "I'd be happy to help you find the perfect cigar! Try our chat assistant for personalized recommendations.",
+        message: "I'd be happy to help you find the perfect cigar! Try the chat assistant for personalized recommendations.",
         cigars: []
       })
     }
     
   } catch (error) {
-    console.error('Quiz recommendations error:', error)
+    console.error('[Quiz] Recommendations error:', error)
     return NextResponse.json({
-      message: "Something went wrong. Please try our chat assistant!",
+      message: "Something went wrong. Please try the chat assistant!",
       cigars: []
     })
   }
