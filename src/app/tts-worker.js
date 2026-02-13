@@ -29,6 +29,38 @@ async function getInstance() {
   return tts
 }
 
+// Extract PCM Float32Array and sample rate from whatever generate() returns
+function extractAudio(result) {
+  // Try every known property name for the audio samples
+  const pcm = result.audio      // RawAudio from @huggingface/transformers
+            || result.data       // some versions use .data
+            || result.waveform   // alternate name
+            || result             // generate() might return Float32Array directly
+
+  // If pcm is a typed array, use it directly
+  if (pcm instanceof Float32Array) {
+    return { samples: pcm, sampleRate: result.sampling_rate || 24000 }
+  }
+
+  // If pcm is an object with its own .audio or .data
+  if (pcm && pcm.audio instanceof Float32Array) {
+    return { samples: pcm.audio, sampleRate: pcm.sampling_rate || 24000 }
+  }
+  if (pcm && pcm.data instanceof Float32Array) {
+    return { samples: pcm.data, sampleRate: pcm.sampling_rate || 24000 }
+  }
+
+  // Last resort: try toWav() if available and extract from WAV
+  if (result && typeof result.toBlob === 'function') {
+    // Can't easily decode a blob in a worker, so report the shape for debugging
+    throw new Error(`Unrecognized audio format. Keys: ${Object.keys(result).join(', ')}. ` +
+      `Prototype: ${Object.getPrototypeOf(result)?.constructor?.name}`)
+  }
+
+  throw new Error(`Cannot extract audio. Type: ${typeof result}. ` +
+    `Keys: ${result ? Object.keys(result).join(', ') : 'N/A'}`)
+}
+
 self.addEventListener('message', async (e) => {
   const { type, text, id, voice } = e.data
 
@@ -42,12 +74,10 @@ self.addEventListener('message', async (e) => {
         return
       }
 
-      const selectedVoice = voice || 'af_heart' // warm, high-quality female voice
+      const selectedVoice = voice || 'af_heart'
       const result = await engine.generate(text, { voice: selectedVoice })
 
-      // RawAudio has .audio (Float32Array) and .sampling_rate (number)
-      const samples = result.audio
-      const sampleRate = result.sampling_rate
+      const { samples, sampleRate } = extractAudio(result)
 
       self.postMessage(
         {
@@ -56,7 +86,7 @@ self.addEventListener('message', async (e) => {
           samples: samples.buffer,
           sampleRate,
         },
-        [samples.buffer] // transfer ownership for zero-copy
+        [samples.buffer]
       )
     } catch (err) {
       self.postMessage({ type: 'error', id, error: err.message })
