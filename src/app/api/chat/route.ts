@@ -521,12 +521,14 @@ function parseImageResponse(response: string): { message: string, cigars: CigarR
     }
   }
 
+  const cigarNames = cigars.map(c => `${c.brand} ${c.name}`).join(', ')
+
   if (confidence < 75 && cigars.length === 0) {
-    console.log(`[Image] Low confidence (${confidence}%), asking for clarification`)
+    console.log(`[Image] Low confidence (${confidence}%), no cigars identified, asking for clarification`)
     return { message, cigars: [], confidence }
   }
 
-  console.log(`[Image] Confidence: ${confidence}%`)
+  console.log(`[Image] Confidence: ${confidence}% | Identified: ${cigarNames || '(none)'}`)
   return { message, cigars, confidence }
 }
 
@@ -622,6 +624,7 @@ export async function POST(request: NextRequest) {
         
         // Use Scout as primary model (best accuracy based on testing)
         const VISION_MODEL = 'meta-llama/llama-4-scout-17b-16e-instruct'
+        const GROQ_MAX_IMAGES = 5 // Groq/Llama limit; 1 slot is the user photo
         
         let response = ''
         let succeeded = false
@@ -630,11 +633,20 @@ export async function POST(request: NextRequest) {
         
         if (groq) {
           try {
-            console.log(`[Chat] Using vision model: ${VISION_MODEL} (${referenceImages.length} references)`)
+            // Groq supports max 5 images total — send priority references + user photo
+            const groqRefs = referenceImages.slice(0, GROQ_MAX_IMAGES - 1)
+            const groqRefPrompt = groqRefs.length > 0
+              ? `\n\nREFERENCE IMAGES: Below are ${groqRefs.length} product photos from our inventory. Compare the CUSTOMER'S PHOTO (the last image) to these. Use them to match band design, colors, and branding:\n${groqRefs
+                  .map((r, i) => `${i + 1}. ${r.brand} - ${r.name}`)
+                  .join('\n')}\n\nThe LAST image is the customer's cigar photo to identify.`
+              : ''
+            const groqVisionPrompt = IMAGE_PROMPT + inventoryPrompt + groqRefPrompt + (lastMessage ? `\n\nCustomer says: ${lastMessage}` : '')
+            
+            console.log(`[Chat] Using vision model: ${VISION_MODEL} (${groqRefs.length} references)`)
             const contentParts: Array<{ type: 'text'; text: string } | { type: 'image_url'; image_url: { url: string } }> = [
-              { type: 'text', text: visionPrompt },
+              { type: 'text', text: groqVisionPrompt },
             ]
-            for (const ref of referenceImages) {
+            for (const ref of groqRefs) {
               contentParts.push({ type: 'image_url', image_url: { url: `data:image/jpeg;base64,${ref.base64}` } })
             }
             contentParts.push({ type: 'image_url', image_url: { url: `data:${mimeType};base64,${base64Data}` } })
@@ -826,18 +838,28 @@ export async function POST(request: NextRequest) {
         const parsed = parseModelResponse(response)
         let cigars = enrichWithInventoryData(parsed.cigars)
 
-        // If user asked for a specific cigar, ensure we show its card
+        // If user asked for a specific cigar, ALWAYS show that card first
         const requestedCigar = findCigarFromUserMessage(lastMessage)
         if (requestedCigar) {
-          const reqName = requestedCigar.name.toLowerCase()
-          const reqBrand = requestedCigar.brand.toLowerCase()
-          const alreadyIncluded = cigars.some(
-            (c) => c.name.toLowerCase() === reqName && c.brand.toLowerCase() === reqBrand
-          )
-          if (!alreadyIncluded) {
-            const enriched = enrichWithInventoryData([requestedCigar])[0]
-            cigars = [enriched, ...cigars].slice(0, 2)
+          const enrichedReq = enrichWithInventoryData([requestedCigar])[0]
+          const reqFull = `${requestedCigar.brand} ${requestedCigar.name}`.toLowerCase()
+
+          // Remove any model-returned card that duplicates the requested cigar
+          cigars = cigars.filter(c => c.name.toLowerCase() !== reqFull)
+
+          // Also remove model cards that aren't mentioned in the message text,
+          // since showing a card the message never discusses is confusing
+          if (parsed.message) {
+            const msgLower = parsed.message.toLowerCase()
+            cigars = cigars.filter(c => {
+              const brand = c.brand?.toLowerCase() || ''
+              const nameWithoutBrand = c.name.toLowerCase().replace(brand, '').trim()
+              return msgLower.includes(nameWithoutBrand) || msgLower.includes(c.name.toLowerCase())
+            })
           }
+
+          // Put the requested cigar first, keep at most 1 model suggestion after it
+          cigars = [enrichedReq, ...cigars].slice(0, 2)
         }
 
         return NextResponse.json({
