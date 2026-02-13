@@ -177,7 +177,7 @@ export default function Home() {
   return (
     <main className="min-h-screen flex flex-col">
       {/* Header with Close Button - compact when chat is engaged */}
-      <header className={`bg-cigar-dark text-cigar-cream px-2 shadow-lg relative transition-all duration-300 ${
+      <header className={`bg-cigar-dark text-cigar-cream px-4 shadow-lg relative transition-all duration-300 ${
         isExpandedChat ? 'py-3' : 'py-6'
       }`}>
         <button
@@ -208,7 +208,7 @@ export default function Home() {
           </button>
         )}
         
-        <div className="max-w-6xl mx-auto text-center">
+        <div className="max-w-4xl mx-auto text-center">
           <h1 className={`font-bold tracking-wide transition-all duration-300 ${
             isExpandedChat ? 'text-xl md:text-2xl' : 'text-3xl md:text-4xl'
           }`}>
@@ -232,8 +232,8 @@ export default function Home() {
       )}
 
       {/* Main Content */}
-      <div className={`flex-1 max-w-6xl mx-auto w-full transition-all duration-300 ${
-        isExpandedChat ? 'p-0' : 'px-2 py-4'
+      <div className={`flex-1 max-w-4xl mx-auto w-full transition-all duration-300 ${
+        isExpandedChat ? 'p-0' : 'p-4'
       }`}>
         {activeTab === 'chat' && !showQuiz && (
           <div className="h-full">
