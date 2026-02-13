@@ -1,9 +1,8 @@
 'use client'
 
 import { useState, useRef, useEffect, useLayoutEffect, useCallback } from 'react'
-import { Send, Loader2, Sparkles, Camera, X, Mic, MicOff, Volume2, VolumeX, Download } from 'lucide-react'
+import { Send, Loader2, Sparkles, Camera, X, Mic, MicOff, Volume2, VolumeX } from 'lucide-react'
 import CigarInfoCard, { CigarData } from './CigarInfoCard'
-import { useKokoroTTS } from '@/hooks/useKokoroTTS'
 
 // Web Speech API - check support at runtime
 const getSpeechRecognition = () => {
@@ -64,8 +63,7 @@ export default function ChatInterface({ isExpanded = false, onEngaged, pendingQu
   const speakResponseRef = useRef<((text: string) => void) | null>(null)
   const handleScanResponseRef = useRef<((imageData: string, data: { message?: string; cigars?: CigarData[] }) => void) | null>(null)
 
-  // Kokoro TTS — natural-sounding voice with browser fallback
-  const { speak: kokoroSpeak, stop: kokoroStop, preload: kokoroPreload, initAudio: kokoroInitAudio, status: ttsStatus } = useKokoroTTS()
+  // Voice mode state (browser speechSynthesis — instant playback)
 
   const lastMessageRef = useRef<HTMLDivElement>(null)
 
@@ -312,24 +310,71 @@ export default function ChatInterface({ isExpanded = false, onEngaged, pendingQu
     }
   }, [showCamera])
 
-  // Text-to-speech: read response aloud using Kokoro (natural) with browser fallback
+  // Text-to-speech: read response aloud using browser speechSynthesis (instant)
+  // Prioritize enhanced/premium voices for natural sound
+  const bestVoiceRef = useRef<SpeechSynthesisVoice | null>(null)
+
+  // Find the best voice once voices are loaded
+  useEffect(() => {
+    if (typeof window === 'undefined' || !window.speechSynthesis) return
+    const pickBest = () => {
+      const voices = window.speechSynthesis.getVoices()
+      if (!voices.length) return
+
+      // Priority order: premium/enhanced voices first, then decent defaults
+      // Apple enhanced voices sound very natural
+      const candidates = [
+        // Apple Premium & Enhanced voices (very natural)
+        (v: SpeechSynthesisVoice) => /\(Premium\)/i.test(v.name) && v.lang.startsWith('en'),
+        (v: SpeechSynthesisVoice) => /\(Enhanced\)/i.test(v.name) && v.lang.startsWith('en'),
+        // Specific high-quality Apple voices
+        (v: SpeechSynthesisVoice) => v.name.includes('Ava') && v.lang.startsWith('en'),
+        (v: SpeechSynthesisVoice) => v.name.includes('Zoe') && v.lang.startsWith('en'),
+        (v: SpeechSynthesisVoice) => v.name.includes('Samantha') && v.lang.startsWith('en'),
+        // Google voices (decent on Chrome)
+        (v: SpeechSynthesisVoice) => v.name.includes('Google US English'),
+        (v: SpeechSynthesisVoice) => v.name.includes('Google UK English Female'),
+        // Microsoft neural voices (Edge)
+        (v: SpeechSynthesisVoice) => v.name.includes('Microsoft') && v.name.includes('Online') && v.lang.startsWith('en'),
+        // Any English voice as fallback
+        (v: SpeechSynthesisVoice) => v.lang.startsWith('en-US'),
+        (v: SpeechSynthesisVoice) => v.lang.startsWith('en'),
+      ]
+
+      for (const test of candidates) {
+        const found = voices.find(test)
+        if (found) {
+          bestVoiceRef.current = found
+          console.log('[TTS] Selected voice:', found.name, found.lang)
+          return
+        }
+      }
+    }
+
+    pickBest()
+    // Voices may load asynchronously
+    window.speechSynthesis.addEventListener('voiceschanged', pickBest)
+    return () => window.speechSynthesis.removeEventListener('voiceschanged', pickBest)
+  }, [])
+
   const speakResponse = useCallback((text: string) => {
     if (!voiceMode || !text.trim()) return
     const clean = text.replace(/\*\*(.*?)\*\*/g, '$1') // strip markdown bold
-    kokoroSpeak(clean)
-  }, [voiceMode, kokoroSpeak])
+    if (typeof window === 'undefined' || !window.speechSynthesis) return
+    window.speechSynthesis.cancel()
+    const utterance = new SpeechSynthesisUtterance(clean)
+    utterance.rate = 1.05  // slightly faster for conversational feel
+    utterance.pitch = 1.05 // slightly higher for warmth
+    if (bestVoiceRef.current) utterance.voice = bestVoiceRef.current
+    window.speechSynthesis.speak(utterance)
+  }, [voiceMode])
   speakResponseRef.current = speakResponse
 
   const stopSpeaking = useCallback(() => {
-    kokoroStop()
-  }, [kokoroStop])
-
-  // Preload TTS model when user first enables voice mode
-  useEffect(() => {
-    if (voiceMode && ttsStatus === 'idle') {
-      kokoroPreload()
+    if (typeof window !== 'undefined' && window.speechSynthesis) {
+      window.speechSynthesis.cancel()
     }
-  }, [voiceMode, ttsStatus, kokoroPreload])
+  }, [])
 
   // Speech-to-text: listen and transcribe
   const silenceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -710,28 +755,13 @@ export default function ChatInterface({ isExpanded = false, onEngaged, pendingQu
             rows={1}
           />
           <button
-            onClick={() => {
-              if (!voiceMode) {
-                // Toggling ON — create/resume AudioContext during this user gesture
-                // so the browser allows audio playback later from async contexts
-                kokoroInitAudio()
-              }
-              setVoiceMode(!voiceMode)
-            }}
+            onClick={() => setVoiceMode(!voiceMode)}
             className={`p-2.5 rounded-xl transition-colors relative ${
               voiceMode ? 'bg-cigar-gold text-cigar-dark' : 'bg-cigar-cream hover:bg-cigar-gold/30 text-cigar-dark'
             }`}
-            title={
-              ttsStatus === 'loading'
-                ? 'Downloading voice model...'
-                : voiceMode
-                  ? 'Voice mode on - responses will be read aloud'
-                  : 'Voice mode off - tap to enable'
-            }
+            title={voiceMode ? 'Voice mode on - responses will be read aloud' : 'Voice mode off - tap to enable'}
           >
-            {ttsStatus === 'loading' && voiceMode ? (
-              <Download className="w-5 h-5 animate-bounce" />
-            ) : voiceMode ? (
+            {voiceMode ? (
               <Volume2 className="w-5 h-5" />
             ) : (
               <VolumeX className="w-5 h-5" />
@@ -746,10 +776,7 @@ export default function ChatInterface({ isExpanded = false, onEngaged, pendingQu
           </button>
           {getSpeechRecognition() ? (
             <button
-              onClick={() => {
-                if (!isListening) kokoroInitAudio() // warm AudioContext during user gesture
-                isListening ? stopListening() : startListening()
-              }}
+              onClick={() => isListening ? stopListening() : startListening()}
               className={`p-2.5 rounded-xl transition-colors ${
                 isListening ? 'bg-red-500 text-white animate-pulse' : 'bg-cigar-cream hover:bg-cigar-gold/30 text-cigar-dark'
               }`}
