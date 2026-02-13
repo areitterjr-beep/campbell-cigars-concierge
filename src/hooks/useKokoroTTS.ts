@@ -50,6 +50,15 @@ export function useKokoroTTS() {
   // Play PCM audio via AudioContext
   const playAudio = useCallback((samplesBuffer: ArrayBuffer, sampleRate: number, id?: string) => {
     try {
+      // Skip empty buffers (e.g. from preload)
+      if (!samplesBuffer || samplesBuffer.byteLength === 0) {
+        if (id && resolversRef.current.has(id)) {
+          resolversRef.current.get(id)!()
+          resolversRef.current.delete(id)
+        }
+        return
+      }
+
       if (!audioCtxRef.current) {
         audioCtxRef.current = new AudioContext()
       }

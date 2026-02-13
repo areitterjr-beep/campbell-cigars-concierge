@@ -35,18 +35,28 @@ self.addEventListener('message', async (e) => {
   if (type === 'generate') {
     try {
       const engine = await getInstance()
-      const selectedVoice = voice || 'af_heart' // warm, high-quality female voice
-      const audio = await engine.generate(text, { voice: selectedVoice })
 
-      // audio.data is a Float32Array of PCM samples, audio.sampling_rate is the rate
+      // Preload call sends empty text — just load the model, don't generate
+      if (!text || !text.trim()) {
+        self.postMessage({ type: 'audio', id, samples: new ArrayBuffer(0), sampleRate: 24000 })
+        return
+      }
+
+      const selectedVoice = voice || 'af_heart' // warm, high-quality female voice
+      const result = await engine.generate(text, { voice: selectedVoice })
+
+      // RawAudio has .audio (Float32Array) and .sampling_rate (number)
+      const samples = result.audio
+      const sampleRate = result.sampling_rate
+
       self.postMessage(
         {
           type: 'audio',
           id,
-          samples: audio.data.buffer,
-          sampleRate: audio.sampling_rate,
+          samples: samples.buffer,
+          sampleRate,
         },
-        [audio.data.buffer] // transfer ownership for zero-copy
+        [samples.buffer] // transfer ownership for zero-copy
       )
     } catch (err) {
       self.postMessage({ type: 'error', id, error: err.message })
