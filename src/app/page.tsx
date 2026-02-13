@@ -1,10 +1,13 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { X, ChevronDown, ChevronUp } from 'lucide-react'
 import Navigation from '@/components/Navigation'
 import ChatInterface from '@/components/ChatInterface'
 import PreferenceQuiz from '@/components/PreferenceQuiz'
+
+const INACTIVITY_TIMEOUT_MS = 30 * 1000 // 30 seconds of inactivity before showing countdown
+const COUNTDOWN_SECONDS = 20
 
 type Tab = 'chat' | 'discover'
 
@@ -34,6 +37,83 @@ export default function Home() {
   const [chatEngaged, setChatEngaged] = useState(false)
   const [pendingCigarQuery, setPendingCigarQuery] = useState<string | null>(null)
 
+  // Inactivity timer
+  const [showCountdown, setShowCountdown] = useState(false)
+  const [countdown, setCountdown] = useState(COUNTDOWN_SECONDS)
+  const inactivityTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const countdownIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const countdownActiveRef = useRef(false) // ref to avoid stale closures
+
+  const clearAllTimers = useCallback(() => {
+    if (inactivityTimerRef.current) { clearTimeout(inactivityTimerRef.current); inactivityTimerRef.current = null }
+    if (countdownIntervalRef.current) { clearInterval(countdownIntervalRef.current); countdownIntervalRef.current = null }
+  }, [])
+
+  const resetToLanding = useCallback(() => {
+    clearAllTimers()
+    countdownActiveRef.current = false
+    setShowCountdown(false)
+    setCountdown(COUNTDOWN_SECONDS)
+    setShowLanding(true)
+    setChatEngaged(false)
+    setShowQuiz(false)
+    setActiveTab('chat')
+  }, [clearAllTimers])
+
+  const startInactivityTimer = useCallback(() => {
+    clearAllTimers()
+    inactivityTimerRef.current = setTimeout(() => {
+      // Show countdown
+      countdownActiveRef.current = true
+      setShowCountdown(true)
+      setCountdown(COUNTDOWN_SECONDS)
+      let remaining = COUNTDOWN_SECONDS
+      countdownIntervalRef.current = setInterval(() => {
+        remaining -= 1
+        if (remaining <= 0) {
+          // Time's up
+          resetToLanding()
+        } else {
+          setCountdown(remaining)
+        }
+      }, 1000)
+    }, INACTIVITY_TIMEOUT_MS)
+  }, [clearAllTimers, resetToLanding])
+
+  const handleStillHere = useCallback(() => {
+    clearAllTimers()
+    countdownActiveRef.current = false
+    setShowCountdown(false)
+    setCountdown(COUNTDOWN_SECONDS)
+    startInactivityTimer()
+  }, [clearAllTimers, startInactivityTimer])
+
+  // Listen for user activity to reset the inactivity timer
+  useEffect(() => {
+    if (showLanding) {
+      clearAllTimers()
+      countdownActiveRef.current = false
+      return
+    }
+
+    const events = ['mousedown', 'keydown', 'touchstart', 'scroll']
+    const onActivity = () => {
+      // Don't reset if countdown modal is showing — user must click a button
+      if (!countdownActiveRef.current) {
+        startInactivityTimer()
+      }
+    }
+
+    events.forEach(e => window.addEventListener(e, onActivity, { passive: true }))
+    startInactivityTimer() // Start the timer
+
+    return () => {
+      events.forEach(e => window.removeEventListener(e, onActivity))
+      clearAllTimers()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [showLanding])
+
   const handleChatEngaged = () => {
     setChatEngaged(true)
   }
@@ -41,7 +121,6 @@ export default function Home() {
   const handleQuizComplete = (preferences: string) => {
     setShowQuiz(false)
     setActiveTab('chat')
-    // The preferences will be passed to the chat to start a conversation
   }
 
   // Landing Page
@@ -231,6 +310,39 @@ export default function Home() {
         <footer className="bg-cigar-dark text-cigar-cream/60 py-4 px-4 text-center text-sm">
           <p>Ask our concierge anything about cigars. We&apos;re here to help!</p>
         </footer>
+      )}
+
+      {/* Inactivity Countdown Overlay */}
+      {showCountdown && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50">
+          <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-sm mx-4 text-center">
+            <div className="w-16 h-16 rounded-full bg-cigar-gold/20 flex items-center justify-center mx-auto mb-4">
+              <span className="text-3xl font-bold text-cigar-dark">{countdown}</span>
+            </div>
+            <h3 className="text-xl font-semibold text-cigar-dark mb-2">
+              Are you still there?
+            </h3>
+            <p className="text-gray-600 text-sm mb-6">
+              This session will return to the home screen in {countdown} second{countdown !== 1 ? 's' : ''}.
+            </p>
+            <div className="flex gap-3">
+              <button
+                onClick={resetToLanding}
+                className="flex-1 border-2 border-cigar-gold text-cigar-dark font-semibold 
+                         py-3 px-4 rounded-xl hover:bg-cigar-cream transition-colors"
+              >
+                No, I&apos;m done
+              </button>
+              <button
+                onClick={handleStillHere}
+                className="flex-1 bg-cigar-gold hover:bg-cigar-amber text-cigar-dark 
+                         font-semibold py-3 px-4 rounded-xl transition-colors"
+              >
+                Yes, I need more time
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </main>
   )
