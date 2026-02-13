@@ -88,6 +88,10 @@ export default function Home() {
     startInactivityTimer()
   }, [clearAllTimers, startInactivityTimer])
 
+  // Keep a ref to startInactivityTimer so event handlers always use the latest version
+  const startTimerRef = useRef(startInactivityTimer)
+  startTimerRef.current = startInactivityTimer
+
   // Listen for user activity to reset the inactivity timer
   useEffect(() => {
     if (showLanding) {
@@ -96,19 +100,23 @@ export default function Home() {
       return
     }
 
-    const events = ['mousedown', 'keydown', 'touchstart', 'scroll']
+    const events = ['mousedown', 'mousemove', 'keydown', 'touchstart', 'scroll', 'input']
+    let throttled = false
     const onActivity = () => {
       // Don't reset if countdown modal is showing — user must click a button
-      if (!countdownActiveRef.current) {
-        startInactivityTimer()
-      }
+      if (countdownActiveRef.current) return
+      // Throttle to avoid resetting on every pixel of mouse movement
+      if (throttled) return
+      throttled = true
+      setTimeout(() => { throttled = false }, 1000)
+      startTimerRef.current()
     }
 
-    events.forEach(e => window.addEventListener(e, onActivity, { passive: true }))
-    startInactivityTimer() // Start the timer
+    events.forEach(e => window.addEventListener(e, onActivity, { passive: true, capture: true }))
+    startTimerRef.current() // Start the timer
 
     return () => {
-      events.forEach(e => window.removeEventListener(e, onActivity))
+      events.forEach(e => window.removeEventListener(e, onActivity, { capture: true }))
       clearAllTimers()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

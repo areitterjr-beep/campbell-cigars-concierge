@@ -846,14 +846,23 @@ export async function POST(request: NextRequest) {
           // Remove any model-returned card that duplicates the requested cigar
           cigars = cigars.filter(c => c.name.toLowerCase() !== reqFull)
 
-          // Also remove model cards that aren't mentioned in the message text,
-          // since showing a card the message never discusses is confusing
+          // Remove model cards that aren't mentioned in the message text at all,
+          // but use loose matching: if at least 2 distinctive words from the cigar name
+          // appear in the message, keep the card
           if (parsed.message) {
             const msgLower = parsed.message.toLowerCase()
             cigars = cigars.filter(c => {
+              const fullName = c.name.toLowerCase()
+              // Direct substring match
+              if (msgLower.includes(fullName)) return true
+              // Check without brand prefix
               const brand = c.brand?.toLowerCase() || ''
-              const nameWithoutBrand = c.name.toLowerCase().replace(brand, '').trim()
-              return msgLower.includes(nameWithoutBrand) || msgLower.includes(c.name.toLowerCase())
+              const nameWithoutBrand = fullName.replace(brand, '').trim()
+              if (nameWithoutBrand && msgLower.includes(nameWithoutBrand)) return true
+              // Token match: keep if 2+ distinctive name tokens appear in the message
+              const nameTokens = tokenize(fullName).filter(t => !NOISE_WORDS.has(t) && t.length > 2)
+              const matchCount = nameTokens.filter(t => msgLower.includes(t)).length
+              return matchCount >= 2 || (nameTokens.length === 1 && matchCount === 1)
             })
           }
 
