@@ -17,7 +17,7 @@ export default function Navigation({ activeTab, onTabChange }: NavigationProps) 
 
   return (
     <nav className="bg-white shadow-md sticky top-0 z-50">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-6xl mx-auto px-2">
         <div className="flex">
           {tabs.map((tab) => {
             const Icon = tab.icon

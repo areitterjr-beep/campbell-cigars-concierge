@@ -682,7 +682,7 @@ export default function ChatInterface({ isExpanded = false, onEngaged, pendingQu
         </div>
       ) : (
       /* Messages Area */
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      <div className="flex-1 overflow-y-auto px-2 py-3 space-y-3">
         {messages.map((message, index) => (
           <div
             key={message.id}
@@ -836,7 +836,7 @@ export default function ChatInterface({ isExpanded = false, onEngaged, pendingQu
 
       {/* Suggested Questions */}
       {messages.length <= 2 && !attachedImage && !showCamera && (
-        <div className="px-4 pb-2">
+        <div className="px-2 pb-2">
           <div className="flex items-center gap-2 text-sm text-gray-500 mb-2">
             <Sparkles className="w-4 h-4" />
             <span>Quick questions:</span>
@@ -858,7 +858,7 @@ export default function ChatInterface({ isExpanded = false, onEngaged, pendingQu
 
       {/* Attached Image Preview */}
       {attachedImage && !showCamera && (
-        <div className="px-4 pb-2">
+        <div className="px-2 pb-2">
           <div className="relative inline-block">
             <img 
               src={attachedImage} 
@@ -877,7 +877,7 @@ export default function ChatInterface({ isExpanded = false, onEngaged, pendingQu
       )}
 
       {/* Input Area */}
-      <div className="border-t border-gray-200 p-3">
+      <div className="border-t border-gray-200 px-2 py-3">
         <div className="flex gap-2 items-end">
           <textarea
             ref={textareaRef}
