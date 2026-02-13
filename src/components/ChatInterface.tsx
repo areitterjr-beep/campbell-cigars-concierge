@@ -65,8 +65,11 @@ export default function ChatInterface({ isExpanded = false, onEngaged }: ChatInt
   // Kokoro TTS — natural-sounding voice with browser fallback
   const { speak: kokoroSpeak, stop: kokoroStop, preload: kokoroPreload, initAudio: kokoroInitAudio, status: ttsStatus } = useKokoroTTS()
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  const lastMessageRef = useRef<HTMLDivElement>(null)
+
+  const scrollToLatestMessage = () => {
+    // Scroll so the TOP of the newest message is visible at the top of the viewport
+    lastMessageRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
   // Auto-resize textarea whenever input changes (covers voice, programmatic setInput, etc.)
@@ -96,7 +99,7 @@ export default function ChatInterface({ isExpanded = false, onEngaged }: ChatInt
   messagesRef.current = messages
 
   useEffect(() => {
-    scrollToBottom()
+    scrollToLatestMessage()
   }, [messages])
 
   useEffect(() => {
@@ -547,9 +550,10 @@ export default function ChatInterface({ isExpanded = false, onEngaged }: ChatInt
       ) : (
       /* Messages Area */
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
-        {messages.map((message) => (
+        {messages.map((message, index) => (
           <div
             key={message.id}
+            ref={index === messages.length - 1 ? lastMessageRef : undefined}
             className={`message-slide-in ${
               message.role === 'user' ? 'flex justify-end' : ''
             }`}
