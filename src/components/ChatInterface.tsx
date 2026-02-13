@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useEffect, useCallback } from 'react'
+import { useState, useRef, useEffect, useLayoutEffect, useCallback } from 'react'
 import { Send, Loader2, Sparkles, Camera, X, Mic, MicOff, Volume2, VolumeX, Download } from 'lucide-react'
 import CigarInfoCard, { CigarData } from './CigarInfoCard'
 import { useKokoroTTS } from '@/hooks/useKokoroTTS'
@@ -51,6 +51,7 @@ export default function ChatInterface({ isExpanded = false, onEngaged }: ChatInt
   const [voiceMode, setVoiceMode] = useState(false)
   const [isListening, setIsListening] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
+  const textareaRef = useRef<HTMLTextAreaElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
   const streamRef = useRef<MediaStream | null>(null)
   const recognitionRef = useRef<any>(null)
@@ -62,11 +63,35 @@ export default function ChatInterface({ isExpanded = false, onEngaged }: ChatInt
   const handleScanResponseRef = useRef<((imageData: string, data: { message?: string; cigars?: CigarData[] }) => void) | null>(null)
 
   // Kokoro TTS — natural-sounding voice with browser fallback
-  const { speak: kokoroSpeak, stop: kokoroStop, preload: kokoroPreload, status: ttsStatus } = useKokoroTTS()
+  const { speak: kokoroSpeak, stop: kokoroStop, preload: kokoroPreload, initAudio: kokoroInitAudio, status: ttsStatus } = useKokoroTTS()
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }
+
+  // Auto-resize textarea whenever input changes (covers voice, programmatic setInput, etc.)
+  // useLayoutEffect runs before browser paint → no visible collapse/flash
+  useLayoutEffect(() => {
+    const ta = textareaRef.current
+    if (!ta) return
+    if (!input) {
+      // Input cleared — reset to natural single-row height
+      ta.style.height = 'auto'
+      return
+    }
+    // Capture current rendered height before we measure
+    const prevHeight = ta.getBoundingClientRect().height
+    // Temporarily collapse to get true content scrollHeight
+    ta.style.height = '0'
+    const contentHeight = ta.scrollHeight
+    if (isListening) {
+      // During voice capture: only grow, never shrink — prevents bounce from interim results
+      ta.style.height = Math.max(contentHeight, prevHeight) + 'px'
+    } else {
+      // Normal typing: grow and shrink freely
+      ta.style.height = contentHeight + 'px'
+    }
+  }, [input, isListening])
 
   messagesRef.current = messages
 
@@ -312,34 +337,39 @@ export default function ChatInterface({ isExpanded = false, onEngaged }: ChatInt
     }
     if (isListening) return
     const recognition = new SpeechRecognition()
-    recognition.continuous = true       // keep listening across pauses
+    recognition.continuous = true
     recognition.interimResults = true
     recognition.lang = 'en-US'
     recognitionRef.current = recognition
+
+    // Keep finalized segments separate from the current interim segment
+    const finalizedParts: string[] = []
     const transcriptRef = { current: '' }
-    let hasFinal = false
 
     recognition.onresult = (e: any) => {
-      // Build transcript from all results
-      let full = ''
+      // Rebuild: collect all final segments, plus the latest interim
+      finalizedParts.length = 0
+      let interim = ''
       for (let i = 0; i < e.results.length; i++) {
-        full += e.results[i][0].transcript
-        if (e.results[i].isFinal) hasFinal = true
+        if (e.results[i].isFinal) {
+          finalizedParts.push(e.results[i][0].transcript)
+        } else {
+          interim = e.results[i][0].transcript
+        }
       }
-      full = full.trim()
+      const full = (finalizedParts.join(' ') + ' ' + interim).trim()
       if (full) {
         transcriptRef.current = full
-        setInput(full)
+        setInput(full)  // useEffect auto-resizes textarea on input change
       }
 
-      // Reset the silence timer — wait 2s after last speech before auto-sending
+      // Reset the silence timer — wait 2.5s of silence before auto-sending
       if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current)
       silenceTimerRef.current = setTimeout(() => {
-        // Only auto-send if we got at least one final result
-        if (hasFinal && transcriptRef.current.trim()) {
+        if (finalizedParts.length > 0 && transcriptRef.current.trim()) {
           recognition.stop()
         }
-      }, 2000)
+      }, 2500)
     }
 
     recognition.onend = () => {
@@ -349,6 +379,7 @@ export default function ChatInterface({ isExpanded = false, onEngaged }: ChatInt
       const text = transcriptRef.current.trim()
       if (text) {
         setInput('')
+        if (textareaRef.current) textareaRef.current.style.height = 'auto'
         handleSendRef.current(text)
       }
     }
@@ -402,6 +433,7 @@ export default function ChatInterface({ isExpanded = false, onEngaged }: ChatInt
 
     setMessages((prev) => [...prev, userMessage])
     setInput('')
+    if (textareaRef.current) textareaRef.current.style.height = 'auto'
     const imageToSend = attachedImage
     setAttachedImage(null)
     setIsLoading(true)
@@ -647,19 +679,29 @@ export default function ChatInterface({ isExpanded = false, onEngaged }: ChatInt
 
       {/* Input Area */}
       <div className="border-t border-gray-200 p-3">
-        <div className="flex gap-2 items-center">
+        <div className="flex gap-2 items-end">
           <textarea
+            ref={textareaRef}
             value={input}
-            onChange={(e) => setInput(e.target.value)}
+            onChange={(e) => {
+              setInput(e.target.value)  // useEffect auto-resizes textarea on input change
+            }}
             onKeyPress={handleKeyPress}
             placeholder={attachedImage ? "Ask about this cigar..." : isListening ? "Listening..." : "Ask me anything..."}
             className="flex-1 resize-none border border-gray-300 rounded-xl px-3 py-2 text-sm
                      focus:outline-none focus:ring-2 focus:ring-cigar-gold focus:border-transparent
-                     placeholder-gray-400 text-cigar-dark"
+                     placeholder-gray-400 text-cigar-dark overflow-hidden"
             rows={1}
           />
           <button
-            onClick={() => setVoiceMode(!voiceMode)}
+            onClick={() => {
+              if (!voiceMode) {
+                // Toggling ON — create/resume AudioContext during this user gesture
+                // so the browser allows audio playback later from async contexts
+                kokoroInitAudio()
+              }
+              setVoiceMode(!voiceMode)
+            }}
             className={`p-2.5 rounded-xl transition-colors relative ${
               voiceMode ? 'bg-cigar-gold text-cigar-dark' : 'bg-cigar-cream hover:bg-cigar-gold/30 text-cigar-dark'
             }`}
@@ -688,7 +730,10 @@ export default function ChatInterface({ isExpanded = false, onEngaged }: ChatInt
           </button>
           {getSpeechRecognition() ? (
             <button
-              onClick={isListening ? stopListening : startListening}
+              onClick={() => {
+                if (!isListening) kokoroInitAudio() // warm AudioContext during user gesture
+                isListening ? stopListening() : startListening()
+              }}
               className={`p-2.5 rounded-xl transition-colors ${
                 isListening ? 'bg-red-500 text-white animate-pulse' : 'bg-cigar-cream hover:bg-cigar-gold/30 text-cigar-dark'
               }`}

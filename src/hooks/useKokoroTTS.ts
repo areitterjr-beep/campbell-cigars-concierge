@@ -47,8 +47,20 @@ export function useKokoroTTS() {
     }
   }, [])
 
+  // Warm up the AudioContext — MUST be called from a user gesture (click/tap)
+  // so the browser allows audio playback later from non-gesture contexts (worker callbacks)
+  const initAudio = useCallback(() => {
+    if (!audioCtxRef.current) {
+      audioCtxRef.current = new AudioContext()
+    }
+    const ctx = audioCtxRef.current
+    if (ctx.state === 'suspended') {
+      ctx.resume().catch(() => { /* best effort */ })
+    }
+  }, [])
+
   // Play PCM audio via AudioContext
-  const playAudio = useCallback((samplesBuffer: ArrayBuffer, sampleRate: number, id?: string) => {
+  const playAudio = useCallback(async (samplesBuffer: ArrayBuffer, sampleRate: number, id?: string) => {
     try {
       // Skip empty buffers (e.g. from preload)
       if (!samplesBuffer || samplesBuffer.byteLength === 0) {
@@ -63,6 +75,12 @@ export function useKokoroTTS() {
         audioCtxRef.current = new AudioContext()
       }
       const ctx = audioCtxRef.current
+
+      // Resume if suspended (safety net — initAudio should have done this already)
+      if (ctx.state === 'suspended') {
+        await ctx.resume()
+      }
+
       const samples = new Float32Array(samplesBuffer)
       const buffer = ctx.createBuffer(1, samples.length, sampleRate)
       buffer.copyToChannel(samples, 0)
@@ -89,40 +107,11 @@ export function useKokoroTTS() {
     } catch (err) {
       console.error('[KokoroTTS] Audio playback error:', err)
       setIsSpeaking(false)
-    }
-  }, [])
-
-  // Speak text using Kokoro TTS
-  const speak = useCallback((text: string, voice?: string): Promise<void> => {
-    return new Promise<void>((resolve) => {
-      if (!text.trim()) { resolve(); return }
-      const worker = getWorker()
-      if (!worker) {
-        // Fallback to browser speech synthesis
-        fallbackSpeak(text)
-        resolve()
-        return
+      // Resolve pending promise so callers don't hang
+      if (id && resolversRef.current.has(id)) {
+        resolversRef.current.get(id)!()
+        resolversRef.current.delete(id)
       }
-      const id = `tts-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`
-      resolversRef.current.set(id, resolve)
-      worker.postMessage({ type: 'generate', text, id, voice })
-    })
-  }, [getWorker])
-
-  // Stop any playing audio
-  const stop = useCallback(() => {
-    if (currentSourceRef.current) {
-      try { currentSourceRef.current.stop() } catch (_) { /* already stopped */ }
-      currentSourceRef.current = null
-    }
-    setIsSpeaking(false)
-    // Resolve all pending
-    resolversRef.current.forEach((resolver) => resolver())
-    resolversRef.current.clear()
-
-    // Also stop browser fallback if it was used
-    if (typeof window !== 'undefined' && window.speechSynthesis) {
-      window.speechSynthesis.cancel()
     }
   }, [])
 
@@ -141,6 +130,52 @@ export function useKokoroTTS() {
     setIsSpeaking(true)
     utterance.onend = () => setIsSpeaking(false)
     window.speechSynthesis.speak(utterance)
+  }, [])
+
+  // Speak text using Kokoro TTS
+  const speak = useCallback((text: string, voice?: string): Promise<void> => {
+    return new Promise<void>((resolve) => {
+      if (!text.trim()) { resolve(); return }
+
+      // If Kokoro worker previously errored, go straight to browser fallback
+      if (status === 'error') {
+        fallbackSpeak(text)
+        resolve()
+        return
+      }
+
+      const worker = getWorker()
+      if (!worker) {
+        // Fallback to browser speech synthesis
+        fallbackSpeak(text)
+        resolve()
+        return
+      }
+
+      // Ensure AudioContext is ready before generating
+      initAudio()
+
+      const id = `tts-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`
+      resolversRef.current.set(id, resolve)
+      worker.postMessage({ type: 'generate', text, id, voice })
+    })
+  }, [getWorker, status, fallbackSpeak, initAudio])
+
+  // Stop any playing audio
+  const stop = useCallback(() => {
+    if (currentSourceRef.current) {
+      try { currentSourceRef.current.stop() } catch (_) { /* already stopped */ }
+      currentSourceRef.current = null
+    }
+    setIsSpeaking(false)
+    // Resolve all pending
+    resolversRef.current.forEach((resolver) => resolver())
+    resolversRef.current.clear()
+
+    // Also stop browser fallback if it was used
+    if (typeof window !== 'undefined' && window.speechSynthesis) {
+      window.speechSynthesis.cancel()
+    }
   }, [])
 
   // Preload the model (call early so it's ready when user enables voice)
@@ -165,5 +200,5 @@ export function useKokoroTTS() {
     }
   }, [])
 
-  return { speak, stop, preload, status, isSpeaking }
+  return { speak, stop, preload, initAudio, status, isSpeaking }
 }
