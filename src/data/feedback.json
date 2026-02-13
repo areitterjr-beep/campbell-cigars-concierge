@@ -1,0 +1,24 @@
+{
+  "feedback": [
+    {
+      "id": "fb_1771016875863_sumxkb",
+      "sessionId": "64d6ed10-5538-40c1-8db2-6df38c3adad7",
+      "timestamp": "2026-02-13T21:07:55.863Z",
+      "rating": "down",
+      "userMessage": "Ideal storage temp and humidity?",
+      "assistantMessage": "For optimal cigar preservation, store your cigars at a temperature between 65–70°F (18–21°C) and a humidity level of 65–70%.",
+      "cigarsShown": [],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
+    },
+    {
+      "id": "fb_1771017074506_s2xyqi",
+      "sessionId": "64d6ed10-5538-40c1-8db2-6df38c3adad7",
+      "timestamp": "2026-02-13T21:11:14.506Z",
+      "rating": "up",
+      "userMessage": "What does strength mean in cigars?",
+      "assistantMessage": "I apologize, but I'm having trouble responding right now.",
+      "cigarsShown": [],
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
+    }
+  ]
+}

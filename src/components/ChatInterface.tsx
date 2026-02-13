@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect, useLayoutEffect, useCallback } from 'react'
-import { Send, Loader2, Sparkles, Camera, X, Mic, MicOff, Volume2, VolumeX } from 'lucide-react'
+import { Send, Loader2, Sparkles, Camera, X, Mic, MicOff, Volume2, VolumeX, ThumbsUp, ThumbsDown } from 'lucide-react'
 import CigarInfoCard, { CigarData } from './CigarInfoCard'
 
 // Web Speech API - check support at runtime
@@ -62,6 +62,23 @@ export default function ChatInterface({ isExpanded = false, onEngaged, pendingQu
   const messagesRef = useRef(messages)
   const speakResponseRef = useRef<((text: string) => void) | null>(null)
   const handleScanResponseRef = useRef<((imageData: string, data: { message?: string; cigars?: CigarData[] }) => void) | null>(null)
+
+  // Session ID for feedback tracking — generated once per session
+  const [sessionId] = useState<string>(() => {
+    if (typeof window === 'undefined') return ''
+    const existing = sessionStorage.getItem('cc-session-id')
+    if (existing) return existing
+    const id = crypto.randomUUID()
+    sessionStorage.setItem('cc-session-id', id)
+    return id
+  })
+
+  // Feedback state: map of message ID → "up" | "down"
+  const [feedback, setFeedback] = useState<Record<string, 'up' | 'down'>>({})
+  // Which message currently has the comment prompt open
+  const [feedbackExpanded, setFeedbackExpanded] = useState<string | null>(null)
+  // Tracks which messages already had their comment submitted/dismissed
+  const [feedbackCommented, setFeedbackCommented] = useState<Record<string, boolean>>({})
 
   // Voice mode state (browser speechSynthesis — instant playback)
 
@@ -376,6 +393,65 @@ export default function ChatInterface({ isExpanded = false, onEngaged, pendingQu
     }
   }, [])
 
+  // Submit feedback (thumbs up/down) for an assistant message
+  const submitFeedback = useCallback(async (messageId: string, rating: 'up' | 'down') => {
+    // Optimistically update UI
+    setFeedback(prev => ({ ...prev, [messageId]: rating }))
+    // Open the "Want to share more?" prompt
+    setFeedbackExpanded(messageId)
+
+    // Find the assistant message and the preceding user message
+    const msgIndex = messages.findIndex(m => m.id === messageId)
+    const assistantMsg = messages[msgIndex]
+    const userMsg = msgIndex > 0 ? messages.slice(0, msgIndex).reverse().find(m => m.role === 'user') : null
+
+    try {
+      await fetch('/api/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          sessionId,
+          rating,
+          userMessage: userMsg?.content || '',
+          assistantMessage: assistantMsg?.content || '',
+          cigarsShown: assistantMsg?.cigars?.map(c => c.name) || [],
+        }),
+      })
+    } catch (err) {
+      console.error('[Feedback] Failed to submit:', err)
+    }
+  }, [messages, sessionId])
+
+  // Submit optional comment for an already-rated message
+  const submitComment = useCallback(async (messageId: string, comment: string) => {
+    setFeedbackCommented(prev => ({ ...prev, [messageId]: true }))
+    setFeedbackExpanded(null)
+
+    if (!comment.trim()) return
+
+    const rating = feedback[messageId]
+    const msgIndex = messages.findIndex(m => m.id === messageId)
+    const assistantMsg = messages[msgIndex]
+    const userMsg = msgIndex > 0 ? messages.slice(0, msgIndex).reverse().find(m => m.role === 'user') : null
+
+    try {
+      await fetch('/api/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          sessionId,
+          rating,
+          comment,
+          userMessage: userMsg?.content || '',
+          assistantMessage: assistantMsg?.content || '',
+          cigarsShown: assistantMsg?.cigars?.map(c => c.name) || [],
+        }),
+      })
+    } catch (err) {
+      console.error('[Feedback] Failed to submit comment:', err)
+    }
+  }, [feedback, messages, sessionId])
+
   // Speech-to-text: listen and transcribe
   const silenceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
@@ -680,6 +756,68 @@ export default function ChatInterface({ isExpanded = false, onEngaged, pendingQu
                   )}
                 </div>
               )}
+
+              {/* Feedback thumbs up/down — assistant messages only, skip the welcome message */}
+              {message.role === 'assistant' && message.id !== '1' && (
+                <div className="mt-2">
+                  <div className="flex items-center gap-1">
+                    <button
+                      onClick={() => submitFeedback(message.id, 'up')}
+                      disabled={!!feedback[message.id]}
+                      className={`p-1.5 rounded-lg transition-colors ${
+                        feedback[message.id] === 'up'
+                          ? 'text-cigar-gold'
+                          : feedback[message.id]
+                            ? 'text-gray-300 cursor-default'
+                            : 'text-gray-400 hover:text-cigar-gold hover:bg-cigar-cream'
+                      }`}
+                      title="Helpful"
+                    >
+                      <ThumbsUp className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={() => submitFeedback(message.id, 'down')}
+                      disabled={!!feedback[message.id]}
+                      className={`p-1.5 rounded-lg transition-colors ${
+                        feedback[message.id] === 'down'
+                          ? 'text-red-500'
+                          : feedback[message.id]
+                            ? 'text-gray-300 cursor-default'
+                            : 'text-gray-400 hover:text-red-500 hover:bg-red-50'
+                      }`}
+                      title="Not helpful"
+                    >
+                      <ThumbsDown className="w-4 h-4" />
+                    </button>
+
+                    {/* "Want to share more?" prompt — appears after voting, before comment is submitted */}
+                    {feedback[message.id] && !feedbackCommented[message.id] && feedbackExpanded !== message.id && (
+                      <button
+                        onClick={() => setFeedbackExpanded(message.id)}
+                        className="ml-1 text-xs text-gray-400 hover:text-gray-600 transition-colors"
+                      >
+                        Want to share more?
+                      </button>
+                    )}
+
+                    {/* "Thanks!" shown after comment submitted or dismissed */}
+                    {feedbackCommented[message.id] && (
+                      <span className="ml-1 text-xs text-gray-400">Thanks for your feedback!</span>
+                    )}
+                  </div>
+
+                  {/* Inline comment input — subtle, small, appears below the thumbs */}
+                  {feedbackExpanded === message.id && !feedbackCommented[message.id] && (
+                    <FeedbackCommentInput
+                      onSubmit={(comment) => submitComment(message.id, comment)}
+                      onDismiss={() => {
+                        setFeedbackCommented(prev => ({ ...prev, [message.id]: true }))
+                        setFeedbackExpanded(null)
+                      }}
+                    />
+                  )}
+                </div>
+              )}
             </div>
           </div>
         ))}
@@ -795,6 +933,52 @@ export default function ChatInterface({ isExpanded = false, onEngaged, pendingQu
           </button>
         </div>
       </div>
+    </div>
+  )
+}
+
+// Small inline comment input for feedback — keeps the component tree clean
+function FeedbackCommentInput({ onSubmit, onDismiss }: { onSubmit: (comment: string) => void; onDismiss: () => void }) {
+  const [text, setText] = useState('')
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    // Auto-focus when the input appears
+    inputRef.current?.focus()
+  }, [])
+
+  const handleSubmit = () => {
+    onSubmit(text.trim())
+  }
+
+  return (
+    <div className="flex items-center gap-2 mt-1.5 animate-in fade-in slide-in-from-top-1 duration-200">
+      <input
+        ref={inputRef}
+        type="text"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') handleSubmit()
+          if (e.key === 'Escape') onDismiss()
+        }}
+        placeholder="Tell us why (optional)..."
+        className="flex-1 text-xs border border-gray-200 rounded-lg px-2.5 py-1.5
+                   focus:outline-none focus:ring-1 focus:ring-cigar-gold/50 focus:border-cigar-gold/50
+                   placeholder-gray-400 text-cigar-dark max-w-[260px]"
+      />
+      <button
+        onClick={handleSubmit}
+        className="text-xs text-cigar-gold hover:text-cigar-amber font-medium transition-colors px-1"
+      >
+        Send
+      </button>
+      <button
+        onClick={onDismiss}
+        className="text-xs text-gray-400 hover:text-gray-500 transition-colors"
+      >
+        Skip
+      </button>
     </div>
   )
 }
