@@ -739,7 +739,7 @@ export async function POST(request: NextRequest) {
       .join('\n')
     let systemPrompt = SYSTEM_PROMPT + `\n\nSTORE INVENTORY (you may ONLY recommend from this list):\n${inventoryList}`
     if (shownCigars.length > 0) {
-      systemPrompt += `\n\n[Internal - do not mention to customer] Previously recommended cigars to avoid repeating: ${shownCigars.join(', ')}. Suggest different cigars for variety.`
+      systemPrompt += `\n\nCRITICAL — DO NOT REPEAT: The following cigars have ALREADY been recommended in this session. You MUST NOT include any of them in your "cigars" array UNLESS the customer explicitly asks for one by name:\n${shownCigars.join(', ')}\nChoose DIFFERENT cigars from the inventory instead.`
     }
 
     let response = ''
@@ -860,6 +860,10 @@ export async function POST(request: NextRequest) {
 
           // Put the requested cigar first, keep at most 1 model suggestion after it
           cigars = [enrichedReq, ...cigars].slice(0, 2)
+        } else if (shownCigars.length > 0) {
+          // Server-side enforcement: remove previously shown cigars unless user asked for one
+          const shownSet = new Set(shownCigars.map((s: string) => s.toLowerCase()))
+          cigars = cigars.filter(c => !shownSet.has(c.name.toLowerCase()))
         }
 
         return NextResponse.json({

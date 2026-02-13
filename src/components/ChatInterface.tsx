@@ -1,8 +1,9 @@
 'use client'
 
 import { useState, useRef, useEffect, useCallback } from 'react'
-import { Send, Loader2, Sparkles, Camera, X, Mic, MicOff, Volume2, VolumeX } from 'lucide-react'
+import { Send, Loader2, Sparkles, Camera, X, Mic, MicOff, Volume2, VolumeX, Download } from 'lucide-react'
 import CigarInfoCard, { CigarData } from './CigarInfoCard'
+import { useKokoroTTS } from '@/hooks/useKokoroTTS'
 
 // Web Speech API - check support at runtime
 const getSpeechRecognition = () => {
@@ -59,6 +60,9 @@ export default function ChatInterface({ isExpanded = false, onEngaged }: ChatInt
   const messagesRef = useRef(messages)
   const speakResponseRef = useRef<((text: string) => void) | null>(null)
   const handleScanResponseRef = useRef<((imageData: string, data: { message?: string; cigars?: CigarData[] }) => void) | null>(null)
+
+  // Kokoro TTS — natural-sounding voice with browser fallback
+  const { speak: kokoroSpeak, stop: kokoroStop, preload: kokoroPreload, status: ttsStatus } = useKokoroTTS()
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -163,8 +167,7 @@ export default function ChatInterface({ isExpanded = false, onEngaged }: ChatInt
     }
     setMessages(prev => [...prev, userMsg, assistantMsg])
     if (data.message && speakResponseRef.current) {
-      const textForSpeech = data.message.replace(/\*\*(.*?)\*\*/g, '$1')
-      speakResponseRef.current(textForSpeech)
+      speakResponseRef.current(data.message)
     }
     stopCamera()
   }, [])
@@ -279,26 +282,28 @@ export default function ChatInterface({ isExpanded = false, onEngaged }: ChatInt
     }
   }, [showCamera])
 
-  // Text-to-speech: read response aloud
+  // Text-to-speech: read response aloud using Kokoro (natural) with browser fallback
   const speakResponse = useCallback((text: string) => {
     if (!voiceMode || !text.trim()) return
-    if (typeof window === 'undefined' || !window.speechSynthesis) return
-    window.speechSynthesis.cancel()
-    const utterance = new SpeechSynthesisUtterance(text)
-    utterance.rate = 0.95
-    utterance.pitch = 1
-    const voices = window.speechSynthesis.getVoices()
-    const preferred = voices.find(v => v.name.includes('Samantha') || v.name.includes('Google') || v.lang.startsWith('en'))
-    if (preferred) utterance.voice = preferred
-    window.speechSynthesis.speak(utterance)
-  }, [voiceMode])
+    const clean = text.replace(/\*\*(.*?)\*\*/g, '$1') // strip markdown bold
+    kokoroSpeak(clean)
+  }, [voiceMode, kokoroSpeak])
   speakResponseRef.current = speakResponse
 
   const stopSpeaking = useCallback(() => {
-    window.speechSynthesis.cancel()
-  }, [])
+    kokoroStop()
+  }, [kokoroStop])
+
+  // Preload TTS model when user first enables voice mode
+  useEffect(() => {
+    if (voiceMode && ttsStatus === 'idle') {
+      kokoroPreload()
+    }
+  }, [voiceMode, ttsStatus, kokoroPreload])
 
   // Speech-to-text: listen and transcribe
+  const silenceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
   const startListening = useCallback(() => {
     const SpeechRecognition = getSpeechRecognition()
     if (!SpeechRecognition) {
@@ -307,20 +312,38 @@ export default function ChatInterface({ isExpanded = false, onEngaged }: ChatInt
     }
     if (isListening) return
     const recognition = new SpeechRecognition()
-    recognition.continuous = false
+    recognition.continuous = true       // keep listening across pauses
     recognition.interimResults = true
     recognition.lang = 'en-US'
     recognitionRef.current = recognition
     const transcriptRef = { current: '' }
+    let hasFinal = false
+
     recognition.onresult = (e: any) => {
-      const results = Array.from(e.results)
-      const transcript = results.map((r: any) => r[0].transcript).join('').trim()
-      if (transcript) {
-        transcriptRef.current = transcript
-        setInput(transcript)
+      // Build transcript from all results
+      let full = ''
+      for (let i = 0; i < e.results.length; i++) {
+        full += e.results[i][0].transcript
+        if (e.results[i].isFinal) hasFinal = true
       }
+      full = full.trim()
+      if (full) {
+        transcriptRef.current = full
+        setInput(full)
+      }
+
+      // Reset the silence timer — wait 2s after last speech before auto-sending
+      if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current)
+      silenceTimerRef.current = setTimeout(() => {
+        // Only auto-send if we got at least one final result
+        if (hasFinal && transcriptRef.current.trim()) {
+          recognition.stop()
+        }
+      }, 2000)
     }
+
     recognition.onend = () => {
+      if (silenceTimerRef.current) { clearTimeout(silenceTimerRef.current); silenceTimerRef.current = null }
       setIsListening(false)
       recognitionRef.current = null
       const text = transcriptRef.current.trim()
@@ -329,12 +352,17 @@ export default function ChatInterface({ isExpanded = false, onEngaged }: ChatInt
         handleSendRef.current(text)
       }
     }
-    recognition.onerror = () => setIsListening(false)
+
+    recognition.onerror = () => {
+      if (silenceTimerRef.current) { clearTimeout(silenceTimerRef.current); silenceTimerRef.current = null }
+      setIsListening(false)
+    }
     recognition.start()
     setIsListening(true)
   }, [isListening])
 
   const stopListening = useCallback(() => {
+    if (silenceTimerRef.current) { clearTimeout(silenceTimerRef.current); silenceTimerRef.current = null }
     if (recognitionRef.current) {
       recognitionRef.current.stop()
       recognitionRef.current = null
@@ -409,8 +437,7 @@ export default function ChatInterface({ isExpanded = false, onEngaged }: ChatInt
 
       setMessages((prev) => [...prev, assistantMessage])
       if (voiceMode && data.message) {
-        const textForSpeech = data.message.replace(/\*\*(.*?)\*\*/g, '$1')
-        speakResponse(textForSpeech)
+        speakResponse(data.message)
       }
     } catch (error) {
       console.error('Chat error:', error)
@@ -633,12 +660,24 @@ export default function ChatInterface({ isExpanded = false, onEngaged }: ChatInt
           />
           <button
             onClick={() => setVoiceMode(!voiceMode)}
-            className={`p-2.5 rounded-xl transition-colors ${
+            className={`p-2.5 rounded-xl transition-colors relative ${
               voiceMode ? 'bg-cigar-gold text-cigar-dark' : 'bg-cigar-cream hover:bg-cigar-gold/30 text-cigar-dark'
             }`}
-            title={voiceMode ? "Voice mode on - responses will be read aloud" : "Voice mode off - tap to enable"}
+            title={
+              ttsStatus === 'loading'
+                ? 'Downloading voice model...'
+                : voiceMode
+                  ? 'Voice mode on - responses will be read aloud'
+                  : 'Voice mode off - tap to enable'
+            }
           >
-            {voiceMode ? <Volume2 className="w-5 h-5" /> : <VolumeX className="w-5 h-5" />}
+            {ttsStatus === 'loading' && voiceMode ? (
+              <Download className="w-5 h-5 animate-bounce" />
+            ) : voiceMode ? (
+              <Volume2 className="w-5 h-5" />
+            ) : (
+              <VolumeX className="w-5 h-5" />
+            )}
           </button>
           <button
             onClick={() => startCamera()}
