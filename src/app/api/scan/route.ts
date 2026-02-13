@@ -74,7 +74,7 @@ RESPONSE FORMAT - Always valid JSON:
   "message": "Your response"
 }
 
-IF CONFIDENCE >= 60:
+IF CONFIDENCE >= 75:
 {
   "confidence": 85,
   "identified": true,
@@ -97,7 +97,7 @@ IF CONFIDENCE >= 60:
   "message": "I identified this as [name]. [What you observed that led to ID]"
 }
 
-IF CONFIDENCE < 60:
+IF CONFIDENCE < 75:
 {
   "confidence": 45,
   "identified": false,
@@ -234,8 +234,8 @@ export async function POST(request: NextRequest) {
             
             console.log(`[Scan] Confidence: ${confidence}%`)
             
-            // Apply confidence guardrail - only return cigar if confidence >= 60
-            if (confidence >= 60 && parsed.identified && parsed.cigar) {
+            // Apply confidence guardrail - only return cigar if confidence >= 75
+            if (confidence >= 75 && parsed.identified && parsed.cigar) {
               const data = getInventoryData(parsed.cigar.name)
               return NextResponse.json({ 
                 cigar: {
@@ -253,7 +253,7 @@ export async function POST(request: NextRequest) {
               return NextResponse.json({ 
                 error: parsed.message,
                 confidence,
-                needsClarification: confidence < 60
+                needsClarification: confidence < 75
               })
             }
           }

@@ -82,12 +82,12 @@ export async function GET(request: NextRequest) {
         shouldIdentify: tc.shouldIdentify,
         tags: tc.tags
       })),
-      guardrailThreshold: 60,
+      guardrailThreshold: 75,
       instructions: `
         To run actual evaluation:
         1. POST to /api/evaluate with test images
         2. Or use the evaluation UI at /evaluate
-        3. Each image will be scored for confidence and checked against the 60% guardrail
+        3. Each image will be scored for confidence and checked against the 75% guardrail
       `
     })
   } catch (error) {
@@ -128,13 +128,13 @@ export async function POST(request: NextRequest) {
         id: `eval_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
         timestamp: new Date().toISOString(),
         confidence,
-        confidenceLevel: confidence >= 80 ? 'high' : confidence >= 60 ? 'medium' : 'low',
+        confidenceLevel: confidence >= 80 ? 'high' : confidence >= 75 ? 'medium' : 'low',
         identified: hasCigar,
         identifiedCigar: hasCigar ? chatData.cigars[0].name : null,
         guardrailPassed: guardrailCheck.passed,
         guardrailMessage: guardrailCheck.message,
         responseTime,
-        meetsThreshold: confidence >= 60,
+        meetsThreshold: confidence >= 75,
         aiResponse: chatData.message,
         notes: body.notes || undefined,
         imageData: body.image // Store the image for display in dashboard

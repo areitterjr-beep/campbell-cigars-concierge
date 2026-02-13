@@ -32,8 +32,8 @@ const NOISE_WORDS = new Set([
   'belicoso', 'torpedo', 'perfecto', 'petit', 'double', 'gran', 'grande'
 ])
 
-// Check if a cigar is in our inventory and get its data
-function getInventoryStatus(cigarName: string, brandName?: string): { productUrl?: string, imageUrl?: string, priceRange?: string } {
+// Match a cigar against our inventory and return the full inventory record (or null)
+function findInventoryMatch(cigarName: string, brandName?: string): any | null {
   const queryName = cigarName.toLowerCase().trim()
   const queryBrand = brandName?.toLowerCase().trim() || ''
 
@@ -57,7 +57,6 @@ function getInventoryStatus(cigarName: string, brandName?: string): { productUrl
     const qFull = queryBrand ? `${queryBrand} ${queryName}` : queryName
 
     if (cFull === qFull || cName === queryName) {
-      // Perfect match
       if (100 > bestScore) { bestScore = 100; bestMatch = c }
       continue
     }
@@ -71,14 +70,12 @@ function getInventoryStatus(cigarName: string, brandName?: string): { productUrl
     const cNameTokens = tokenize(cName)
     const cAllTokens = [...cBrandTokens, ...cNameTokens]
 
-    // Check brand compatibility
     const brandMatch = queryBrand && (
       cBrand === queryBrand ||
       cBrand.includes(queryBrand) || queryBrand.includes(cBrand) ||
       cBrandTokens.some(bt => brandTokens.includes(bt))
     )
 
-    // Count meaningful token overlaps between query and inventory
     let matchCount = 0
     let matchWeight = 0
     const matched: string[] = []
@@ -88,9 +85,7 @@ function getInventoryStatus(cigarName: string, brandName?: string): { productUrl
       for (const ct of cAllTokens) {
         if (qt === ct) {
           matchCount++
-          // Numbers (1964, 1926, 45, 9) are highly distinctive
           const isNumber = /^\d+$/.test(qt)
-          // Long distinctive words (hemingway, melanio, undercrown) are valuable
           const isDistinctive = qt.length >= 6
           matchWeight += isNumber ? 30 : isDistinctive ? 20 : 10
           matched.push(qt)
@@ -99,8 +94,6 @@ function getInventoryStatus(cigarName: string, brandName?: string): { productUrl
       }
     }
 
-    // Require: brand must match + at least one meaningful token overlap,
-    // OR at least 2 meaningful non-brand token overlaps
     const nonBrandMatches = matched.filter(m => !brandTokens.includes(m))
 
     let score = 0
@@ -110,7 +103,6 @@ function getInventoryStatus(cigarName: string, brandName?: string): { productUrl
       score = 10 + matchWeight
     }
 
-    // Bonus for substring containment (one direction)
     if (score > 0 && (queryName.includes(cName) || cName.includes(queryName))) {
       score += 15
     }
@@ -124,16 +116,36 @@ function getInventoryStatus(cigarName: string, brandName?: string): { productUrl
     }
   }
 
-  // Require a minimum confidence threshold
-  if (bestScore < 25) {
-    bestMatch = null
-  }
+  return bestScore >= 25 ? bestMatch : null
+}
 
+// Legacy wrapper used by existing callers
+function getInventoryStatus(cigarName: string, brandName?: string): { productUrl?: string, imageUrl?: string, priceRange?: string } {
+  const match = findInventoryMatch(cigarName, brandName)
   return {
-    productUrl: bestMatch?.productUrl || undefined,
-    imageUrl: bestMatch?.imageUrl || undefined,
-    priceRange: bestMatch?.priceRange || undefined
+    productUrl: match?.productUrl || undefined,
+    imageUrl: match?.imageUrl || undefined,
+    priceRange: match?.priceRange || undefined
   }
+}
+
+// Extract cigar name from image identification message (e.g. "I can see this is a My Father Blue!")
+function findCigarFromImageMessage(message: string): CigarRecommendation | null {
+  const idPatterns = [
+    /(?:I can (?:clearly )?see|this is) (?:this is |it's )?(?:a |an )?(.+?)(?:!|\.|,|$)/i,
+    /(?:clearly |easily )?(?:identify|recognize) (?:this as|it as) (?:a |an )?(.+?)(?:!|\.|,|$)/i,
+    /(?:ah,?|oh,?)?\s*(?:I can clearly see )?this is (?:a |an )?(.+?)(?:!|\.|,|$)/i,
+  ]
+  let query = ''
+  for (const p of idPatterns) {
+    const m = message.match(p)
+    if (m && m[1]) {
+      query = m[1].trim().replace(/^"(.*)"$/, '$1')
+      break
+    }
+  }
+  if (!query || tokenize(query).filter(t => !NOISE_WORDS.has(t)).length < 1) return null
+  return findCigarFromUserMessage(`tell me about ${query}`)
 }
 
 // Find a cigar in inventory when user asks for a specific cigar by name
@@ -320,7 +332,7 @@ const IMAGE_PROMPT = `You are a world-class cigar sommelier and expert identifie
 CONTEXT: You are helping customers who are IN THE SHOP right now. Never suggest visiting a cigar shop - they're already here!
 
 CRITICAL: READ THE BAND TEXT CAREFULLY!
-The cigar band is your PRIMARY identification tool. Look for:
+The cigar band is your PRIMARY identification tool. Text like "BLUE" vs "LE BIJOU 1922" are different cigars—never guess. Look for:
 - ANY text/words on the band (brand name, line name, country)
 - Numbers (like "1926", "1964", "No. 9")
 - Letters or initials
@@ -339,9 +351,10 @@ ICONIC BAND IDENTIFICATION GUIDE:
 - Hemingway: Green band with signature
 - Don Carlos: Gold/black with portrait
 
-**MY FATHER**:
-- "MY FATHER" text with Don Pepin Garcia's image
-- Le Bijou: Blue/silver band "LE BIJOU 1922"
+**MY FATHER** - CRITICAL: Band COLOR and TEXT distinguish these. Do NOT confuse them.
+- Blue: Blue + WHITE (like paper/cream). Band says "BLUE". White = Blue only.
+- Le Bijou: Blue + SILVER (metallic gray). Band says "LE BIJOU 1922". Silver = Le Bijou only.
+- RULE: White secondary color + "BLUE" text = My Father Blue. Silver/gray secondary + "LE BIJOU" = Le Bijou. If unsure which, READ THE BAND TEXT.
 - Flor de Las Antillas: Red/gold ornate band
 
 **OLIVA**:
@@ -401,26 +414,25 @@ PHYSICAL SIZE CLUES:
 - Corona: 5.5" x 42 (thinner, classic)
 - Gordo/60 ring: Very thick cigars
 
-CONFIDENCE SCORING (BE AGGRESSIVE):
-- 80-100: Can read brand name and/or recognize iconic band clearly
-- 70-79: Brand pattern matches known design, text partially visible
-- 60-69: Strong visual match to known brand even if details unclear
-- 40-59: Can see cigar but need text confirmation
+CONFIDENCE SCORING (BE CONSERVATIVE):
+- 80-100: Can read brand name and/or recognize iconic band clearly, matches a reference image
+- 75-79: Brand pattern matches known design, text clearly visible, strong match to inventory
+- 40-74: Uncertain - band partially visible, or cannot match to reference/inventory. ASK FOR CLARIFICATION.
 - 0-39: Cannot make out band details
 
-IMPORTANT: If you can read ANY text on the band, use it! Even partial text like "PAD..." = Padron, "FUE..." = Fuente, "OLI..." = Oliva. Be confident when you recognize distinctive band patterns!
+CRITICAL: When in doubt, use confidence < 75 and ask ONE specific clarifying question. Only identify when you can clearly match the band to a cigar in our store inventory. Do NOT guess.
 
-RESPONSE FORMAT - Always respond with valid JSON:
+RESPONSE FORMAT - Valid JSON only. Keep message under 50 words. No confidence in message.
 {
   "confidence": <number 0-100>,
   "message": "Your response",
   "cigars": []
 }
 
-IF CONFIDENCE >= 60: Identify the cigar:
+IF CONFIDENCE >= 75: Identify the cigar:
 {
   "confidence": 85,
-  "message": "I can see this is a [cigar name]! [brief description of what you observed]",
+  "message": "I can see this is a [cigar name]!",
   "cigars": [{
     "name": "Full cigar name",
     "brand": "Brand",
@@ -436,73 +448,120 @@ IF CONFIDENCE >= 60: Identify the cigar:
   }]
 }
 
-IF CONFIDENCE < 60: Ask ONE specific question:
+IF CONFIDENCE < 75: Ask ONE specific question:
 {
   "confidence": 45,
   "message": "I can see [specific observations about wrapper, shape, partial band]. To confirm, can you tell me [ONE specific question]?",
   "cigars": []
 }
 
-Remember: Even partial views of cigars being held, smoked, or in cases can often be identified by an expert. Use your knowledge!
+REFERENCE IMAGES (when provided): You will receive reference images from our store inventory. Compare the customer's photo to these—match band design, colors, and text. Only identify when you have a clear visual match to a reference or to a cigar in the inventory list below.
 
-REFERENCE IMAGES (when provided): You will receive reference images from our store inventory showing actual product photos. Compare the customer's photo to these reference images—match band design, colors, text, and overall appearance. Use them as visual training to identify the cigar. Prefer matching to one of the reference cigars when the customer's photo clearly matches.`
+CRITICAL - My Father Blue vs Le Bijou: Different colors, different text. Blue = blue+WHITE band, word "BLUE" on band. Le Bijou = blue+SILVER band, "LE BIJOU 1922" on band. WHITE≠SILVER. "BLUE"≠"LE BIJOU". Before identifying, verify: if band is white/cream colored → Blue. If band has silver/metallic gray → Le Bijou.
 
-// Helper to parse JSON from model response
+STORE INVENTORY (you may ONLY identify cigars from this list—if the band does not clearly match one of these, use confidence < 75 and ask for clarification):`
+
+// Helper to parse JSON from model response (handles truncated responses)
 function parseModelResponse(response: string): { message: string, cigars: CigarRecommendation[], confidence?: number } {
+  // Strip markdown code fences the model sometimes wraps around JSON
+  const cleaned = response.replace(/^```(?:json)?\s*/i, '').replace(/```\s*$/i, '').trim()
+
   try {
-    // Try to find JSON in the response
-    const jsonMatch = response.match(/\{[\s\S]*\}/)
+    const jsonMatch = cleaned.match(/\{[\s\S]*\}/)
     if (jsonMatch) {
       const parsed = JSON.parse(jsonMatch[0])
       return {
-        message: parsed.message || response,
+        message: parsed.message || '',
         cigars: Array.isArray(parsed.cigars) ? parsed.cigars : [],
         confidence: typeof parsed.confidence === 'number' ? parsed.confidence : undefined
       }
     }
-  } catch (e) {
-    console.log('Could not parse JSON, using response as message')
+  } catch (_) { /* fall through to regex extraction */ }
+
+  // Regex extraction for truncated / malformed JSON
+  const confMatch = cleaned.match(/"confidence"\s*:\s*(\d+)/)
+  const msgMatch = cleaned.match(/"message"\s*:\s*"((?:[^"\\]|\\.)*)/)
+  const cigarNameMatch = cleaned.match(/"cigars"\s*:\s*\[\s*\{\s*"name"\s*:\s*"((?:[^"\\]|\\.)*)/)
+  const msg = msgMatch ? msgMatch[1].replace(/\\"/g, '"') : ''
+  const conf = confMatch ? parseInt(confMatch[1], 10) : undefined
+  let cigars: CigarRecommendation[] = []
+  if (cigarNameMatch) {
+    const name = cigarNameMatch[1].replace(/\\"/g, '"').trim()
+    const backfill = findCigarFromUserMessage(`tell me about ${name}`)
+    if (backfill) cigars = [backfill]
   }
-  
-  // If no valid JSON, return the response as message with no cigars
-  return { message: response, cigars: [] }
+  return { message: msg, cigars, confidence: conf }
+}
+
+// Strip confidence numbers from message so users only see conversational text
+function sanitizeMessage(message: string): string {
+  let out = message
+    .replace(/^"\s*message\s*"\s*:\s*"/i, '')
+    .replace(/\s*[\[\({]?\s*"?confidence"?\s*:\s*\d+\s*%?[\]\)}]?/gi, '')
+    .replace(/\bconfidence\s*:\s*\d+\s*%?\.?/gi, '')
+    .replace(/\s*Confidence:\s*\d+%?\.?/gi, '')
+    .replace(/\s{2,}/g, ' ')
+  out = out.replace(/\\"/g, '"').trim()
+  if (out.endsWith('"') && !out.startsWith('"')) out = out.slice(0, -1)
+  return out
 }
 
 // Parse image recognition response with confidence guardrail
 function parseImageResponse(response: string): { message: string, cigars: CigarRecommendation[], confidence: number } {
   const parsed = parseModelResponse(response)
-  const confidence = parsed.confidence ?? 50 // Default to 50 if not provided
-  
-  // Apply confidence guardrail - only show cigars if confidence >= 60
-  if (confidence < 60) {
-    console.log(`[Image] Low confidence (${confidence}%), asking for clarification`)
-    return {
-      message: parsed.message,
-      cigars: [], // Don't show cigars if not confident
-      confidence
+  let confidence = parsed.confidence ?? 50
+  const message = sanitizeMessage(parsed.message)
+  let cigars = parsed.cigars
+
+  if (cigars.length === 0) {
+    const backfill = findCigarFromImageMessage(parsed.message)
+    if (backfill) {
+      cigars = [backfill]
+      if (confidence < 75) confidence = 80
     }
   }
-  
-  console.log(`[Image] Confidence: ${confidence}%`)
-  return {
-    message: parsed.message,
-    cigars: parsed.cigars,
-    confidence
+
+  if (confidence < 75 && cigars.length === 0) {
+    console.log(`[Image] Low confidence (${confidence}%), asking for clarification`)
+    return { message, cigars: [], confidence }
   }
+
+  console.log(`[Image] Confidence: ${confidence}%`)
+  return { message, cigars, confidence }
 }
 
-// Add inventory data (image, product URL, real price) to cigar recommendations
-function enrichWithInventoryData(cigars: CigarRecommendation[]) {
+// Replace AI-generated card data with authoritative inventory data so the
+// same cigar always shows consistent values regardless of model output.
+function enrichWithInventoryData(cigars: CigarRecommendation[]): (CigarRecommendation & { productUrl?: string; imageUrl?: string })[] {
   return cigars.map(cigar => {
-    const status = getInventoryStatus(cigar.name, cigar.brand)
+    const inv = findInventoryMatch(cigar.name, cigar.brand)
+    if (!inv) return { ...cigar, productUrl: undefined, imageUrl: undefined }
+
     return {
-      ...cigar,
-      productUrl: status.productUrl,
-      imageUrl: status.imageUrl,
-      // Override AI-generated price with the real store price from spreadsheet
-      price: status.priceRange || cigar.price
+      name: `${inv.brand} ${inv.name}`,
+      brand: inv.brand,
+      origin: inv.origin || cigar.origin,
+      wrapper: inv.wrapper || cigar.wrapper,
+      body: inv.body || cigar.body,
+      strength: inv.strength || cigar.strength,
+      price: inv.priceRange || cigar.price,
+      time: inv.smokingTime || cigar.time,
+      description: inv.description || cigar.description,
+      tastingNotes: Array.isArray(inv.tastingNotes) && inv.tastingNotes.length > 0
+        ? inv.tastingNotes
+        : cigar.tastingNotes,
+      pairings: inv.pairings && (inv.pairings.alcoholic?.length || inv.pairings.nonAlcoholic?.length)
+        ? inv.pairings
+        : cigar.pairings,
+      productUrl: inv.productUrl || undefined,
+      imageUrl: inv.imageUrl || undefined,
     }
   })
+}
+
+// Keep only cigars that match our inventory (reject wrong IDs / cigars we don't carry)
+function filterCigarsByInventory<T extends { productUrl?: string; imageUrl?: string }>(enriched: T[]): T[] {
+  return enriched.filter(c => !!(c.productUrl || c.imageUrl))
 }
 
 // Allow up to 30s for AI API calls (Groq/Gemini can be slow)
@@ -549,13 +608,17 @@ export async function POST(request: NextRequest) {
         const { getReferenceImagesFromInventory } = await import('@/lib/imageUtils')
         const referenceImages = await getReferenceImagesFromInventory(
           cigarsData.cigars as any[],
-          6
+          12
         )
+        const inventoryList = (cigarsData.cigars as any[])
+          .map((c) => `${c.brand} - ${c.name}`)
+          .join('\n')
         const refPrompt = referenceImages.length > 0
           ? `\n\nREFERENCE IMAGES: Below are ${referenceImages.length} product photos from our inventory. Compare the CUSTOMER'S PHOTO (the last image) to these. Use them to match band design, colors, and branding:\n${referenceImages
               .map((r, i) => `${i + 1}. ${r.brand} - ${r.name}`)
               .join('\n')}\n\nThe LAST image is the customer's cigar photo to identify.`
           : ''
+        const inventoryPrompt = `\n${inventoryList}`
         
         // Use Scout as primary model (best accuracy based on testing)
         const VISION_MODEL = 'meta-llama/llama-4-scout-17b-16e-instruct'
@@ -563,7 +626,7 @@ export async function POST(request: NextRequest) {
         let response = ''
         let succeeded = false
         
-        const visionPrompt = IMAGE_PROMPT + refPrompt + (lastMessage ? `\n\nCustomer says: ${lastMessage}` : '')
+        const visionPrompt = IMAGE_PROMPT + inventoryPrompt + refPrompt + (lastMessage ? `\n\nCustomer says: ${lastMessage}` : '')
         
         if (groq) {
           try {
@@ -578,8 +641,8 @@ export async function POST(request: NextRequest) {
             const completion = await groq.chat.completions.create({
             messages: [{ role: 'user', content: contentParts }],
             model: VISION_MODEL,
-            temperature: 0.7,
-            max_tokens: 800,
+            temperature: 0.3,
+            max_tokens: 1200,
           })
           
             response = completion.choices[0]?.message?.content || ''
@@ -606,7 +669,10 @@ export async function POST(request: NextRequest) {
           try {
             console.log('[Chat] Trying Gemini vision...')
             const genAI = new GoogleGenerativeAI(geminiKey)
-            const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' })
+            const model = genAI.getGenerativeModel({
+              model: 'gemini-2.5-flash',
+              generationConfig: { temperature: 0.3, maxOutputTokens: 1200 }
+            })
             const geminiParts: Array<{ text: string } | { inlineData: { data: string; mimeType: string } }> = [
               { text: visionPrompt },
             ]
@@ -632,9 +698,18 @@ export async function POST(request: NextRequest) {
 
         // Use image-specific parser with confidence guardrail
         const parsed = parseImageResponse(response)
+        let cigars = enrichWithInventoryData(parsed.cigars)
+        cigars = filterCigarsByInventory(cigars)
+        if (cigars.length === 0 && parsed.cigars.length > 0) {
+          return NextResponse.json({
+            message: "I'm not certain that's in our inventory. Can you tell me what text you see on the band? Or describe the colors?",
+            cigars: [],
+            confidence: Math.min(parsed.confidence, 74)
+          })
+        }
         return NextResponse.json({
           message: parsed.message,
-          cigars: enrichWithInventoryData(parsed.cigars).slice(0, 2),
+          cigars: cigars.slice(0, 2),
           confidence: parsed.confidence
         })
       } catch (visionError) {

@@ -3174,6 +3174,38 @@
       "imageUrl": "https://www.holts.com/media//categoryimage//thumb/270x270/m/y/my-father-connecticut-.png"
     },
     {
+      "id": "160",
+      "name": "Blue",
+      "brand": "My Father",
+      "origin": "Honduras",
+      "wrapper": "Connecticut Broadleaf Rosado",
+      "body": "Medium-Full",
+      "strength": "Medium-Full",
+      "priceRange": "$9-$13",
+      "smokingTime": "45-60min",
+      "description": "The inaugural blend from the Garcias' new Honduran factory. Connecticut Broadleaf Rosado wrapper over Honduran Corojo and Criollo tobaccos from Finca La Opulencia. Blue-and-white band pays homage to the Honduran flag.",
+      "tastingNotes": [
+        "Leather",
+        "Cayenne",
+        "Wood",
+        "Sweetness",
+        "Dried Fruit"
+      ],
+      "pairings": {
+        "alcoholic": [
+          "Aged Rum",
+          "Bourbon"
+        ],
+        "nonAlcoholic": [
+          "Espresso",
+          "Turkish Coffee"
+        ]
+      },
+      "inventory": 12,
+      "productUrl": "https://www.cigarsinternational.com/p/my-father-blue-honduras/2062764/",
+      "imageUrl": "https://www.holts.com/media//categoryimage//thumb/280x280/m/y/my-father-blue.png"
+    },
+    {
       "id": "106",
       "name": "Serie V Melanio",
       "brand": "Oliva",

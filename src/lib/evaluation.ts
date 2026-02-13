@@ -156,7 +156,7 @@ export async function runEvaluationCase(
     const identificationCorrect = testCase.shouldIdentify === didIdentify
     
     // Check guardrail - low confidence should NOT identify
-    const guardrailWorking = actualConfidence < 60 ? !didIdentify : true
+    const guardrailWorking = actualConfidence < 75 ? !didIdentify : true
     
     // Overall pass/fail
     const passed = confidenceInRange && identificationCorrect && guardrailWorking
@@ -168,7 +168,7 @@ export async function runEvaluationCase(
       errors.push(`Expected ${testCase.shouldIdentify ? 'to identify' : 'NOT to identify'}, but ${didIdentify ? 'did identify' : 'did not identify'}`)
     }
     if (!guardrailWorking) {
-      errors.push(`Guardrail failed: confidence ${actualConfidence} < 60 but still identified`)
+      errors.push(`Guardrail failed: confidence ${actualConfidence} < 75 but still identified`)
     }
     
     return {
@@ -229,7 +229,7 @@ export async function runFullEvaluation(
   )
   
   const guardrailResults = results.filter(r =>
-    r.actualConfidence >= 60 || !r.didIdentify
+    r.actualConfidence >= 75 || !r.didIdentify
   )
   
   return {
@@ -302,14 +302,14 @@ export function checkConfidenceGuardrail(confidence: number, hasCigarResult: boo
   passed: boolean
   message: string
 } {
-  if (confidence < 60 && hasCigarResult) {
+  if (confidence < 75 && hasCigarResult) {
     return {
       passed: false,
-      message: `GUARDRAIL VIOLATION: Confidence ${confidence}% is below 60% threshold but cigar was still identified. Should ask clarifying questions instead.`
+      message: `GUARDRAIL VIOLATION: Confidence ${confidence}% is below 75% threshold but cigar was still identified. Should ask clarifying questions instead.`
     }
   }
   
-  if (confidence >= 60 && !hasCigarResult) {
+  if (confidence >= 75 && !hasCigarResult) {
     return {
       passed: true, // This is okay - high confidence but chose not to show (could be other reasons)
       message: `Note: High confidence (${confidence}%) but no cigar shown. This may be intentional.`
@@ -318,7 +318,7 @@ export function checkConfidenceGuardrail(confidence: number, hasCigarResult: boo
   
   return {
     passed: true,
-    message: confidence >= 60 
+    message: confidence >= 75 
       ? `OK: Confidence ${confidence}% meets threshold, cigar identified.`
       : `OK: Confidence ${confidence}% below threshold, asking for clarification.`
   }

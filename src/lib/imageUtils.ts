@@ -7,9 +7,10 @@ let referenceImagesCache: { images: Array<{ brand: string; name: string; base64:
 const CACHE_TTL_MS = 10 * 60 * 1000 // 10 minutes
 
 /**
- * Fetch image from URL and return as base64. Resizes to thumbnail for reference use.
+ * Fetch image from URL and return as base64. Resizes for reference use.
+ * Larger size (384px) preserves band detail for better vision model comparison.
  */
-export async function fetchImageAsBase64(url: string, maxSize = 256): Promise<string | null> {
+export async function fetchImageAsBase64(url: string, maxSize = 384): Promise<string | null> {
   try {
     const fullUrl = url.startsWith('//') ? `https:${url}` : url
     const res = await fetch(fullUrl, { headers: { 'User-Agent': 'CampbellCigars/1.0' } })
@@ -26,24 +27,38 @@ export async function fetchImageAsBase64(url: string, maxSize = 256): Promise<st
   }
 }
 
+/** Cigars to always include in references (e.g. commonly confused with others) */
+const PRIORITY_REFERENCE_CIGARS = [
+  { brand: 'My Father', name: 'Blue' },
+  { brand: 'My Father', name: 'Le Bijou 1922' },
+]
+
 /**
  * Get reference images from inventory for vision model training/context.
- * Returns a curated set of cigars (diverse brands) with their product images as base64.
+ * Includes priority cigars (e.g. Blue, Le Bijou) for confusable-line recognition.
  */
 export async function getReferenceImagesFromInventory(
   cigars: Array<{ brand: string; name: string; imageUrl?: string }>,
-  count = 8
+  count = 12
 ): Promise<Array<{ brand: string; name: string; base64: string }>> {
   if (referenceImagesCache && Date.now() - referenceImagesCache.fetchedAt < CACHE_TTL_MS) {
     return referenceImagesCache.images
   }
   const withImages = cigars.filter((c) => c.imageUrl && c.imageUrl.startsWith('http'))
-  const seenBrands = new Set<string>()
+  const brandCount = new Map<string, number>()
+  const maxPerBrand = 2
   const selected: typeof withImages = []
+  for (const p of PRIORITY_REFERENCE_CIGARS) {
+    const found = withImages.find((c) => c.brand === p.brand && c.name === p.name)
+    if (found && !selected.includes(found)) selected.push(found)
+  }
+  for (const s of selected) brandCount.set(s.brand, (brandCount.get(s.brand) ?? 0) + 1)
   for (const c of withImages) {
     if (selected.length >= count) break
-    if (seenBrands.has(c.brand)) continue
-    seenBrands.add(c.brand)
+    if (selected.includes(c)) continue
+    const n = brandCount.get(c.brand) ?? 0
+    if (n >= maxPerBrand) continue
+    brandCount.set(c.brand, n + 1)
     selected.push(c)
   }
   const results: Array<{ brand: string; name: string; base64: string }> = []

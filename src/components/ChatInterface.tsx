@@ -38,7 +38,7 @@ export default function ChatInterface({ isExpanded = false, onEngaged }: ChatInt
     {
       id: '1',
       role: 'assistant',
-      content: `Welcome! I'm your personal cigar expert. Ask me for recommendations, snap a photo to identify a cigar, or get pairing suggestions. How can I help?`,
+      content: `Welcome! I'm your personal cigar expert. Ask me for recommendations, use the camera to scan a cigar band in real time, or get pairing suggestions. How can I help?`,
       timestamp: new Date(),
     },
   ])
@@ -46,16 +46,25 @@ export default function ChatInterface({ isExpanded = false, onEngaged }: ChatInt
   const [isLoading, setIsLoading] = useState(false)
   const [attachedImage, setAttachedImage] = useState<string | null>(null)
   const [showCamera, setShowCamera] = useState(false)
+  const [isScanning, setIsScanning] = useState(false) // real-time scan in progress
   const [voiceMode, setVoiceMode] = useState(false)
   const [isListening, setIsListening] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
   const streamRef = useRef<MediaStream | null>(null)
   const recognitionRef = useRef<any>(null)
+  const isAnalyzingRef = useRef(false)
+  const scanIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const checkReadyRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const messagesRef = useRef(messages)
+  const speakResponseRef = useRef<((text: string) => void) | null>(null)
+  const handleScanResponseRef = useRef<((imageData: string, data: { message?: string; cigars?: CigarData[] }) => void) | null>(null)
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }
+
+  messagesRef.current = messages
 
   useEffect(() => {
     scrollToBottom()
@@ -70,6 +79,7 @@ export default function ChatInterface({ isExpanded = false, onEngaged }: ChatInt
   }, [])
 
   const startCamera = async () => {
+    if (onEngaged) onEngaged()
     setShowCamera(true)
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
@@ -88,30 +98,186 @@ export default function ChatInterface({ isExpanded = false, onEngaged }: ChatInt
   }
 
   const stopCamera = () => {
+    if (checkReadyRef.current) {
+      clearInterval(checkReadyRef.current)
+      checkReadyRef.current = null
+    }
+    if (scanIntervalRef.current) {
+      clearInterval(scanIntervalRef.current)
+      scanIntervalRef.current = null
+    }
     if (streamRef.current) {
       streamRef.current.getTracks().forEach(track => track.stop())
       streamRef.current = null
     }
     setShowCamera(false)
+    setIsScanning(false)
   }
 
-  const capturePhoto = () => {
-    if (!videoRef.current) return
-    
+  const captureFrameAsBase64 = (): string | null => {
+    if (!videoRef.current || videoRef.current.videoWidth === 0) return null
     const canvas = document.createElement('canvas')
     canvas.width = videoRef.current.videoWidth
     canvas.height = videoRef.current.videoHeight
     const ctx = canvas.getContext('2d')
-    ctx?.drawImage(videoRef.current, 0, 0)
-    
-    const imageData = canvas.toDataURL('image/jpeg', 0.8)
-    setAttachedImage(imageData)
-    stopCamera()
+    if (!ctx) return null
+    ctx.drawImage(videoRef.current, 0, 0)
+    if (isFrameMostlyBlack(ctx, canvas.width, canvas.height)) return null
+    return canvas.toDataURL('image/jpeg', 0.8)
   }
+
+  const isFrameMostlyBlack = (ctx: CanvasRenderingContext2D, w: number, h: number): boolean => {
+    try {
+      const sampleSize = 9
+      const stepX = Math.floor(w / (sampleSize + 1))
+      const stepY = Math.floor(h / (sampleSize + 1))
+      let totalLuminance = 0
+      let count = 0
+      for (let i = 1; i <= sampleSize; i++) {
+        for (let j = 1; j <= sampleSize; j++) {
+          const px = ctx.getImageData(stepX * i, stepY * j, 1, 1).data
+          totalLuminance += 0.299 * px[0] + 0.587 * px[1] + 0.114 * px[2]
+          count++
+        }
+      }
+      return count > 0 && totalLuminance / count < 15
+    } catch {
+      return false
+    }
+  }
+
+  const handleScanResponse = useCallback((imageData: string, data: { message?: string; cigars?: CigarData[] }) => {
+    const userMsg: Message = {
+      id: Date.now().toString(),
+      role: 'user',
+      content: 'What can you tell me about this cigar?',
+      image: imageData,
+      timestamp: new Date(),
+    }
+    const assistantMsg: Message = {
+      id: (Date.now() + 1).toString(),
+      role: 'assistant',
+      content: data.message || "I'm not sure what that is. Can you describe what you see on the band?",
+      cigars: data.cigars,
+      timestamp: new Date(),
+    }
+    setMessages(prev => [...prev, userMsg, assistantMsg])
+    if (data.message && speakResponseRef.current) {
+      const textForSpeech = data.message.replace(/\*\*(.*?)\*\*/g, '$1')
+      speakResponseRef.current(textForSpeech)
+    }
+    stopCamera()
+  }, [])
+  handleScanResponseRef.current = handleScanResponse
+
+  const manualSnap = useCallback(async () => {
+    if (isAnalyzingRef.current || !videoRef.current) return
+    const imageData = captureFrameAsBase64()
+    if (!imageData) return
+
+    isAnalyzingRef.current = true
+    setIsScanning(true)
+    try {
+      const shownCigars = messagesRef.current
+        .filter(m => m.cigars && m.cigars.length > 0)
+        .flatMap(m => m.cigars!.map(c => c.name))
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          messages: [{ role: 'user', content: 'What can you tell me about this cigar?' }],
+          image: imageData,
+          shownCigars,
+        }),
+      })
+      const data = await response.json()
+      handleScanResponse(imageData, data)
+    } catch (err) {
+      console.error('Snap error:', err)
+      handleScanResponse(imageData!, { message: "I had trouble analyzing that. Please try again or describe what you see on the band." })
+    } finally {
+      isAnalyzingRef.current = false
+      setIsScanning(false)
+    }
+  }, [handleScanResponse])
 
   const removeAttachedImage = () => {
     setAttachedImage(null)
   }
+
+  // Real-time scan: capture frames periodically until cigar is recognized
+  useEffect(() => {
+    if (!showCamera || !videoRef.current) return
+
+    const attemptRecognition = async () => {
+      if (isAnalyzingRef.current) return
+      const imageData = captureFrameAsBase64()
+      if (!imageData) return
+
+      isAnalyzingRef.current = true
+      setIsScanning(true)
+
+      try {
+        const shownCigars = messagesRef.current
+          .filter(m => m.cigars && m.cigars.length > 0)
+          .flatMap(m => m.cigars!.map(c => c.name))
+
+        const response = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            messages: [{ role: 'user', content: 'What can you tell me about this cigar?' }],
+            image: imageData,
+            shownCigars,
+          }),
+        })
+
+        const data = await response.json()
+
+        const handler = handleScanResponseRef.current
+        if (handler && (data.cigars?.length || data.message)) {
+          handler(imageData, { message: data.message, cigars: data.cigars || [] })
+        }
+      } catch (err) {
+        console.error('Scan error:', err)
+      } finally {
+        isAnalyzingRef.current = false
+        setIsScanning(false)
+      }
+    }
+
+    const startInterval = () => {
+      const vw = videoRef.current?.videoWidth ?? 0
+      if (vw > 0) {
+        attemptRecognition()
+        scanIntervalRef.current = setInterval(attemptRecognition, 2500)
+      } else {
+        checkReadyRef.current = setInterval(() => {
+          const ready = (videoRef.current?.videoWidth ?? 0) > 0
+          if (ready && checkReadyRef.current) {
+            clearInterval(checkReadyRef.current)
+            checkReadyRef.current = null
+            attemptRecognition()
+            scanIntervalRef.current = setInterval(attemptRecognition, 2500)
+          }
+        }, 300)
+      }
+    }
+
+    const timer = setTimeout(startInterval, 1500)
+
+    return () => {
+      clearTimeout(timer)
+      if (checkReadyRef.current) {
+        clearInterval(checkReadyRef.current)
+        checkReadyRef.current = null
+      }
+      if (scanIntervalRef.current) {
+        clearInterval(scanIntervalRef.current)
+        scanIntervalRef.current = null
+      }
+    }
+  }, [showCamera])
 
   // Text-to-speech: read response aloud
   const speakResponse = useCallback((text: string) => {
@@ -126,6 +292,7 @@ export default function ChatInterface({ isExpanded = false, onEngaged }: ChatInt
     if (preferred) utterance.voice = preferred
     window.speechSynthesis.speak(utterance)
   }, [voiceMode])
+  speakResponseRef.current = speakResponse
 
   const stopSpeaking = useCallback(() => {
     window.speechSynthesis.cancel()
@@ -276,10 +443,10 @@ export default function ChatInterface({ isExpanded = false, onEngaged }: ChatInt
         : 'h-[calc(100vh-280px)] rounded-2xl'
     }`}>
 
-      {/* Camera View - Shows inside chat area */}
-      {showCamera && (
-        <div className="absolute inset-0 bg-black z-40 flex flex-col rounded-2xl overflow-hidden">
-          <div className="flex-1 relative">
+      {/* Camera View - Fills content area, keeps container borders */}
+      {showCamera ? (
+        <div className="flex-1 flex flex-col min-h-0 m-3 rounded-xl overflow-hidden border-2 border-cigar-gold/30 bg-black transition-all duration-300">
+          <div className="flex-1 relative min-h-0">
             <video
               ref={videoRef}
               className="w-full h-full object-cover"
@@ -288,27 +455,38 @@ export default function ChatInterface({ isExpanded = false, onEngaged }: ChatInt
             />
             <button
               onClick={stopCamera}
-              className="absolute top-4 right-4 bg-black/60 hover:bg-black/80 text-white p-2 rounded-full transition-colors"
+              className="absolute top-3 right-3 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors backdrop-blur-sm"
             >
-              <X className="w-6 h-6" />
+              <X className="w-5 h-5" />
             </button>
-            <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
-              <p className="text-white text-center text-sm mb-3">Point at a cigar or cigar band</p>
-              <div className="flex justify-center">
+            <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/70 to-transparent">
+              <p className="text-white text-center text-sm mb-2">
+                {isScanning ? 'Scanning...' : 'Point camera at cigar band'}
+              </p>
+              {isScanning && (
+                <div className="flex justify-center mb-2">
+                  <Loader2 className="w-6 h-6 animate-spin text-cigar-gold" />
+                </div>
+              )}
+              <div className="flex justify-center gap-4 items-center">
                 <button
-                  onClick={capturePhoto}
+                  onClick={manualSnap}
+                  disabled={isScanning}
                   className="w-16 h-16 bg-white rounded-full flex items-center justify-center border-4 border-cigar-gold
-                           hover:scale-105 transition-transform active:scale-95"
+                           hover:scale-105 transition-transform active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+                  title="Capture photo"
                 >
                   <div className="w-12 h-12 bg-cigar-gold rounded-full" />
                 </button>
               </div>
+              <p className="text-white/60 text-center text-xs mt-2">
+                Tap to capture when band is in focus, or wait for auto-scan. Tap X to cancel.
+              </p>
             </div>
           </div>
         </div>
-      )}
-
-      {/* Messages Area */}
+      ) : (
+      /* Messages Area */
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {messages.map((message) => (
           <div
@@ -396,9 +574,10 @@ export default function ChatInterface({ isExpanded = false, onEngaged }: ChatInt
 
         <div ref={messagesEndRef} />
       </div>
+      )}
 
       {/* Suggested Questions */}
-      {messages.length <= 2 && !attachedImage && (
+      {messages.length <= 2 && !attachedImage && !showCamera && (
         <div className="px-4 pb-2">
           <div className="flex items-center gap-2 text-sm text-gray-500 mb-2">
             <Sparkles className="w-4 h-4" />
@@ -420,7 +599,7 @@ export default function ChatInterface({ isExpanded = false, onEngaged }: ChatInt
       )}
 
       {/* Attached Image Preview */}
-      {attachedImage && (
+      {attachedImage && !showCamera && (
         <div className="px-4 pb-2">
           <div className="relative inline-block">
             <img 
@@ -464,7 +643,7 @@ export default function ChatInterface({ isExpanded = false, onEngaged }: ChatInt
           <button
             onClick={() => startCamera()}
             className="bg-cigar-cream hover:bg-cigar-gold/30 text-cigar-dark p-2.5 rounded-xl transition-colors"
-            title="Take a photo"
+            title="Scan cigar band in real time"
           >
             <Camera className="w-5 h-5" />
           </button>

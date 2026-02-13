@@ -250,7 +250,7 @@ export default function EvaluatePage() {
                         {/* Image Thumbnail */}
                         <div className={`w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 border-2 ${
                           item.confidence >= 80 ? 'border-green-500' :
-                          item.confidence >= 60 ? 'border-yellow-500' : 'border-red-500'
+                          item.confidence >= 75 ? 'border-yellow-500' : 'border-red-500'
                         }`}>
                           {item.imageData ? (
                             <img 
@@ -261,7 +261,7 @@ export default function EvaluatePage() {
                           ) : (
                             <div className={`w-full h-full flex items-center justify-center text-lg font-bold ${
                               item.confidence >= 80 ? 'text-green-400 bg-green-500/10' :
-                              item.confidence >= 60 ? 'text-yellow-400 bg-yellow-500/10' : 
+                              item.confidence >= 75 ? 'text-yellow-400 bg-yellow-500/10' : 
                               'text-red-400 bg-red-500/10'
                             }`}>
                               {item.confidence}%
@@ -285,7 +285,7 @@ export default function EvaluatePage() {
                             )}
                             <span className={`ml-2 text-sm font-bold ${
                               item.confidence >= 80 ? 'text-green-400' :
-                              item.confidence >= 60 ? 'text-yellow-400' : 'text-red-400'
+                              item.confidence >= 75 ? 'text-yellow-400' : 'text-red-400'
                             }`}>{item.confidence}%</span>
                           </div>
                           <p className="text-gray-500 text-sm truncate">{item.notes || item.aiResponse}</p>
@@ -316,7 +316,7 @@ export default function EvaluatePage() {
                 {/* Image Preview */}
                 <div className={`rounded-xl overflow-hidden border-2 ${
                   selectedEval.confidence >= 80 ? 'border-green-500' :
-                  selectedEval.confidence >= 60 ? 'border-yellow-500' : 'border-red-500'
+                  selectedEval.confidence >= 75 ? 'border-yellow-500' : 'border-red-500'
                 }`}>
                   {selectedEval.imageData ? (
                     <img 
@@ -344,14 +344,14 @@ export default function EvaluatePage() {
                     <span className="text-gray-400">Confidence</span>
                     <span className={`font-bold ${
                       selectedEval.confidence >= 80 ? 'text-green-400' :
-                      selectedEval.confidence >= 60 ? 'text-yellow-400' : 'text-red-400'
+                      selectedEval.confidence >= 75 ? 'text-yellow-400' : 'text-red-400'
                     }`}>{selectedEval.confidence}%</span>
                   </div>
                   <div className="h-3 bg-white/10 rounded-full overflow-hidden">
                     <div 
                       className={`h-full rounded-full transition-all ${
                         selectedEval.confidence >= 80 ? 'bg-gradient-to-r from-green-500 to-emerald-400' :
-                        selectedEval.confidence >= 60 ? 'bg-gradient-to-r from-yellow-500 to-amber-400' : 
+                        selectedEval.confidence >= 75 ? 'bg-gradient-to-r from-yellow-500 to-amber-400' : 
                         'bg-gradient-to-r from-red-500 to-rose-400'
                       }`}
                       style={{ width: `${selectedEval.confidence}%` }}
@@ -359,7 +359,7 @@ export default function EvaluatePage() {
                   </div>
                   <div className="flex justify-between mt-1 text-xs text-gray-500">
                     <span>0%</span>
-                    <span className="text-amber-500">60% threshold</span>
+                    <span className="text-amber-500">75% threshold</span>
                     <span>100%</span>
                   </div>
                 </div>
@@ -425,7 +425,7 @@ export default function EvaluatePage() {
           <div className="grid grid-cols-3 gap-6">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-full bg-red-500/20 border-2 border-red-500 flex items-center justify-center">
-                <span className="text-red-400 font-bold">0-59</span>
+                <span className="text-red-400 font-bold">0-74</span>
               </div>
               <div>
                 <p className="text-white font-medium">Low Confidence</p>
@@ -434,7 +434,7 @@ export default function EvaluatePage() {
             </div>
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-full bg-yellow-500/20 border-2 border-yellow-500 flex items-center justify-center">
-                <span className="text-yellow-400 font-bold">60-79</span>
+                <span className="text-yellow-400 font-bold">75-79</span>
               </div>
               <div>
                 <p className="text-white font-medium">Medium Confidence</p>
