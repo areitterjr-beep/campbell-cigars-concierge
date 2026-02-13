@@ -89,27 +89,32 @@ export default function PreferenceQuiz({ onComplete, onCancel }: PreferenceQuizP
   const [answers, setAnswers] = useState<Answer[]>([])
   const [selectedOption, setSelectedOption] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
+  const [isLoadingMore, setIsLoadingMore] = useState(false)
   const [recommendations, setRecommendations] = useState<string | null>(null)
   const [recommendedCigars, setRecommendedCigars] = useState<CigarCardData[]>([])
+  const [shownCigarNames, setShownCigarNames] = useState<string[]>([])
 
   const currentQuestion = QUESTIONS[currentStep]
   const isLastQuestion = currentStep === QUESTIONS.length - 1
 
-  const handleNext = () => {
-    if (!selectedOption) return
+  const handleSelect = (value: string) => {
+    setSelectedOption(value)
 
-    const newAnswers = [
-      ...answers,
-      { question: currentQuestion.question, answer: selectedOption },
-    ]
-    setAnswers(newAnswers)
-    setSelectedOption(null)
+    // Brief highlight then auto-advance
+    setTimeout(() => {
+      const newAnswers = [
+        ...answers,
+        { question: currentQuestion.question, answer: value },
+      ]
+      setAnswers(newAnswers)
+      setSelectedOption(null)
 
-    if (isLastQuestion) {
-      getRecommendations(newAnswers)
-    } else {
-      setCurrentStep((prev) => prev + 1)
-    }
+      if (isLastQuestion) {
+        getRecommendations(newAnswers)
+      } else {
+        setCurrentStep((prev) => prev + 1)
+      }
+    }, 250)
   }
 
   const handleBack = () => {
@@ -121,7 +126,7 @@ export default function PreferenceQuiz({ onComplete, onCancel }: PreferenceQuizP
     }
   }
 
-  const getRecommendations = async (finalAnswers: Answer[]) => {
+  const getRecommendations = async (finalAnswers: Answer[], excludeCigars: string[] = []) => {
     setIsLoading(true)
     
     try {
@@ -134,18 +139,55 @@ export default function PreferenceQuiz({ onComplete, onCancel }: PreferenceQuizP
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           preferences: preferenceSummary,
+          shownCigars: excludeCigars,
         }),
       })
 
       const data = await response.json()
+      const newCigars: CigarCardData[] = data.cigars || []
+      const newNames = newCigars.map((c: CigarCardData) => c.name)
+
       setRecommendations(data.message)
-      setRecommendedCigars(data.cigars || [])
+      setRecommendedCigars(newCigars)
+      setShownCigarNames(prev => [...prev, ...newNames])
     } catch (error) {
       console.error('Recommendation error:', error)
       setRecommendations('Unable to generate recommendations. Please try asking our AI assistant directly!')
       setRecommendedCigars([])
     } finally {
       setIsLoading(false)
+    }
+  }
+
+  const getMoreCigars = async () => {
+    setIsLoadingMore(true)
+    
+    try {
+      const preferenceSummary = answers
+        .map((a) => `${a.question}: ${a.answer}`)
+        .join('\n')
+
+      const response = await fetch('/api/quiz-recommendations', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          preferences: preferenceSummary,
+          shownCigars: shownCigarNames,
+        }),
+      })
+
+      const data = await response.json()
+      const newCigars: CigarCardData[] = data.cigars || []
+      const newNames = newCigars.map((c: CigarCardData) => c.name)
+
+      if (newCigars.length > 0) {
+        setRecommendedCigars(prev => [...prev, ...newCigars])
+        setShownCigarNames(prev => [...prev, ...newNames])
+      }
+    } catch (error) {
+      console.error('More cigars error:', error)
+    } finally {
+      setIsLoadingMore(false)
     }
   }
 
@@ -197,27 +239,45 @@ export default function PreferenceQuiz({ onComplete, onCancel }: PreferenceQuizP
           </div>
         )}
 
-        <div className="flex gap-4">
+        <div className="flex flex-col gap-3">
           <button
-            onClick={() => {
-              setRecommendations(null)
-              setRecommendedCigars([])
-              setCurrentStep(0)
-              setAnswers([])
-              setSelectedOption(null)
-            }}
-            className="flex-1 border-2 border-cigar-gold text-cigar-dark font-semibold 
-                     py-3 px-6 rounded-xl hover:bg-cigar-cream transition-colors"
+            onClick={getMoreCigars}
+            disabled={isLoadingMore}
+            className="w-full flex items-center justify-center gap-2 bg-cigar-gold hover:bg-cigar-amber 
+                     disabled:opacity-60 text-cigar-dark font-semibold py-3 px-6 rounded-xl transition-colors"
           >
-            Retake Quiz
+            {isLoadingMore ? (
+              <>
+                <Loader2 className="w-4 h-4 animate-spin" />
+                Finding more...
+              </>
+            ) : (
+              'See More Options'
+            )}
           </button>
-          <button
-            onClick={() => onComplete(recommendations)}
-            className="flex-1 bg-cigar-gold hover:bg-cigar-amber text-cigar-dark 
-                     font-semibold py-3 px-6 rounded-xl transition-colors"
-          >
-            Ask More Questions
-          </button>
+          <div className="flex gap-3">
+            <button
+              onClick={() => {
+                setRecommendations(null)
+                setRecommendedCigars([])
+                setShownCigarNames([])
+                setCurrentStep(0)
+                setAnswers([])
+                setSelectedOption(null)
+              }}
+              className="flex-1 border-2 border-cigar-gold text-cigar-dark font-semibold 
+                       py-3 px-6 rounded-xl hover:bg-cigar-cream transition-colors"
+            >
+              Retake Quiz
+            </button>
+            <button
+              onClick={() => onComplete(recommendations!)}
+              className="flex-1 border-2 border-cigar-gold text-cigar-dark font-semibold 
+                       py-3 px-6 rounded-xl hover:bg-cigar-cream transition-colors"
+            >
+              Ask More Questions
+            </button>
+          </div>
         </div>
       </div>
     )
@@ -244,16 +304,19 @@ export default function PreferenceQuiz({ onComplete, onCancel }: PreferenceQuizP
         {currentQuestion.question}
       </h3>
 
-      {/* Options */}
+      {/* Options — tap to select and auto-advance */}
       <div className="space-y-3 mb-8">
         {currentQuestion.options.map((option) => (
           <button
             key={option.value}
-            onClick={() => setSelectedOption(option.value)}
+            onClick={() => handleSelect(option.value)}
+            disabled={!!selectedOption}
             className={`w-full text-left p-4 rounded-xl border-2 transition-all duration-200 ${
               selectedOption === option.value
-                ? 'border-cigar-gold bg-cigar-gold/10'
-                : 'border-gray-200 hover:border-cigar-gold/50 hover:bg-cigar-cream/30'
+                ? 'border-cigar-gold bg-cigar-gold/10 scale-[1.01]'
+                : selectedOption
+                  ? 'border-gray-200 opacity-50'
+                  : 'border-gray-200 hover:border-cigar-gold/50 hover:bg-cigar-cream/30'
             }`}
           >
             <div className="font-medium text-cigar-dark">{option.label}</div>
@@ -262,7 +325,7 @@ export default function PreferenceQuiz({ onComplete, onCancel }: PreferenceQuizP
         ))}
       </div>
 
-      {/* Navigation */}
+      {/* Back / Cancel */}
       <div className="flex gap-4">
         {currentStep > 0 ? (
           <button
@@ -282,17 +345,6 @@ export default function PreferenceQuiz({ onComplete, onCancel }: PreferenceQuizP
             Cancel
           </button>
         )}
-        
-        <button
-          onClick={handleNext}
-          disabled={!selectedOption}
-          className="flex-1 flex items-center justify-center gap-2 bg-cigar-gold 
-                   hover:bg-cigar-amber disabled:bg-gray-300 text-cigar-dark 
-                   font-semibold py-3 px-6 rounded-xl transition-colors"
-        >
-          {isLastQuestion ? 'Get Recommendations' : 'Next'}
-          <ChevronRight className="w-5 h-5" />
-        </button>
       </div>
     </div>
   )

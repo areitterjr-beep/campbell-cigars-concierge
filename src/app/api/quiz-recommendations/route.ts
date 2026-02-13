@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Groq from 'groq-sdk'
+import { GoogleGenerativeAI } from '@google/generative-ai'
 import cigarsData from '@/data/cigars.json'
 
 interface CigarRecommendation {
@@ -180,47 +181,78 @@ GUIDELINES:
 
 export const maxDuration = 30
 
-export async function POST(request: NextRequest) {
-  try {
-    const { preferences } = await request.json()
-    const apiKey = process.env.GROQ_API_KEY
-    
-    if (!apiKey || apiKey === 'your_groq_api_key_here') {
-      return NextResponse.json({
-        message: "Based on your preferences, here are my top picks for you!",
-        cigars: []
-      })
-    }
+// Try to get AI response text — Groq first, Gemini fallback
+async function getAIResponse(systemPrompt: string, userMessage: string): Promise<string> {
+  const groqKey = process.env.GROQ_API_KEY
+  const geminiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_GENERATIVE_AI_API_KEY
 
-    const inventoryList = (cigarsData.cigars as any[])
-      .map((c) => `${c.brand} - ${c.name}`)
-      .join('\n')
-    const systemPrompt = SYSTEM_PROMPT + `\n\nSTORE INVENTORY (you may ONLY recommend from this list):\n${inventoryList}`
-
-    const groq = new Groq({ apiKey })
-
+  // Try Groq first
+  if (groqKey && groqKey !== 'your_groq_api_key_here') {
     try {
+      const groq = new Groq({ apiKey: groqKey })
       const completion = await groq.chat.completions.create({
         messages: [
           { role: 'system', content: systemPrompt },
-          { 
-            role: 'user', 
-            content: `Customer quiz preferences:\n${preferences}` 
-          },
+          { role: 'user', content: userMessage },
         ],
         model: 'llama-3.3-70b-versatile',
         temperature: 0.7,
         max_tokens: 1500,
       })
+      const text = completion.choices[0]?.message?.content || ''
+      if (text) {
+        console.log('[Quiz] Groq succeeded')
+        return text
+      }
+    } catch (groqError: any) {
+      console.warn('[Quiz] Groq failed, trying Gemini fallback:', groqError?.message?.substring(0, 100))
+    }
+  }
 
-      const responseText = completion.choices[0]?.message?.content || ''
+  // Gemini fallback — try multiple models
+  if (geminiKey) {
+    const geminiModels = ['gemini-2.5-flash', 'gemini-2.0-flash']
+    for (const modelName of geminiModels) {
+      try {
+        const genAI = new GoogleGenerativeAI(geminiKey)
+        const model = genAI.getGenerativeModel({ model: modelName })
+        const result = await model.generateContent(`${systemPrompt}\n\nUser: ${userMessage}`)
+        const text = result.response.text()
+        if (text) {
+          console.log(`[Quiz] Gemini succeeded (${modelName})`)
+          return text
+        }
+      } catch (geminiError: any) {
+        console.warn(`[Quiz] Gemini ${modelName} failed:`, geminiError?.message?.substring(0, 120))
+      }
+    }
+  }
+
+  throw new Error('Both Groq and Gemini failed')
+}
+
+export async function POST(request: NextRequest) {
+  try {
+    const { preferences, shownCigars = [] } = await request.json()
+
+    const inventoryList = (cigarsData.cigars as any[])
+      .map((c) => `${c.brand} - ${c.name}`)
+      .join('\n')
+    let systemPrompt = SYSTEM_PROMPT + `\n\nSTORE INVENTORY (you may ONLY recommend from this list):\n${inventoryList}`
+
+    // Exclude already-shown cigars (same logic as chat route)
+    if (shownCigars.length > 0) {
+      systemPrompt += `\n\nCRITICAL — DO NOT REPEAT: The following cigars have ALREADY been recommended. You MUST NOT include any of them. Choose DIFFERENT cigars from the inventory:\n${shownCigars.join(', ')}`
+    }
+
+    try {
+      const responseText = await getAIResponse(systemPrompt, `Customer quiz preferences:\n${preferences}`)
       
       // Parse the JSON response
       let message = "Based on your preferences, here are my top picks for you!"
       let cigars: CigarRecommendation[] = []
       
       try {
-        // Strip markdown code fences if present
         const cleaned = responseText.replace(/```json\s*/gi, '').replace(/```\s*/g, '')
         const jsonMatch = cleaned.match(/\{[\s\S]*\}/)
         if (jsonMatch) {
@@ -229,22 +261,30 @@ export async function POST(request: NextRequest) {
           cigars = Array.isArray(parsed.cigars) ? parsed.cigars : []
         }
       } catch {
-        console.log('[Quiz] Could not parse recommendations JSON, raw:', responseText.substring(0, 200))
+        console.log('[Quiz] Could not parse JSON, raw:', responseText.substring(0, 200))
       }
       
       // Enrich with authoritative inventory data (images, correct prices, etc.)
-      const enrichedCigars = enrichWithInventoryData(cigars).slice(0, 2)
+      let enrichedCigars = enrichWithInventoryData(cigars).slice(0, 2)
 
-      console.log(`[Quiz] Recommendations: ${enrichedCigars.map(c => c.name).join(', ')}`)
+      // Server-side enforcement: filter out any cigars that were already shown
+      if (shownCigars.length > 0) {
+        const shownLower = shownCigars.map((n: string) => n.toLowerCase())
+        enrichedCigars = enrichedCigars.filter(c => !shownLower.some((s: string) => 
+          c.name.toLowerCase().includes(s) || s.includes(c.name.toLowerCase())
+        ))
+      }
+
+      console.log(`[Quiz] Recommendations: ${enrichedCigars.map(c => c.name).join(', ')} | Excluded: ${shownCigars.join(', ') || 'none'}`)
 
       return NextResponse.json({
         message,
         cigars: enrichedCigars
       })
-    } catch (aiError) {
-      console.error('[Quiz] AI error:', aiError)
+    } catch (aiError: any) {
+      console.error('[Quiz] All AI providers failed:', aiError?.message)
       return NextResponse.json({
-        message: "I'd be happy to help you find the perfect cigar! Try the chat assistant for personalized recommendations.",
+        message: "I'm having trouble generating recommendations right now. Please try again in a moment, or use the chat assistant for personalized help!",
         cigars: []
       })
     }
@@ -252,7 +292,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('[Quiz] Recommendations error:', error)
     return NextResponse.json({
-      message: "Something went wrong. Please try the chat assistant!",
+      message: "Something went wrong. Please try again!",
       cigars: []
     })
   }

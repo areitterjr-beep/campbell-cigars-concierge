@@ -32,6 +32,7 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState<Tab>('chat')
   const [showQuiz, setShowQuiz] = useState(false)
   const [chatEngaged, setChatEngaged] = useState(false)
+  const [pendingCigarQuery, setPendingCigarQuery] = useState<string | null>(null)
 
   const handleChatEngaged = () => {
     setChatEngaged(true)
@@ -151,7 +152,9 @@ export default function Home() {
           <div className="h-full">
             <ChatInterface 
               isExpanded={isExpandedChat} 
-              onEngaged={handleChatEngaged} 
+              onEngaged={handleChatEngaged}
+              pendingQuery={pendingCigarQuery}
+              onPendingQueryConsumed={() => setPendingCigarQuery(null)}
             />
           </div>
         )}
@@ -188,17 +191,32 @@ export default function Home() {
                     <QuickGuideCard
                       title="New to Cigars?"
                       description="Start with mild, Connecticut-wrapped cigars. They're smooth, approachable, and won't overwhelm your palate."
-                      recommendation="Try: Ashton Crystal Belicoso or Montecristo White Series"
+                      cigars={['Ashton Crystal Belicoso', 'Montecristo White Series']}
+                      onCigarClick={(name) => {
+                        setActiveTab('chat')
+                        setChatEngaged(true)
+                        setPendingCigarQuery(`Tell me about the ${name}`)
+                      }}
                     />
                     <QuickGuideCard
                       title="Looking for Bold Flavors?"
                       description="Full-bodied Nicaraguan cigars with Maduro wrappers deliver rich, complex flavors with notes of chocolate and espresso."
-                      recommendation="Try: Liga Privada No. 9 or Padron 1964 Anniversary Maduro"
+                      cigars={['Liga Privada No. 9', 'Padron 1964 Anniversary Maduro']}
+                      onCigarClick={(name) => {
+                        setActiveTab('chat')
+                        setChatEngaged(true)
+                        setPendingCigarQuery(`Tell me about the ${name}`)
+                      }}
                     />
                     <QuickGuideCard
                       title="Short on Time?"
                       description="Petit coronas and short perfectos offer a complete smoking experience in 30-45 minutes."
-                      recommendation="Try: Arturo Fuente Hemingway Short Story"
+                      cigars={['Arturo Fuente Hemingway Short Story']}
+                      onCigarClick={(name) => {
+                        setActiveTab('chat')
+                        setChatEngaged(true)
+                        setPendingCigarQuery(`Tell me about the ${name}`)
+                      }}
                     />
                   </div>
                 </div>
@@ -221,17 +239,33 @@ export default function Home() {
 function QuickGuideCard({ 
   title, 
   description, 
-  recommendation 
+  cigars,
+  onCigarClick,
 }: { 
   title: string
   description: string
-  recommendation: string 
+  cigars: string[]
+  onCigarClick: (name: string) => void
 }) {
   return (
     <div className="bg-cigar-cream/50 rounded-xl p-4 border border-cigar-gold/20">
       <h4 className="font-semibold text-cigar-dark mb-2">{title}</h4>
       <p className="text-gray-600 text-sm mb-2">{description}</p>
-      <p className="text-cigar-amber text-sm font-medium">{recommendation}</p>
+      <p className="text-sm font-medium text-cigar-amber">
+        Try:{' '}
+        {cigars.map((name, i) => (
+          <span key={name}>
+            {i > 0 && ' or '}
+            <button
+              onClick={() => onCigarClick(name)}
+              className="underline decoration-cigar-gold/50 underline-offset-2 
+                       hover:text-cigar-gold transition-colors cursor-pointer"
+            >
+              {name}
+            </button>
+          </span>
+        ))}
+      </p>
     </div>
   )
 }

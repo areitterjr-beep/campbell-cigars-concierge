@@ -23,6 +23,8 @@ interface Message {
 interface ChatInterfaceProps {
   isExpanded?: boolean
   onEngaged?: () => void
+  pendingQuery?: string | null
+  onPendingQueryConsumed?: () => void
 }
 
 const SUGGESTED_QUESTIONS = [
@@ -34,7 +36,7 @@ const SUGGESTED_QUESTIONS = [
   "Ideal storage temp and humidity?",
 ]
 
-export default function ChatInterface({ isExpanded = false, onEngaged }: ChatInterfaceProps) {
+export default function ChatInterface({ isExpanded = false, onEngaged, pendingQuery, onPendingQueryConsumed }: ChatInterfaceProps) {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
@@ -490,6 +492,16 @@ export default function ChatInterface({ isExpanded = false, onEngaged }: ChatInt
     }
   }
   handleSendRef.current = handleSend
+
+  // Handle pending query from external navigation (e.g., Quick Start Guide cigar click)
+  const pendingConsumedRef = useRef<string | null>(null)
+  useEffect(() => {
+    if (pendingQuery && pendingQuery !== pendingConsumedRef.current) {
+      pendingConsumedRef.current = pendingQuery
+      handleSendRef.current(pendingQuery)
+      onPendingQueryConsumed?.()
+    }
+  }, [pendingQuery, onPendingQueryConsumed])
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
